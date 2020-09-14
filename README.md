@@ -1,5 +1,6 @@
-# web-music-library
-An internet application that serves as a cohesive music library, dynamically collecting data from various sources into one unified service.
+# Web-Music-Library
 
-Includes connection to Spotify Web API and Genius.com API.
+A cohesive web library collecting music-oriented data from various sources into one unified service.
+
+Includes connection to Spotify API and Genius.com API.
 
