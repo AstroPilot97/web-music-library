@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { ResultsRoutingModule } from './results-routing.module';
 import { ArtistInfoComponent } from './artist-info/artist-info.component';
+import { AlbumInfoComponent } from './album-info/album-info.component';
 
 
 @NgModule({
-  declarations: [ArtistInfoComponent],
+  declarations: [ArtistInfoComponent, AlbumInfoComponent],
   imports: [
     CommonModule,
     ResultsRoutingModule

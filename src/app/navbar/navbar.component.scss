@@ -4,6 +4,15 @@ mat-toolbar{
   span {
     margin: 1%;
   }
+  .example-option-img {
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  [dir='rtl'] .example-option-img {
+    margin-right: 0;
+    margin-left: 8px;
+  }
   .example-spacer {
     flex: 1 1 auto;
   }
