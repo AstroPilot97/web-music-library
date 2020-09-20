@@ -1,6 +1,6 @@
-<p>Boneless chicken</p>
 <div class="wrapper">
   <p>{{artistInfo.name}}</p>
+  <img [src]="artistInfo.images[0].url">
   <ul *ngFor="let genre of artistInfo.genres">
     <li>{{genre}}</li>
   </ul>
