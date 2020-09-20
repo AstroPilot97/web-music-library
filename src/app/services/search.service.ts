@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SpotifyAuthService } from './spotify-auth.service';
-import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +17,7 @@ export class SearchService {
   });
    }
 
-  searchQuery(query: string){
+  searchQuery(query: string): Observable<any>{
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
@@ -26,7 +25,7 @@ export class SearchService {
       })
     };
 
-    this.searchUrl = `https://api.spotify.com/v1/search?query=${query}&offset=0&limit=10&type=artist,album,track`;
-    return this.http.get(this.searchUrl, httpOptions).pipe(map(res => console.log(res)));
+    this.searchUrl = `https://api.spotify.com/v1/search?query=${query}&offset=0&limit=10&type=artist,album`;
+    return this.http.get(this.searchUrl, httpOptions);
   }
 }

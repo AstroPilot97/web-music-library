@@ -1,8 +1,26 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
+  <span>WebTunes</span>
+  <span>
+    <div id="searchBar">
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput
+                placeholder="Search for a track, album or an artist"
+                aria-label="searchBar"
+                [matAutocomplete]="auto"
+                [formControl]="queryCtrl"
+                (keyup)="searchQuery()">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option routerLink="#" *ngFor="let result of filteredResults | async" [value]="result.name">
+              <img class="example-option-img" aria-hidden [src]="result.images[0].url" height="50" width="50">
+              <span style="margin-bottom: 1.5em;">{{result.name}}</span> |
+              <small>{{result.type}}</small>
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </div>
+  </span>
   <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
     <mat-icon>favorite</mat-icon>
