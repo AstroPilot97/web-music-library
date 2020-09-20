@@ -3,14 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { SearchService } from '../services/search.service';
-
-export interface Result {
-  images?: {
-    url: string;
-  };
-  name: string;
-  type: string;
-}
+import { Result } from '../models/result';
 
 @Component({
   selector: 'app-navbar',
