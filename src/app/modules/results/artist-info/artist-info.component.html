@@ -1,7 +1,18 @@
 <div class="wrapper">
-  <p>{{artistInfo.name}}</p>
-  <img [src]="artistInfo.images[0].url">
-  <ul *ngFor="let genre of artistInfo.genres">
-    <li>{{genre}}</li>
-  </ul>
+  <ngx-loading [show]="loading"
+  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true, primaryColour: '#55133b' }">
+  </ngx-loading>
+  <div class="artist-container">
+    <div class="artist-banner">
+      <img [src]="artistInfo.images[0].url">
+    </div>
+    <div class="artist-name">
+      <h1>{{artistInfo.name}}</h1>
+    </div>
+    <div class="artist-genres">
+      <ul *ngFor="let genre of artistInfo.genres">
+        <li>{{genre}}</li>
+      </ul>
+    </div>
+  </div>
 </div>

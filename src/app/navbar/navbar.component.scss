@@ -1,32 +1,113 @@
-mat-toolbar{
-  padding-left: 10vw;
-  padding-right: 10vw;
-  span {
-    margin: 1%;
-  }
-  .example-option-img {
-    vertical-align: middle;
-    margin-right: 8px;
-  }
+@import '../../variables';
 
-  [dir='rtl'] .example-option-img {
-    margin-right: 0;
-    margin-left: 8px;
-  }
-  .example-spacer {
-    flex: 1 1 auto;
-  }
-  #searchBar {
-    width: 40vw;
-    margin-top: 1%;
-    font-size: 1.1rem;
-    .example-form {
-      min-width: 150px;
-      max-width: 600px;
-      width: 100%;
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  mat-toolbar{
+    background-color: $darkPurple;
+    -webkit-text-stroke: 1px $lightGray;
+    -webkit-text-fill-color: black;
+    color: $lightGray;
+    .header{
+      display: none;
     }
-    .example-full-width {
-      width: 100%;
+    .example-option-img {
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+    [dir='rtl'] .example-option-img {
+      margin-right: 0;
+      margin-left: 8px;
+    }
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+    #searchBar {
+      width: 90vw;
+      margin-top: 5%;
+      font-size: 1.2rem;
+      .example-form {
+        min-width: 150px;
+        max-width: 600px;
+        width: 100%;
+      }
+      .example-full-width {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  mat-toolbar {
+    background-color: $darkPurple;
+    -webkit-text-stroke: 1px $lightGray;
+    -webkit-text-fill-color: black;
+    color: $lightGray;
+    span{
+      margin: 1%;
+    }
+    .header{
+      -webkit-text-stroke: 0px;
+      -webkit-text-fill-color: $lightGray;
+      font-size: 1.5rem;
+    }
+    #searchBar {
+      width: 60vw;
+      margin-top: 2.5%;
+      font-size: 1.2rem;
+      .example-form {
+        min-width: 150px;
+        max-width: 600px;
+        width: 100%;
+      }
+      .example-full-width {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  mat-toolbar {
+    .header{
+      font-size: 1.6rem;
+    }
+    #searchBar {
+      width: 40vw;
+      margin-top: 2.5%;
+      font-size: 1.2rem;
+      .example-form {
+        min-width: 150px;
+        max-width: 600px;
+        width: 100%;
+      }
+      .example-full-width {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  mat-toolbar {
+    .header {
+      font-size: 2rem;
+    }
+    #searchBar {
+      width: 40vw;
+      margin-top: 1.7%;
+      font-size: 1.2rem;
+      .example-form {
+        min-width: 150px;
+        max-width: 600px;
+        width: 100%;
+      }
+      .example-full-width {
+        width: 100%;
+      }
     }
   }
 }

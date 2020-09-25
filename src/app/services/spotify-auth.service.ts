@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpotifyAuthService {
 
-  clientId = '7da9e2ec3b4c400693182d553861b318';
-  clientSecret = '7e8499e5e1954d0dba3204b481fc752f';
+  clientId = environment.spotify_clientId;
+  clientSecret = environment.spotify_clientSecret;
 
   constructor(private http: HttpClient) { }
 

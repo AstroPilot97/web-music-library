@@ -14,6 +14,8 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchService } from './services/search.service';
+import { NgxLoadingModule } from 'ngx-loading';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { SearchService } from './services/search.service';
     MatAutocompleteModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxLoadingModule.forRoot({}),
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]

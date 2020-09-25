@@ -5,13 +5,15 @@ import { ResultsRoutingModule } from './results-routing.module';
 import { ArtistInfoComponent } from './artist-info/artist-info.component';
 import { AlbumInfoComponent } from './album-info/album-info.component';
 import { ArtistService } from '../../services/artist.service';
+import { NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
   declarations: [ArtistInfoComponent, AlbumInfoComponent],
   imports: [
     CommonModule,
-    ResultsRoutingModule
+    ResultsRoutingModule,
+    NgxLoadingModule
   ],
   providers: [ArtistService]
 })
