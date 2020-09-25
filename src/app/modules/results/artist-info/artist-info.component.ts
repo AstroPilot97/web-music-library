@@ -13,13 +13,16 @@ export class ArtistInfoComponent implements OnInit {
 
   artistInfo: Artist;
 
-  constructor(private artistService: ArtistService, private route: ActivatedRoute) { }
+  constructor(private artistService: ArtistService, private route: ActivatedRoute) {
+
+   }
 
   ngOnInit(): void {
-    this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
+    setTimeout(() => this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
       this.artistService.getArtist(id).subscribe(artist => {
         this.artistInfo = artist;
+        console.log(`Component: ${artist}`);
       })
-     })
+     }), 1000)
     }
   }

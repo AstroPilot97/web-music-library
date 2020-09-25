@@ -25,7 +25,7 @@ export class SearchService {
       })
     };
 
-    this.searchUrl = `https://api.spotify.com/v1/search?query=${query}&offset=0&limit=10&type=artist,album`;
+    this.searchUrl = `https://api.spotify.com/v1/search?query=${query}&offset=0&limit=4&type=artist,album`;
     return this.http.get(this.searchUrl, httpOptions);
   }
 }

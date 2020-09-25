@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SpotifyAuthService } from './spotify-auth.service';
 import { Observable } from 'rxjs';
-import { Artist } from '../models/artist';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +15,7 @@ export class ArtistService {
     this.spotifyAuth.login().subscribe(data => {
       this.accessToken = data['access_token'];
       this.tokenType = data['token_type'];
+      console.log(`Artist service: ${data}`);
     });
   }
 
