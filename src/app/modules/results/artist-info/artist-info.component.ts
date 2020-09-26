@@ -15,7 +15,6 @@ export class ArtistInfoComponent implements OnInit {
   artistInfo: Artist;
 
   constructor(private artistService: ArtistService, private route: ActivatedRoute, public loading: LoadingService) {
-    this.loading.startLoading();
     this.getArtistInfo();
   }
 
@@ -26,6 +25,7 @@ export class ArtistInfoComponent implements OnInit {
     setTimeout(() => this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
       this.artistService.getArtist(id).subscribe(artist => {
         this.artistInfo = artist;
+        this.loading.finishLoading();
       })
      }), 2500)
   }

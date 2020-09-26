@@ -14,7 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SearchService } from './services/search.service';
-import { NgxLoadingModule } from 'ngx-loading';
+import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
 
 
 @NgModule({
@@ -35,7 +35,14 @@ import { NgxLoadingModule } from 'ngx-loading';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxLoadingModule.forRoot({}),
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBorderRadius: '4px',
+      fullScreenBackdrop: true,
+      primaryColour: '#55133b',
+      secondaryColour: '#55133b',
+      tertiaryColour: '#55133b'
+    }),
   ],
   providers: [SearchService],
   bootstrap: [AppComponent]

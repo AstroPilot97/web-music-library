@@ -12,4 +12,8 @@ export class LoadingService {
   startLoading(){
     this.isLoading = true;
   }
+
+  finishLoading(){
+    this.isLoading = false;
+  }
 }

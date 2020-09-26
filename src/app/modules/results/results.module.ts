@@ -8,6 +8,7 @@ import { ArtistService } from '../../services/artist.service';
 import { NgxLoadingModule } from 'ngx-loading';
 
 
+
 @NgModule({
   declarations: [ArtistInfoComponent, AlbumInfoComponent],
   imports: [

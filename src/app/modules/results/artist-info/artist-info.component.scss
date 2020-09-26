@@ -5,6 +5,8 @@
   .wrapper{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100%;
     background-color: $spotifyBlack;
     .artist-banner{
@@ -26,4 +28,19 @@
 @media only screen and (min-width: 992px) {}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) {
+  .wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    top: 0;
+    .artist-container{
+      padding-left: 5vw;
+      padding-right: 5vw;
+    }
+    background-color: $spotifyBlack;
+    .artist-banner{
+      padding: 2%;
+    }
+  }
+}

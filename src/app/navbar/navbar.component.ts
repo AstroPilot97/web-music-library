@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
 import { SearchService } from '../services/search.service';
 import { Result } from '../models/result';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   results: Result[] = [];
 
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService, public loading: LoadingService) {
     this.filteredResults = this.queryCtrl.valueChanges
       .pipe(
         startWith(''),
