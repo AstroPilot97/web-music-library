@@ -3,5 +3,6 @@ export interface Artist {
   genres: string[];
   images: {
     url: string;
+    length: number;
   }
 }

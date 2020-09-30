@@ -1,7 +1,8 @@
 <div class="wrapper">
+  <div class="bg-image" *ngIf="artistInfo.images.length !== 0" style="background-image: url({{artistInfo.images[0].url}});"></div>
   <div class="artist-container">
     <div class="artist-banner">
-      <img [src]="artistInfo.images[0].url">
+      <img *ngIf="artistInfo.images.length !== 0" [src]="artistInfo.images[0].url">
     </div>
     <div class="artist-name">
       <h1>{{artistInfo.name}}</h1>
@@ -13,3 +14,4 @@
     </div>
   </div>
 </div>
+

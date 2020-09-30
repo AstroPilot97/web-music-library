@@ -1,5 +1,7 @@
 @import '../../../../variables';
 
+
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .wrapper{
@@ -32,15 +34,30 @@
   .wrapper{
     display: flex;
     flex-direction: column;
+    text-align: center;
+    align-items: center;
     height: 100%;
     top: 0;
+    .bg-image{
+      filter: blur(6px);
+      background-attachment: fixed;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 110%;
+      width: 110%;
+      left: 0;
+      top: 0;
+      z-index: -1000;
+      position: fixed;
+    }
     .artist-container{
+      margin: 0 auto;
+      width: fit-content;
+      background-color: $spotifyBlack;
+      border-radius: 25px;
+      position: absolute;
       padding-left: 5vw;
       padding-right: 5vw;
-    }
-    background-color: $spotifyBlack;
-    .artist-banner{
-      padding: 2%;
     }
   }
 }
