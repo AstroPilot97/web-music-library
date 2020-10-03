@@ -1,1 +1,17 @@
-<p>Koksu 5 gram</p>
+<div class="wrapper">
+  <div class="bg-image" *ngIf="albumInfo.images.length !== 0" style="background-image: url({{albumInfo.images[0].url}});">
+  </div>
+  <div class="album-container">
+    <div class="album-banner">
+      <img *ngIf="albumInfo.images.length !== 0" [src]="albumInfo.images[0].url">
+    </div>
+    <div class="album-name">
+      <h1>{{albumInfo.name}}</h1>
+    </div>
+    <div class="album-genres">
+      <ul *ngFor="let genre of albumInfo.genres">
+        <li>{{genre}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
