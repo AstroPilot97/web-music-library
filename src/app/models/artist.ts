@@ -5,4 +5,5 @@ export interface Artist {
     url: string;
     length: number;
   }
+  popularity: number;
 }

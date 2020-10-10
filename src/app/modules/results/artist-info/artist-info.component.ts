@@ -26,6 +26,7 @@ export class ArtistInfoComponent implements OnInit {
       this.artistService.getArtist(id).subscribe(artist => {
         this.artistInfo = artist;
         this.loading.finishLoading();
+        console.log(artist);
       })
      }), 2500)
   }
