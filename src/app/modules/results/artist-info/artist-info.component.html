@@ -1,20 +1,46 @@
 <div class="wrapper">
-  <div class="bg-image" *ngIf="artistInfo.images.length !== 0" style="background-image: url({{artistInfo.images[0].url}});"></div>
+  <div class="bg-image" *ngIf="spotifyArtistInfo.images.length !== 0" style="background-image: url({{spotifyArtistInfo.images[0].url}});"></div>
   <div class="artist-container">
-    <div class="artist-banner">
-      <img *ngIf="artistInfo.images.length !== 0" [src]="artistInfo.images[0].url">
+    <div class="top-container">
+      <div class="artist-banner">
+        <img *ngIf="spotifyArtistInfo.images.length !== 0" [src]="spotifyArtistInfo.images[0].url">
+      </div>
+      <div class="artist-name">
+        <h1>{{spotifyArtistInfo.name}}</h1>
+      </div>
+      <div class="artist-genres">
+        <ul *ngFor="let genre of spotifyArtistInfo.genres">
+          <li>{{genre}}</li>
+        </ul>
+      </div>
     </div>
-    <div class="artist-name">
-      <h1>{{artistInfo.name}}</h1>
-    </div>
-    <div class="artist-genres">
-      <ul *ngFor="let genre of artistInfo.genres">
-        <li>{{genre}}</li>
-      </ul>
-    </div>
-    <div class="artist-popularity">
-      <p>Popularity on Spotify: {{artistInfo.popularity}}</p>
+    <div class="bottom-subcontainer">
+      <div class="row">
+        <div class="column">
+          <div class="artist-bio">
+            <h1>{{lastfmArtistInfo.artist.name}}'s bio</h1>
+            <p>{{lastfmArtistInfo.artist.bio.summary}}</p>
+          </div>
+          <div class="artist-followers">
+            <p>Followers on Spotify: {{spotifyArtistInfo.followers.total}}</p>
+          </div>
+          <div class="artist-popularity">
+            <p>Popularity on Spotify: {{spotifyArtistInfo.popularity}}</p>
+          </div>
+        </div>
+        <div class="column">
+          <div class="similar-artists">
+            <h1>Similar artists</h1>
+            <div class="artist-box" *ngFor="let artist of similarArtists.artists | slice: 0:5">
+              <img class="similar-artist-image" (click)="ngOnInit()" routerLink="/results/artist/{{artist.name}}/{{artist.id}}"
+              *ngIf="artist.images.length !== 0" [src]="artist.images[0].url" height="250" width="250">
+              <h3>{{artist.name}}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<ngx-loading [show]="loading.isLoading"></ngx-loading>
 

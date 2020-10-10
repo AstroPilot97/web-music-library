@@ -9,6 +9,7 @@ import { NgxLoadingModule } from 'ngx-loading';
 
 
 
+
 @NgModule({
   declarations: [ArtistInfoComponent, AlbumInfoComponent],
   imports: [

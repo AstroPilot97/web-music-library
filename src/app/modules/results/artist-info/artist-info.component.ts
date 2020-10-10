@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { ArtistService } from '../../../services/artist.service';
-import { map } from 'rxjs/operators';
-import { Artist } from '../../../models/artist';
+import { SpotifyArtist, LastFMArtist, SimilarArtist } from '../../../models/artist';
 import { LoadingService } from '../../../services/loading.service';
+import { Title } from '@angular/platform-browser';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-artist-info',
@@ -12,22 +13,35 @@ import { LoadingService } from '../../../services/loading.service';
 })
 export class ArtistInfoComponent implements OnInit {
 
-  artistInfo: Artist;
+  artistName: string;
+  artistId: string;
+  spotifyArtistInfo: SpotifyArtist;
+  similarArtists: SimilarArtist;
+  lastfmArtistInfo: LastFMArtist;
 
-  constructor(private artistService: ArtistService, private route: ActivatedRoute, public loading: LoadingService) {
-    this.getArtistInfo();
-  }
+  constructor(private artistService: ArtistService, private route: ActivatedRoute, public loading: LoadingService, private webTitle: Title) {}
 
   ngOnInit(): void {
+    console.log(this.loading.isLoading);
+    this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      this.artistName = paramMap.get('name');
+      this.artistId = paramMap.get('id');
+      this.webTitle.setTitle(`${this.artistName} page`);
+      this.getArtistInfo();
+    });
   }
 
   getArtistInfo(): void {
-    setTimeout(() => this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
-      this.artistService.getArtist(id).subscribe(artist => {
-        this.artistInfo = artist;
+    this.loading.startLoading()
+    setTimeout(() => forkJoin([this.artistService.getArtist(this.artistId), this.artistService.getSimilarArtists(this.artistId), this.artistService.getlastfmArtist(this.artistName)])
+      .subscribe(results => {
+        this.spotifyArtistInfo = results[0];
+        this.similarArtists = results[1];
+        this.lastfmArtistInfo = results[2];
+        console.log(this.spotifyArtistInfo);
+        console.log(this.similarArtists);
+        console.log(this.lastfmArtistInfo);
         this.loading.finishLoading();
-        console.log(artist);
-      })
-     }), 2500)
+      }), 2500)
   }
 }

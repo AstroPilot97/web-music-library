@@ -15,7 +15,6 @@ export class AlbumService {
     this.spotifyAuth.login().subscribe(data => {
       this.accessToken = data['access_token'];
       this.tokenType = data['token_type'];
-      console.log(`Artist service: ${data}`);
     });
    }
 

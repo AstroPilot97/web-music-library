@@ -52,12 +52,53 @@
     }
     .artist-container{
       margin: 0 auto;
-      width: fit-content;
-      background-color: $spotifyBlack;
-      border-radius: 25px;
+      width: 50%;
       position: absolute;
+      margin-top: 1vh;
       padding-left: 5vw;
       padding-right: 5vw;
+      .top-container{
+        padding-top: 2vh;
+        border-radius: 25px;
+        background: rgba($spotifyBlack, 0.9);
+        padding-bottom: 2vh;
+        margin-bottom: 2vh;
+        .artist-banner{
+          img {
+            max-width: 800px;
+          }
+        }
+      }
+      .bottom-subcontainer{
+        .row {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .column{
+            border-radius: 25px;
+            margin: 0 10px;
+            flex-wrap: wrap;
+            background: rgba($spotifyBlack, 0.9);
+            padding: 3%;
+          }
+        }
+        .artist-bio{
+          text-align: justify;
+        }
+        .similar-artists{
+          .similar-artist-image {
+            border-radius: 50%;
+          }
+          .artist-box{
+            transition: transform .2s;
+            margin-top: 2vh;
+          }
+          .artist-box:hover {
+            transform: scale(1.15);
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
 }

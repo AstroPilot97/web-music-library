@@ -12,9 +12,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SearchService } from './services/search.service';
 import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
+import { ApiRequestInterceptor } from './interceptor/api-request.interceptor';
 
 
 @NgModule({
@@ -44,7 +45,13 @@ import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
       tertiaryColour: '#55133b'
     }),
   ],
-  providers: [SearchService],
+  providers: [SearchService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiRequestInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

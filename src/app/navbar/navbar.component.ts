@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
       );
   }
   ngOnInit(): void {
+    console.log(this.loading.isLoading);
   }
 
   private _filterResults(value: string): Result[] {
@@ -37,7 +38,6 @@ export class NavbarComponent implements OnInit {
     this.searchService.searchQuery(this.queryCtrl.value).subscribe(res => {
       res.artists.items = [...res.artists.items, ...res.albums.items];
       this.results = res.artists.items;
-      console.log(res.artists.items);
     });
   }
 
