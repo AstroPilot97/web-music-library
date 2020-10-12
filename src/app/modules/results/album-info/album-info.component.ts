@@ -22,6 +22,7 @@ export class AlbumInfoComponent implements OnInit {
   }
 
   getAlbumInfo(): void {
+    this.loading.startLoading()
     setTimeout(() => this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
       this.albumService.getAlbum(id).subscribe(album => {
         this.albumInfo = album;

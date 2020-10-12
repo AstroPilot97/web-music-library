@@ -44,3 +44,12 @@ export interface SimilarArtist {
     }
   }
 }
+
+export interface ArtistAlbums {
+  id: number;
+  name: string;
+  images: {
+    url: string;
+    length: number;
+  }
+}

@@ -9,7 +9,7 @@
                 aria-label="searchBar"
                 [matAutocomplete]="auto"
                 [formControl]="queryCtrl"
-                (keyup)="searchQuery()">
+                (keydown)="searchQuery()">
           <mat-autocomplete #auto="matAutocomplete">
           <mat-option (click)="loading.startLoading()" routerLink="results/{{result.type}}/{{result.name}}/{{result.id}}" *ngFor="let result of filteredResults | async" [value]="result.name">
               <img *ngIf="result.images.length !== 0" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.images[0].url"/>

@@ -27,7 +27,6 @@ export class ArtistService {
         Authorization: `${this.tokenType} ${this.accessToken}`
       })
     };
-
     this.artistUrl = `https://api.spotify.com/v1/artists/${id}`;
     return this.http.get(this.artistUrl, httpOptions);
   }
@@ -44,6 +43,21 @@ export class ArtistService {
       })
     };
     this.artistUrl = `https://api.spotify.com/v1/artists/${id}/related-artists`;
+    return this.http.get(this.artistUrl, httpOptions);
+  }
+
+  getArtistAlbums(id:string): Observable<any>{
+    this.spotifyAuth.login().subscribe(data => {
+      this.accessToken = data['access_token'];
+      this.tokenType = data['token_type'];
+    });
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: `${this.tokenType} ${this.accessToken}`
+      })
+    };
+    this.artistUrl = `https://api.spotify.com/v1/artists/${id}/albums?include_groups=album&limit=50`;
     return this.http.get(this.artistUrl, httpOptions);
   }
 
