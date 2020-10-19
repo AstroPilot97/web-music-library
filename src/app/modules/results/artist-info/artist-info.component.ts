@@ -19,6 +19,8 @@ export class ArtistInfoComponent implements OnInit {
   similarArtists: SimilarArtist;
   lastfmArtistInfo: LastFMArtist;
   artistAlbums: ArtistAlbums;
+  isExpanded: boolean = false;
+
   constructor(private artistService: ArtistService, private route: ActivatedRoute, public loading: LoadingService, private webTitle: Title) {}
 
   ngOnInit(): void {
@@ -45,5 +47,14 @@ export class ArtistInfoComponent implements OnInit {
         console.log(this.artistAlbums);
         this.loading.finishLoading();
       }), 2500)
+  }
+
+  showFullInfo(){
+    if(this.isExpanded === false){
+      this.isExpanded = true;
+    }
+    else {
+      this.isExpanded = false;
+    }
   }
 }

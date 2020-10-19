@@ -14,20 +14,32 @@
         <div class="column left">
           <div class="artist-miscalleanous">
             <div class="artist-genres">
-              <ul *ngFor="let genre of spotifyArtistInfo.genres">
-                <li>{{genre}}</li>
-              </ul>
+              <h2>Genres</h2>
+              <mat-chip-list aria-label="Genres">
+                <mat-chip *ngFor="let genre of spotifyArtistInfo.genres">{{genre}}</mat-chip>
+              </mat-chip-list>
             </div>
             <div class="artist-followers">
               <p>Followers on Spotify: {{spotifyArtistInfo.followers.total}}</p>
             </div>
             <div class="artist-popularity">
-              <p>Popularity on Spotify: {{spotifyArtistInfo.popularity}}</p>
+              <p>Popularity on Spotify: </p>
+              <div class="popularity-bar">
+                <mat-progress-bar
+                mode="determinate" value="{{spotifyArtistInfo.popularity}}"
+                matTooltip="Popularity: {{spotifyArtistInfo.popularity}}"
+                matTooltipPosition="above">
+              </mat-progress-bar>
+              </div>
             </div>
           </div>
           <div class="artist-bio">
-            <h1>{{lastfmArtistInfo.artist.name}}'s bio</h1>
-            <p>{{lastfmArtistInfo.artist.bio.summary}}</p>
+            <h1>{{lastfmArtistInfo.artist.name}}'s bio
+              <span *ngIf="!isExpanded" (click)="showFullInfo()">(Show full bio)</span>
+              <span *ngIf="isExpanded" (click)="showFullInfo()">(Show shorter bio)</span>
+            </h1>
+            <p *ngIf="!isExpanded">{{lastfmArtistInfo.artist.bio.summary}}</p>
+            <p *ngIf="isExpanded">{{lastfmArtistInfo.artist.bio.content}}</p>
           </div>
           <div class="artist-albums">
             <div class="album" *ngFor="let album of artistAlbums">
