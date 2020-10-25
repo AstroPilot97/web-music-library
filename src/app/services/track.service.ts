@@ -17,8 +17,8 @@ export class TrackService {
     return this.http.get(this.searchUrl);
   }
 
-  getTrackLyrics(artist: string, song: string): Observable<any>{
-    this.searchUrl = `http://api.chartlyrics.com/apiv1.asmx/SearchLyricDirect?artist=${artist}&song=${song}`;
+  getTrackLyrics(artist: string, track: string): Observable<any>{
+    this.searchUrl = `https://orion.apiseeds.com/api/music/lyric/${artist}/${track}?apikey=${environment.lyrics_apiKey}`;
     return this.http.get(this.searchUrl);
   }
 }

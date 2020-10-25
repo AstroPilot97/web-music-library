@@ -27,3 +27,18 @@ export interface Track {
     image_url: string;
   }
 }
+
+export interface TrackLyrics {
+  copyright: {
+    artist: string;
+    notice: string;
+    text: string;
+  }
+  track: {
+    text: string;
+    lang: {
+      code: string;
+      name: string;
+    }
+  }
+}

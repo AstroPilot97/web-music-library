@@ -31,11 +31,32 @@
               <p>Recorded at: {{trackInfo.recording_location}}</p>
             </div>
           </div>
-          <div class="track-description">
-          </div>
           <div class="track-lyrics">
+            <h2>Track lyrics</h2>
+            <p *ngIf="lyricsInfo">{{lyricsInfo.track.text}}</p>
+            <p *ngIf="!lyricsInfo">Sorry, lyrics haven't been found for this track.</p>
+          </div>
         </div>
         <div class="column right">
+          <div class="track-description">
+            <h1>Track description</h1>
+            <p *ngIf="trackInfo.description.plain !== '?'">{{trackInfo.description.plain}}</p>
+            <p *ngIf="trackInfo.description.plain === '?'">No track description has been provided yet.</p>
+          </div>
+          <div class="track-artist">
+            <h1>Track artist</h1>
+            <div class="artist">
+              <img class="artist-image" *ngIf="trackInfo.primary_artist.image_url" [src]="trackInfo.primary_artist.image_url" height="200" width="200">
+              <h3>{{trackInfo.primary_artist.name}}</h3>
+            </div>
+          </div>
+          <div class="track-producers">
+            <h1>Track producers</h1>
+            <div class="producer" *ngFor="let producer of trackInfo.producer_artists">
+              <img class="producer-image" *ngIf="producer.image_url" [src]="producer.image_url" height="200" width="200">
+              <h3>{{producer.name}}</h3>
+            </div>
+          </div>
         </div>
       </div>
     </div>

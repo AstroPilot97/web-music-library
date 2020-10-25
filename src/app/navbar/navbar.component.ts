@@ -55,7 +55,6 @@ export class NavbarComponent implements OnInit {
   geniusSearchQuery(){
     this.searchService.geniusSearch(this.queryCtrl.value).subscribe(res => {
       this.trackResults = res.response.hits;
-      console.log(this.trackResults);
     })
   }
 
