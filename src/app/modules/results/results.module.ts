@@ -10,6 +10,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgAnimatedCounterModule } from '@bugsplat/ng-animated-counter'
+import { AlbumService } from '../../services/album.service';
 
 @NgModule({
   declarations: [ArtistInfoComponent, AlbumInfoComponent],
@@ -22,6 +23,6 @@ import { NgAnimatedCounterModule } from '@bugsplat/ng-animated-counter'
     MatTooltipModule,
     NgAnimatedCounterModule
   ],
-  providers: [ArtistService]
+  providers: [ArtistService, AlbumService]
 })
 export class ResultsModule { }
