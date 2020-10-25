@@ -1,0 +1,44 @@
+<div class="wrapper">
+  <div class="bg-image" *ngIf="trackInfo.song_art_image_url" style="background-image: url({{trackInfo.song_art_image_url}});"></div>
+  <div class="track-container">
+    <div class="top-subcontainer">
+      <div class="track-banner">
+        <img *ngIf="trackInfo.song_art_image_url" [src]="trackInfo.song_art_image_url">
+      </div>
+      <div class="track-name">
+        <h1>{{trackInfo.full_title}}</h1>
+      </div>
+    </div>
+    <div class="bottom-subcontainer">
+      <div class="row">
+        <div class="column left">
+          <div class="track-miscalleanous">
+            <h1>{{trackInfo.title}} info</h1>
+            <hr>
+            <div class="track-writers">
+              <span>Written by:
+                <ul *ngFor="let writer of trackInfo.writer_artists">
+                  <li>{{writer.name}}</li>
+                </ul>
+              </span>
+              <hr>
+            </div>
+            <div class="track-release-date">
+              <p>Release date: {{trackInfo.release_date_for_display}}</p>
+              <hr>
+            </div>
+            <div class="track-recording-location">
+              <p>Recorded at: {{trackInfo.recording_location}}</p>
+            </div>
+          </div>
+          <div class="track-description">
+          </div>
+          <div class="track-lyrics">
+        </div>
+        <div class="column right">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ngx-loading [show]="loading.isLoading"></ngx-loading>

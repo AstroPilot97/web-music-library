@@ -44,7 +44,6 @@ export class ArtistInfoComponent implements OnInit {
             a.name === album.name
           ))
         );
-        console.log(this.artistAlbums);
         this.loading.finishLoading();
       }), 2500)
   }

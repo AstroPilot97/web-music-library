@@ -11,9 +11,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgAnimatedCounterModule } from '@bugsplat/ng-animated-counter'
 import { AlbumService } from 'src/app/services/album.service';
+import { TrackInfoComponent } from './track-info/track-info.component';
+import { TrackService } from '../../services/track.service';
 
 @NgModule({
-  declarations: [ArtistInfoComponent, AlbumInfoComponent],
+  declarations: [ArtistInfoComponent, AlbumInfoComponent, TrackInfoComponent],
   imports: [
     CommonModule,
     ResultsRoutingModule,
@@ -23,6 +25,6 @@ import { AlbumService } from 'src/app/services/album.service';
     MatTooltipModule,
     NgAnimatedCounterModule
   ],
-  providers: [ArtistService, AlbumService]
+  providers: [ArtistService, AlbumService, TrackService]
 })
 export class ResultsModule { }

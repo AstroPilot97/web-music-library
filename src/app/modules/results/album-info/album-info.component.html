@@ -18,12 +18,12 @@
             <hr>
             <div class="release-date">
               <p>Release date: {{albumInfo.release_date | date: 'longDate'}}</p>
+              <hr>
             </div>
-            <hr>
             <div class="album-artist">
               <p *ngFor="let artist of albumInfo.artists">Artist(s): {{artist.name}}</p>
+              <hr>
             </div>
-            <hr>
             <div class="album-genres">
               <mat-chip-list aria-label="Genres">
                 <mat-chip *ngFor="let genre of albumInfo.genres">{{genre}}</mat-chip>
