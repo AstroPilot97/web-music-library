@@ -62,7 +62,7 @@ export class ArtistService {
   }
 
   getlastfmArtist(name: string): Observable<any>{
-    this.artistUrl = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${name}&api_key=${environment.lastfm_apiKey}&format=json`;
+    this.artistUrl = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${name}&api_key=${environment.lastfm_apiKey}&format=json`;
     return this.http.get(this.artistUrl);
   }
 }
