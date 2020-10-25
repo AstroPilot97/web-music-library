@@ -1,7 +1,7 @@
 <div class="wrapper">
   <div class="bg-image" *ngIf="spotifyArtistInfo.images.length !== 0" style="background-image: url({{spotifyArtistInfo.images[0].url}});"></div>
   <div class="artist-container">
-    <div class="top-container">
+    <div class="top-subcontainer">
       <div class="artist-banner">
         <img *ngIf="spotifyArtistInfo.images.length !== 0" [src]="spotifyArtistInfo.images[0].url">
       </div>

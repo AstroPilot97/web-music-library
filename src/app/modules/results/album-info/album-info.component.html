@@ -2,16 +2,40 @@
   <div class="bg-image" *ngIf="albumInfo.images.length !== 0" style="background-image: url({{albumInfo.images[0].url}});">
   </div>
   <div class="album-container">
-    <div class="album-banner">
-      <img *ngIf="albumInfo.images.length !== 0" [src]="albumInfo.images[0].url">
+    <div class="top-subcontainer">
+      <div class="album-banner">
+        <img *ngIf="albumInfo.images.length !== 0" [src]="albumInfo.images[0].url">
+      </div>
+      <div class="album-name">
+        <h1>{{albumInfo.name}}</h1>
+      </div>
     </div>
-    <div class="album-name">
-      <h1>{{albumInfo.name}}</h1>
-    </div>
-    <div class="album-genres">
-      <ul *ngFor="let genre of albumInfo.genres">
-        <li>{{genre}}</li>
-      </ul>
+    <div class="bottom-subcontainer">
+      <div class="row">
+        <div class="column left">
+          <div class="album-miscalleanous">
+            <h1>{{albumInfo.name}}'s info</h1>
+            <hr>
+            <div class="release-date">
+              <p>Release date: {{albumInfo.release_date | date: 'longDate'}}</p>
+            </div>
+            <hr>
+            <div class="album-artist">
+              <p *ngFor="let artist of albumInfo.artists">Artist(s): {{artist.name}}</p>
+            </div>
+            <hr>
+            <div class="album-genres">
+              <mat-chip-list aria-label="Genres">
+                <mat-chip *ngFor="let genre of albumInfo.genres">{{genre}}</mat-chip>
+              </mat-chip-list>
+            </div>
+          </div>
+          <div class="album-tracklist">
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<ngx-loading [show]="loading.isLoading"></ngx-loading>

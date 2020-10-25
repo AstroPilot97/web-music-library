@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SpotifyAuthService } from './spotify-auth.service';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,7 @@ export class SearchService {
     this.spotifyAuth.login().subscribe(data => {
       this.accessToken = data['access_token'];
       this.tokenType = data['token_type'];
-  });
+     });
    }
 
   searchQuery(query: string): Observable<any>{
@@ -25,7 +26,12 @@ export class SearchService {
       })
     };
 
-    this.searchUrl = `https://api.spotify.com/v1/search?query=${query}&offset=0&limit=4&type=artist,album`;
+    this.searchUrl = `https://api.spotify.com/v1/search?query=${query}&offset=0&limit=3&type=artist,album`;
     return this.http.get(this.searchUrl, httpOptions);
+  }
+
+  geniusSearch(query: string): Observable<any>{
+    this.searchUrl = `https://api.genius.com/search?q=${query}&access_token=${environment.genius_apiKey}`;
+    return this.http.get(this.searchUrl);
   }
 }

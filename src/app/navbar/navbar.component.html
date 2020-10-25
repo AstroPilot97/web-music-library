@@ -5,17 +5,23 @@
       <form class="example-form">
         <mat-form-field class="example-full-width">
           <input matInput
-                placeholder="Search for an album or an artist"
+                placeholder="Search for an album, artist or track"
                 aria-label="searchBar"
                 [matAutocomplete]="auto"
                 [formControl]="queryCtrl"
-                (keydown)="searchQuery()">
+                (keydown)="searchQuery(); geniusSearchQuery()">
           <mat-autocomplete #auto="matAutocomplete">
-          <mat-option (click)="loading.startLoading()" routerLink="results/{{result.type}}/{{result.name}}/{{result.id}}" *ngFor="let result of filteredResults | async" [value]="result.name">
+            <mat-option (click)="loading.startLoading()" routerLink="results/{{result.type}}/{{result.name}}/{{result.id}}" *ngFor="let result of filteredResults | async" [value]="result.name">
               <img *ngIf="result.images.length !== 0" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.images[0].url"/>
               <img *ngIf="result.images.length === 0" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
               <span>{{result.name}}</span> |
               <small>{{result.type}}</small>
+            </mat-option>
+            <mat-option (click)="loading.startLoading()" routerLink="results/track/{{track.result.title}}/{{track.result.id}}" *ngFor="let track of filteredTracks | async" [value]="track.result.title">
+              <img *ngIf="track.result.header_image_thumbnail_url" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="track.result.header_image_thumbnail_url"/>
+              <img *ngIf="!track.result.header_image_thumbnail_url" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
+              <span>{{track.result.title}}</span> |
+              <small>track</small>
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>

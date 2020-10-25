@@ -7,3 +7,11 @@ export interface Result {
   name: string;
   type: string;
 }
+
+export interface TrackResult {
+  result: {
+    id: number;
+    title: string;
+    header_image_thumbnail_url: string;
+  }
+}
