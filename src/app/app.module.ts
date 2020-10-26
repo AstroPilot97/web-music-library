@@ -17,7 +17,6 @@ import { SearchService } from './services/search.service';
 import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
 import { ApiRequestInterceptor } from './interceptor/api-request.interceptor';
 
-
 @NgModule({
   declarations: [
     AppComponent,

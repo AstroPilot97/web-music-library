@@ -28,16 +28,33 @@
               <hr>
             </div>
             <div class="track-recording-location">
-              <p>Recorded at: {{trackInfo.recording_location}}</p>
+              <ng-container *ngIf="trackInfo.recording_location; else elseTemplate">
+                <p>Recorded at: {{trackInfo.recording_location}}</p>
+              </ng-container>
+              <ng-template #elseTemplate>
+                <p>No info about recording location</p>
+              </ng-template>
             </div>
           </div>
           <div class="track-lyrics">
             <h2>Track lyrics</h2>
             <p *ngIf="lyricsInfo">{{lyricsInfo.track.text}}</p>
-            <p *ngIf="!lyricsInfo">Sorry, lyrics haven't been found for this track.</p>
+            <small *ngIf="lyricsInfo">{{lyricsInfo.copyright.notice}}</small>
+            <p *ngIf="!lyricsInfo">Sorry, lyrics haven't been provided for this track.</p>
           </div>
         </div>
         <div class="column right">
+          <div class="track-media">
+            <h1>Track preview</h1>
+            <div class="music-video" *ngFor="let media of trackInfo.media">
+              <ng-container *ngIf="media.type === 'video'">
+                <youtube-player [videoId]="videoId"></youtube-player>
+              </ng-container>
+            </div>
+            <div class="music-preview" *ngIf="spotifyTrack.preview_url">
+              <embed [src]="spotifyTrack.preview_url | safe">
+            </div>
+          </div>
           <div class="track-description">
             <h1>Track description</h1>
             <p *ngIf="trackInfo.description.plain !== '?'">{{trackInfo.description.plain}}</p>

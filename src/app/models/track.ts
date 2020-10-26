@@ -1,5 +1,3 @@
-import { CloseScrollStrategyConfig } from '@angular/cdk/overlay/scroll/close-scroll-strategy';
-
 export interface Track {
   description: {
     plain: string;
@@ -15,7 +13,7 @@ export interface Track {
     provider: string;
     type: string;
     url: string;
-  }
+  }[]
   recording_location: string;
   release_date_for_display: string;
   producer_artists: {
@@ -25,6 +23,23 @@ export interface Track {
   writer_artists: {
     name: string;
     image_url: string;
+  }
+}
+
+export interface SpotifyTrack {
+  preview_url: string;
+  explicit: boolean;
+  name: string;
+  artists: {
+    name: string;
+    id: string;
+  }[]
+  album: {
+    id: string;
+    name: string;
+    images: {
+      url: string;
+    }[]
   }
 }
 

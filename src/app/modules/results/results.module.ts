@@ -9,13 +9,14 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { NgAnimatedCounterModule } from '@bugsplat/ng-animated-counter'
 import { AlbumService } from 'src/app/services/album.service';
 import { TrackInfoComponent } from './track-info/track-info.component';
 import { TrackService } from '../../services/track.service';
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
-  declarations: [ArtistInfoComponent, AlbumInfoComponent, TrackInfoComponent],
+  declarations: [ArtistInfoComponent, AlbumInfoComponent, TrackInfoComponent, SafePipe],
   imports: [
     CommonModule,
     ResultsRoutingModule,
@@ -23,7 +24,7 @@ import { TrackService } from '../../services/track.service';
     MatChipsModule,
     MatProgressBarModule,
     MatTooltipModule,
-    NgAnimatedCounterModule
+    NgxYoutubePlayerModule,
   ],
   providers: [ArtistService, AlbumService, TrackService]
 })

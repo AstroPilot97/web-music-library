@@ -25,7 +25,6 @@ export class SearchService {
         Authorization: `${this.tokenType} ${this.accessToken}`
       })
     };
-
     this.searchUrl = `https://api.spotify.com/v1/search?query=${query}&offset=0&limit=2&type=artist,album`;
     return this.http.get(this.searchUrl, httpOptions);
   }
