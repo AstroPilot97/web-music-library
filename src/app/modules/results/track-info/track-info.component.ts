@@ -40,19 +40,13 @@ export class TrackInfoComponent implements OnInit {
       this.trackService.getTrackInfo(this.trackId).subscribe(res => {
         this.trackInfo = res.response.song;
         this.lyricsInfo = null;
-        this.spotifyTrack = null;
+        this.spotifyResults = null;
         this.getSongLyrics();
         this.pullIdFromVideoUrl();
-        this.trackService.getSpotifyTrackInfo(this.trackName).subscribe(res => {
+        this.trackService.getSpotifyTrackInfo(`${this.trackName} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
           this.spotifyResults = res.tracks.items;
-          this.spotifyResults.forEach((track) => {
-            if(track.artists.find(artist => artist.name === this.trackInfo.primary_artist.name)){
-              if(track.name === this.trackInfo.title){
-                this.spotifyTrack = track;
-                console.log(this.spotifyTrack);
-              }
-            }
-          })
+          this.spotifyTrack = this.spotifyResults[0];
+          console.log(this.spotifyTrack);
         })
         this.loading.finishLoading();
       })

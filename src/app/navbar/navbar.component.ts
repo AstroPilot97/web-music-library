@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit {
   private _filterTracks(value: string): TrackResult[] {
     const filterValue = value.toLowerCase();
 
-    return this.trackResults.filter(track => track.result.title.toLowerCase().indexOf(filterValue) === 0);
+    return this.trackResults.filter(track => track.result.full_title.toLowerCase().indexOf(filterValue) === 0);
   }
 
   searchQuery(){
@@ -55,6 +55,7 @@ export class NavbarComponent implements OnInit {
   geniusSearchQuery(){
     this.searchService.geniusSearch(this.queryCtrl.value).subscribe(res => {
       this.trackResults = res.response.hits;
+      console.log(this.trackResults);
     })
   }
 

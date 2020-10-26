@@ -12,6 +12,7 @@ export interface TrackResult {
   result: {
     id: number;
     title: string;
+    full_title: string;
     header_image_thumbnail_url: string;
   }
 }
