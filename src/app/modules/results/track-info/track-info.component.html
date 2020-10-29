@@ -42,17 +42,32 @@
             <small *ngIf="lyricsInfo">{{lyricsInfo.copyright.notice}}</small>
             <p *ngIf="!lyricsInfo">Sorry, lyrics haven't been provided for this track.</p>
           </div>
+          <div class="track-album">
+            <h2>Check out the album</h2>
+            <div class="album">
+              <img [src]="spotifyTrack.album.images[1].url" (click)="loading.startLoading()" routerLink="/results/album/{{spotifyTrack.album.name}}/{{spotifyTrack.album.id}}">
+              <h3>{{spotifyTrack.album.name}}</h3>
+            </div>
+          </div>
+          <div class="track-analysis">
+            <h2>Track features</h2>
+            <p>Track length: {{trackTime}}</p>
+            <p>Track tempo: {{trackFeatures.tempo | number: '1.0-0'}} BPM (Beats per minute)</p>
+          </div>
         </div>
         <div class="column right">
           <div class="track-media">
             <h1>Track preview</h1>
+            <div class="music-preview" *ngIf="spotifyTrack.preview_url">
+              <img class="album-cover" [src]="spotifyTrack.album.images[1].url">
+              <h2 class="track-name">{{trackInfo.primary_artist.name}} - {{trackName}}</h2>
+              <audio class="player" controls loop preload="auto" [src]="spotifyTrack.preview_url | safe" type="audio/mp3">
+              </audio>
+            </div>
             <div class="music-video" *ngFor="let media of trackInfo.media">
               <ng-container *ngIf="media.type === 'video'">
                 <youtube-player [videoId]="videoId"></youtube-player>
               </ng-container>
-            </div>
-            <div class="music-preview" *ngIf="spotifyTrack.preview_url">
-              <embed [src]="spotifyTrack.preview_url | safe">
             </div>
           </div>
           <div class="track-description">

@@ -116,11 +116,51 @@
           margin-bottom: 10px;
           white-space: pre-wrap;
         }
+        .track-album{
+          padding: 3%;
+          background: rgba($spotifyBlack, 0.9);
+          border-radius: 25px;
+          margin-bottom: 10px;
+          .album{
+            transition: transform .2s;
+            margin-top: 2vh;
+          }
+          .album:hover{
+            transform: scale(1.10);
+            cursor: pointer;
+          }
+        }
+        .track-analysis{
+          padding: 3%;
+          background: rgba($spotifyBlack, 0.9);
+          border-radius: 25px;
+          margin-bottom: 10px;
+        }
         .track-media{
           padding: 3%;
           background: rgba($spotifyBlack, 0.9);
           border-radius: 25px;
           margin-bottom: 10px;
+          .music-preview{
+            width: 80%;
+            height: auto;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #eee;
+            color: #444;
+            margin: 20px auto;
+            overflow: hidden;
+            .album-cover{
+              width: 35%;
+              float: left;
+            }
+            .player{
+              width: 60%;
+            }
+            .track-name{
+              color: $spotifyBlack;
+            }
+          }
         }
         .track-description{
           text-align: left;

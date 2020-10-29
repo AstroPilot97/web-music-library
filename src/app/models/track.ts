@@ -27,6 +27,7 @@ export interface Track {
 }
 
 export interface SpotifyTrack {
+  id: string;
   preview_url: string;
   explicit: boolean;
   name: string;
@@ -56,4 +57,14 @@ export interface TrackLyrics {
       name: string;
     }
   }
+}
+
+export interface TrackFeatures {
+  loudness: number;
+  energy: number;
+  danceability: number;
+  instrumentalness: number;
+  liveness: number;
+  tempo: number;
+  duration_ms: number;
 }

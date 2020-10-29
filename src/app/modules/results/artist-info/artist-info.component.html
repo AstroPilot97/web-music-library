@@ -43,8 +43,8 @@
           </div>
           <div class="artist-albums">
             <div class="album" *ngFor="let album of artistAlbums">
-              <h3>{{album.name}}</h3>
               <img *ngIf="album.images.length !== 0" [src]="album.images[1].url" (click)="loading.startLoading()" routerLink="/results/album/{{album.name}}/{{album.id}}">
+              <h3>{{album.name}}</h3>
             </div>
           </div>
         </div>

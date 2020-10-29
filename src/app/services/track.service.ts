@@ -40,4 +40,15 @@ export class TrackService {
     this.searchUrl = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`;
     return this.http.get(this.searchUrl, httpOptions);
   }
+
+  getSpotifyTrackFeatures(id: string): Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: `${this.tokenType} ${this.accessToken}`
+      })
+    };
+    this.searchUrl = `https://api.spotify.com/v1/audio-features/${id}`;
+    return this.http.get(this.searchUrl, httpOptions);
+  }
 }

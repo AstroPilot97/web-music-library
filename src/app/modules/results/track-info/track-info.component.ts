@@ -4,8 +4,7 @@ import { Title } from '@angular/platform-browser';
 import { TrackService } from '../../../services/track.service';
 import { Track } from 'src/app/models/track';
 import { LoadingService } from '../../../services/loading.service';
-import { TrackLyrics, SpotifyTrack } from '../../../models/track';
-import { mergeMap } from 'rxjs/operators';
+import { TrackLyrics, SpotifyTrack, TrackFeatures } from '../../../models/track';
 
 @Component({
   selector: 'app-track-info',
@@ -19,8 +18,10 @@ export class TrackInfoComponent implements OnInit {
   trackInfo: Track;
   spotifyResults: SpotifyTrack[];
   spotifyTrack: SpotifyTrack;
+  trackFeatures: TrackFeatures;
   lyricsInfo: TrackLyrics;
   videoId: string;
+  trackTime: string;
 
   constructor(private route: ActivatedRoute, private webTitle: Title, private trackService: TrackService, public loading: LoadingService) {
   }
@@ -36,18 +37,20 @@ export class TrackInfoComponent implements OnInit {
 
   getInfo(){
     this.loading.startLoading();
+    this.trackInfo = null;
+    this.lyricsInfo = null;
+    this.spotifyResults = null;
+    this.spotifyTrack = null;
     setTimeout(() => {
       this.trackService.getTrackInfo(this.trackId).subscribe(res => {
         this.trackInfo = res.response.song;
-        this.lyricsInfo = null;
-        this.spotifyResults = null;
         this.getSongLyrics();
         this.pullIdFromVideoUrl();
         this.trackService.getSpotifyTrackInfo(`${this.trackName} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
           this.spotifyResults = res.tracks.items;
           this.spotifyTrack = this.spotifyResults[0];
-          console.log(this.spotifyTrack);
-        })
+          this.getAudioFeatures();
+        });
         this.loading.finishLoading();
       })
     }, 2500)
@@ -63,6 +66,24 @@ export class TrackInfoComponent implements OnInit {
     this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackName).subscribe(res => {
       this.lyricsInfo = res.result;
     })
+  }
+
+  getAudioFeatures(){
+    this.trackService.getSpotifyTrackFeatures(`${this.spotifyTrack.id}`).subscribe(res => {
+      this.trackFeatures = res;
+      this.formatTrackTime();
+    });
+  }
+
+  formatTrackTime(){
+    let seconds = this.trackFeatures.duration_ms / 1000;
+    let minutes = seconds / 60;
+
+    seconds = Math.floor(seconds) % 60;
+    minutes = Math.floor(minutes) % 60;
+
+    this.trackTime = `${minutes}:${seconds}`;
+    console.log(this.trackTime);
   }
 
 }
