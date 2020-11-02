@@ -28,4 +28,15 @@ export class AlbumService {
     this.albumUrl = `https://api.spotify.com/v1/albums/${id}`;
     return this.http.get(this.albumUrl, httpOptions);
    }
+
+   getArtist(id: string): Observable<any>{
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        Authorization: `${this.tokenType} ${this.accessToken}`
+      })
+    };
+    this.albumUrl = `https://api.spotify.com/v1/artists/${id}`;
+    return this.http.get(this.albumUrl, httpOptions);
+  }
 }

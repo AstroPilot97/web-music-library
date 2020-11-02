@@ -16,6 +16,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SearchService } from './services/search.service';
 import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
 import { ApiRequestInterceptor } from './interceptor/api-request.interceptor';
+import {NgPipesModule} from 'ngx-pipes'
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ApiRequestInterceptor } from './interceptor/api-request.interceptor';
       secondaryColour: '#55133b',
       tertiaryColour: '#55133b'
     }),
+    NgPipesModule
   ],
   providers: [SearchService,
     {

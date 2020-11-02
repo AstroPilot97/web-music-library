@@ -5,9 +5,9 @@ import { AlbumInfoComponent } from './album-info/album-info.component';
 import { TrackInfoComponent } from './track-info/track-info.component';
 
 const routes: Routes = [
-  {path: 'artist/:name/:id', component: ArtistInfoComponent},
-  {path: 'album/:name/:id', component: AlbumInfoComponent},
-  {path: 'track/:title/:id', component: TrackInfoComponent}
+  {path: 'artist/:id', component: ArtistInfoComponent},
+  {path: 'album/:id', component: AlbumInfoComponent},
+  {path: 'track/:id', component: TrackInfoComponent}
 ];
 
 @NgModule({

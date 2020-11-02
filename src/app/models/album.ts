@@ -17,7 +17,8 @@ export interface Album {
       duration_ms: number;
       track_number: number;
       explicit: boolean;
-    }
+      trackTime: string;
+    }[]
   }
   copyrights: {
     type: string;

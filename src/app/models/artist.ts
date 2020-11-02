@@ -1,5 +1,6 @@
 export interface SpotifyArtist {
   name: string;
+  id: string;
   genres: string[];
   images: {
     url: string;

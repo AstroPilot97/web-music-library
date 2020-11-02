@@ -9,11 +9,13 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTableModule } from '@angular/material/table';
 import { AlbumService } from 'src/app/services/album.service';
 import { TrackInfoComponent } from './track-info/track-info.component';
 import { TrackService } from '../../services/track.service';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { SafePipe } from './safe.pipe';
+import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [ArtistInfoComponent, AlbumInfoComponent, TrackInfoComponent, SafePipe],
@@ -25,6 +27,8 @@ import { SafePipe } from './safe.pipe';
     MatProgressBarModule,
     MatTooltipModule,
     NgxYoutubePlayerModule,
+    NgPipesModule,
+    MatTableModule
   ],
   providers: [ArtistService, AlbumService, TrackService]
 })

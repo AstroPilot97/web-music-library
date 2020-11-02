@@ -24,14 +24,41 @@
               <p *ngFor="let artist of albumInfo.artists">Artist(s): {{artist.name}}</p>
               <hr>
             </div>
-            <div class="album-genres">
-              <mat-chip-list aria-label="Genres">
-                <mat-chip *ngFor="let genre of albumInfo.genres">{{genre}}</mat-chip>
-              </mat-chip-list>
+            <div class="album-label">
+              <p>Label: {{albumInfo.label}}</p>
+            </div>
+            <div class="album-copyrights" *ngFor="let copyright of albumInfo.copyrights">
+              <p><small *ngIf="copyright.type">({{copyright.type}})</small> {{copyright.text}}</p>
             </div>
           </div>
           <div class="album-tracklist">
-
+            <h2>Album's tracklist</h2>
+            <table mat-table [dataSource]="albumInfo.tracks.items" class="mat-elevation-z8">
+              <ng-container matColumnDef="number">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let track"> {{track.track_number}} </td>
+              </ng-container>
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Track Name </th>
+                <td mat-cell *matCellDef="let track"> {{track.name}} </td>
+              </ng-container>
+              <ng-container matColumnDef="length">
+                <th mat-header-cell *matHeaderCellDef> Track length </th>
+                <td mat-cell *matCellDef="let track"> {{track.trackTime}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="tableHeaders"></tr>
+              <tr mat-row *matRowDef="let row; columns: tableHeaders;"></tr>
+            </table>
+          </div>
+        </div>
+        <div class="column right">
+          <div class="album-artists">
+            <h1>Album artists</h1>
+            <div class="artist-box">
+              <img class="album-artist-image" routerLink="/results/artist/{{artistInfo.id}}"
+              *ngIf="artistInfo.images.length !== 0" [src]="artistInfo.images[0].url" height="200" width="200">
+              <h3>{{artistInfo.name}}</h3>
+            </div>
           </div>
         </div>
       </div>

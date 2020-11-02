@@ -22,28 +22,18 @@
             <div class="artist-followers">
               <p>Followers on Spotify: {{spotifyArtistInfo.followers.total}}</p>
             </div>
-            <div class="artist-popularity">
-              <p>Popularity on Spotify: </p>
-              <div class="popularity-bar">
-                <mat-progress-bar
-                mode="determinate" value="{{spotifyArtistInfo.popularity}}"
-                matTooltip="Popularity: {{spotifyArtistInfo.popularity}}"
-                matTooltipPosition="above">
-              </mat-progress-bar>
-              </div>
-            </div>
           </div>
           <div class="artist-bio">
-            <h1>{{lastfmArtistInfo.artist.name}}'s bio
+            <h1>{{spotifyArtistInfo.name}}'s bio
               <span *ngIf="!isExpanded" (click)="showFullInfo()">(Show full bio)</span>
               <span *ngIf="isExpanded" (click)="showFullInfo()">(Show shorter bio)</span>
             </h1>
-            <p *ngIf="!isExpanded">{{lastfmArtistInfo.artist.bio.summary}}</p>
-            <p *ngIf="isExpanded">{{lastfmArtistInfo.artist.bio.content}}</p>
+            <p *ngIf="!isExpanded">{{lastfmArtistInfo.artist.bio.summary | stripTags | trim: 'Read more on Last.fm'}}</p>
+            <p *ngIf="isExpanded">{{lastfmArtistInfo.artist.bio.content | stripTags | trim: 'Read more on Last.fm'}}</p>
           </div>
           <div class="artist-albums">
             <div class="album" *ngFor="let album of artistAlbums">
-              <img *ngIf="album.images.length !== 0" [src]="album.images[1].url" (click)="loading.startLoading()" routerLink="/results/album/{{album.name}}/{{album.id}}">
+              <img *ngIf="album.images.length !== 0" [src]="album.images[1].url" (click)="ngOnInit()" routerLink="/results/album/{{album.id}}">
               <h3>{{album.name}}</h3>
             </div>
           </div>
@@ -52,7 +42,7 @@
           <div class="similar-artists">
             <h1>Similar artists</h1>
             <div class="artist-box" *ngFor="let artist of similarArtists.artists | slice: 0:5">
-              <img class="similar-artist-image" (click)="ngOnInit()" routerLink="/results/artist/{{artist.name}}/{{artist.id}}"
+              <img class="similar-artist-image" (click)="ngOnInit()" routerLink="/results/artist/{{artist.id}}"
               *ngIf="artist.images.length !== 0" [src]="artist.images[0].url" height="200" width="200">
               <h3>{{artist.name}}</h3>
             </div>

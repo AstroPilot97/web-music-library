@@ -13,7 +13,6 @@ import { TrackLyrics, SpotifyTrack, TrackFeatures } from '../../../models/track'
 })
 export class TrackInfoComponent implements OnInit {
 
-  trackName: string;
   trackId: string;
   trackInfo: Track;
   spotifyResults: SpotifyTrack[];
@@ -28,9 +27,7 @@ export class TrackInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      this.trackName = paramMap.get('title');
       this.trackId = paramMap.get('id');
-      this.webTitle.setTitle(`${this.trackName} page`);
       this.getInfo();
     });
   }
@@ -46,12 +43,13 @@ export class TrackInfoComponent implements OnInit {
         this.trackInfo = res.response.song;
         this.getSongLyrics();
         this.pullIdFromVideoUrl();
-        this.trackService.getSpotifyTrackInfo(`${this.trackName} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
+        this.trackService.getSpotifyTrackInfo(`${this.trackInfo.title} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
           this.spotifyResults = res.tracks.items;
           this.spotifyTrack = this.spotifyResults[0];
           this.getAudioFeatures();
         });
         this.loading.finishLoading();
+        this.webTitle.setTitle(`${this.trackInfo.title} page`);
       })
     }, 2500)
   }
@@ -63,7 +61,7 @@ export class TrackInfoComponent implements OnInit {
   }
 
   getSongLyrics() {
-    this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackName).subscribe(res => {
+    this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
       this.lyricsInfo = res.result;
     })
   }
@@ -83,7 +81,6 @@ export class TrackInfoComponent implements OnInit {
     minutes = Math.floor(minutes) % 60;
 
     this.trackTime = `${minutes}:${seconds}`;
-    console.log(this.trackTime);
   }
 
 }

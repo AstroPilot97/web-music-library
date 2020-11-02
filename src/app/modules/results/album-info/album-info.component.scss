@@ -86,10 +86,10 @@
             flex-wrap: wrap;
           }
           .column.left{
-            width: 75%;
+            width: 65%;
           }
           .column.right{
-            width: 25%;
+            width: 35%;
           }
         }
         .album-miscalleanous{
@@ -108,48 +108,26 @@
             padding-top: 1vh;
             padding-bottom: 1vh;
           }
-          .artist-popularity{
+          .album-label{
             font-size: 1.2rem;
             padding-bottom: 1vh;
           }
         }
-        .artist-bio{
-          text-align: justify;
+        .album-tracklist{
+          text-align: left;
           background: rgba($spotifyBlack, 0.9);
           border-radius: 25px;
           padding: 3%;
           margin-bottom: 10px;
-          span{
-            font-size: 0.8rem;
-            cursor: pointer;
-          }
-          span:hover{
-            filter: brightness(120%);
+          table {
+            width: 100%;
           }
         }
-        .artist-albums{
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          justify-content: space-evenly;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          padding: 3%;
-          .album{
-            width: 50%;
-            padding-bottom: 1vh;
-            transition: transform .2s;
-          }
-          .album:hover{
-            transform: scale(1.05);
-            cursor: pointer;
-          }
-        }
-        .similar-artists{
+        .album-artists{
           padding-top: 1vh;
           background: rgba($spotifyBlack, 0.9);
           border-radius: 25px;
-          .similar-artist-image {
+          .album-artist-image {
             border-radius: 50%;
           }
           .artist-box{

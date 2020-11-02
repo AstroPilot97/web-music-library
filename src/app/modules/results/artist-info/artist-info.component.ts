@@ -13,7 +13,6 @@ import { forkJoin } from 'rxjs';
 })
 export class ArtistInfoComponent implements OnInit {
 
-  artistName: string;
   artistId: string;
   spotifyArtistInfo: SpotifyArtist;
   similarArtists: SimilarArtist;
@@ -25,27 +24,32 @@ export class ArtistInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
-      this.artistName = paramMap.get('name');
       this.artistId = paramMap.get('id');
-      this.webTitle.setTitle(`${this.artistName} page`);
       this.getArtistInfo();
     });
   }
 
   getArtistInfo(): void {
     this.loading.startLoading()
-    setTimeout(() => forkJoin([this.artistService.getArtist(this.artistId), this.artistService.getSimilarArtists(this.artistId), this.artistService.getlastfmArtist(this.artistName), this.artistService.getArtistAlbums(this.artistId)])
+    setTimeout(() => forkJoin([this.artistService.getArtist(this.artistId), this.artistService.getSimilarArtists(this.artistId), this.artistService.getArtistAlbums(this.artistId)])
       .subscribe(results => {
         this.spotifyArtistInfo = results[0];
         this.similarArtists = results[1];
-        this.lastfmArtistInfo = results[2];
-        this.artistAlbums = results[3].items.filter((album, index, self) =>
+        this.artistAlbums = results[2].items.filter((album, index, self) =>
           index === self.findIndex((a) => (
             a.name === album.name
           ))
         );
+        this.getLastFMArtistInfo();
         this.loading.finishLoading();
+        this.webTitle.setTitle(`${this.spotifyArtistInfo.name}'s page`)
       }), 2500)
+  }
+
+  getLastFMArtistInfo(){
+    this.artistService.getlastfmArtist(this.spotifyArtistInfo.name).subscribe(res => {
+      this.lastfmArtistInfo = res;
+    });
   }
 
   showFullInfo(){

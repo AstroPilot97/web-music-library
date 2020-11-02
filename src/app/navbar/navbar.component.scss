@@ -58,6 +58,9 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   mat-toolbar {
+    .example-spacer {
+      flex: 1 1 auto;
+    }
     background-color: $darkPurple;
     span{
       margin: 1%;
@@ -109,6 +112,9 @@
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   mat-toolbar {
+    .example-spacer {
+      flex: 1 1 auto;
+    }
     .header {
       font-size: 2rem;
     }
@@ -156,6 +162,9 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   mat-toolbar {
+    .example-spacer {
+      flex: 1 1 auto;
+    }
     .header {
       font-size: 2rem;
       cursor: pointer;
@@ -196,8 +205,8 @@
   .example-option-img{
     vertical-align: middle;
     margin-right: 0.5rem;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
   }
 }
 

@@ -45,7 +45,7 @@
           <div class="track-album">
             <h2>Check out the album</h2>
             <div class="album">
-              <img [src]="spotifyTrack.album.images[1].url" (click)="loading.startLoading()" routerLink="/results/album/{{spotifyTrack.album.name}}/{{spotifyTrack.album.id}}">
+              <img [src]="spotifyTrack.album.images[1].url" (click)="loading.startLoading()" routerLink="/results/album/{{spotifyTrack.album.id}}">
               <h3>{{spotifyTrack.album.name}}</h3>
             </div>
           </div>
@@ -60,7 +60,7 @@
             <h1>Track preview</h1>
             <div class="music-preview" *ngIf="spotifyTrack.preview_url">
               <img class="album-cover" [src]="spotifyTrack.album.images[1].url">
-              <h2 class="track-name">{{trackInfo.primary_artist.name}} - {{trackName}}</h2>
+              <h2 class="track-name">{{trackInfo.primary_artist.name}} - {{trackInfo.title}}</h2>
               <audio class="player" controls loop preload="auto" [src]="spotifyTrack.preview_url | safe" type="audio/mp3">
               </audio>
             </div>
@@ -78,7 +78,8 @@
           <div class="track-artist">
             <h1>Track artist</h1>
             <div class="artist">
-              <img class="artist-image" *ngIf="trackInfo.primary_artist.image_url" [src]="trackInfo.primary_artist.image_url" height="200" width="200">
+              <img class="artist-image" *ngIf="trackInfo.primary_artist.image_url" [src]="trackInfo.primary_artist.image_url"
+              height="200" width="200" (click)="loading.startLoading()" routerLink="/results/artist/{{spotifyTrack.artists[0].id}}">
               <h3>{{trackInfo.primary_artist.name}}</h3>
             </div>
           </div>

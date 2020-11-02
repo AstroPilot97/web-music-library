@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
     "ngx-loading": "^8.0.0",
+    "ngx-pipes": "^2.7.5",
     "ngx-youtube-player": "^9.1.0",
     "node-fetch": "^2.6.1",
     "rxjs": "~6.6.3",
