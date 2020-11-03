@@ -46,20 +46,7 @@
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {  .wrapper{
-  height:100%;
-  background-color: $spotifyBlack;
-  display: flex;
-  .banner-area{
-    height: 60%;
-  }
-  .card-row{
-    height: 40%;
-  }
-}}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 992px) {
   .wrapper{
     height:100%;
     background-color: $spotifyBlack;
@@ -69,6 +56,27 @@
     }
     .card-row{
       height: 40%;
+    }
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .wrapper{
+    height:100%;
+    background-image: url("../../../../assets/backgrounds/home-bg.png");
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    .banner-area{
+      color: $lightGray;
+      h1{
+        font-size: 4rem;
+      }
+      font-size: 2rem;
+      text-align: center;
+      margin-top: 25%;
+      margin-left: 20%;
     }
   }
 }
