@@ -57,7 +57,7 @@ export class ArtistService {
         Authorization: `${this.tokenType} ${this.accessToken}`
       })
     };
-    this.artistUrl = `https://api.spotify.com/v1/artists/${id}/albums?market=US&include_groups=album&limit=50`;
+    this.artistUrl = `https://api.spotify.com/v1/artists/${id}/albums?include_groups=album&limit=50`;
     return this.http.get(this.artistUrl, httpOptions);
   }
 

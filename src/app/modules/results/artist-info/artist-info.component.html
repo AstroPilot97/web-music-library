@@ -1,5 +1,6 @@
 <div class="wrapper">
   <div class="bg-image" *ngIf="spotifyArtistInfo.images.length !== 0" style="background-image: url({{spotifyArtistInfo.images[0].url}});"></div>
+  <div class="bg-image" *ngIf="!spotifyArtistInfo" style="background-color: #2b2b2b;"></div>
   <div class="artist-container">
     <div class="top-subcontainer">
       <div class="artist-banner">
@@ -28,7 +29,7 @@
               <span *ngIf="!isExpanded" (click)="showFullInfo()">(Show full bio)</span>
               <span *ngIf="isExpanded" (click)="showFullInfo()">(Show shorter bio)</span>
             </h1>
-            <p *ngIf="!isExpanded">{{lastfmArtistInfo.artist.bio.summary | stripTags | trim: 'Read more on Last.fm'}}</p>
+            <p *ngIf="!isExpanded">{{lastfmArtistInfo.artist.bio.summary | stripTags | trim: 'Read more on Last.fm'}}...</p>
             <p *ngIf="isExpanded">{{lastfmArtistInfo.artist.bio.content | stripTags | trim: 'Read more on Last.fm'}}</p>
           </div>
           <div class="artist-albums">

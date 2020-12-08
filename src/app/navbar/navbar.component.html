@@ -14,26 +14,21 @@
             <mat-option (click)="loading.startLoading()" routerLink="results/{{result.type}}/{{result.id}}" *ngFor="let result of filteredResults | async" [value]="result.name">
               <img *ngIf="result.images.length !== 0" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.images[0].url"/>
               <img *ngIf="result.images.length === 0" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
-              <span>{{result.name}}</span> |
-              <small>{{result.type}}</small>
+              <span>{{result.name}}</span>
+              <small> | {{result.type}}</small>
             </mat-option>
-            <mat-option (click)="loading.startLoading()" routerLink="results/track/{{track.result.id}}" *ngFor="let track of filteredTracks | async" [value]="track.result.full_title">
+            <mat-option (click)="ngOnInit(); loading.startLoading()" routerLink="results/track/{{track.result.id}}" *ngFor="let track of filteredTracks | async" [value]="track.result.full_title">
               <img *ngIf="track.result.header_image_thumbnail_url" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="track.result.header_image_thumbnail_url"/>
               <img *ngIf="!track.result.header_image_thumbnail_url" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
-              <span>{{track.result.full_title}}</span> |
-              <small>track</small>
+              <span>{{track.result.full_title}}</span>
+              <small> | track</small>
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
       </form>
     </div>
   </span>
-  <button class="basic-button" type="button" mat-button>
-    Artists
-  </button>
-  <button class="basic-button" type="button" mat-button>
-    Albums
-  </button>
+
   <span class="example-spacer"></span>
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>menu</mat-icon>
