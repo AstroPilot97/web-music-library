@@ -8,7 +8,16 @@ export const environment = {
   spotify_clientSecret: "7e8499e5e1954d0dba3204b481fc752f",
   lastfm_apiKey: "5c8c448be3aea36d7d7192a5f2aa73ba",
   genius_apiKey: "bzhW_CRMSWma1w56yCD0jVRR_5lmHc--_ZOC8YjmqIU1zSdg7zodwciU_BwkMAlk",
-  lyrics_apiKey: "dqdDpRZNpSqVVFAkfIe5BVAqpf98EuHW2IJAOyTimtwknXQWQei2HiPfzDe9g4kO"
+  lyrics_apiKey: "dqdDpRZNpSqVVFAkfIe5BVAqpf98EuHW2IJAOyTimtwknXQWQei2HiPfzDe9g4kO",
+  firebase: {
+    apiKey: "AIzaSyCX8IdNWEOxqhJKLYzOIgOzyaqZdWo0Oo8",
+    authDomain: "webmusiclibrary-1f647.firebaseapp.com",
+    databaseURL: "https://webmusiclibrary-1f647.firebaseio.com",
+    projectId: "webmusiclibrary-1f647",
+    storageBucket: "webmusiclibrary-1f647.appspot.com",
+    messagingSenderId: "358912020025",
+    appId: "1:358912020025:web:a7687fe8e0a2a1d56247e8"
+  }
 };
 
 /*

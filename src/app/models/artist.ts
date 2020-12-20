@@ -19,9 +19,6 @@ export interface LastFMArtist {
       content: string;
       summary: string;
     }
-    image: {
-      text: string;
-    }
     similar: {
       artist: {
         image: {

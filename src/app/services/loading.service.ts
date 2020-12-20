@@ -10,10 +10,10 @@ export class LoadingService {
   constructor() { }
 
   startLoading(){
-    this.isLoading = true;
+    return this.isLoading = true;
   }
 
   finishLoading(){
-    this.isLoading = false;
+    return this.isLoading = false;
   }
 }

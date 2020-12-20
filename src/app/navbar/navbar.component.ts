@@ -5,6 +5,7 @@ import { startWith, map } from 'rxjs/operators';
 import { SearchService } from '../services/search.service';
 import { Result, TrackResult } from '../models/result';
 import { LoadingService } from '../services/loading.service';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-navbar',
@@ -19,7 +20,7 @@ export class NavbarComponent implements OnInit {
   results: Result[] = [];
   trackResults: TrackResult[] = [];
 
-  constructor(private searchService: SearchService, public loading: LoadingService) {
+  constructor(private searchService: SearchService, private firebaseSearch: FirebaseService, public loading: LoadingService) {
     this.filteredResults = this.queryCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -31,8 +32,8 @@ export class NavbarComponent implements OnInit {
       map(track => track ? this._filterTracks(track) : this.trackResults.slice())
     );
   }
-  ngOnInit(): void {
-  }
+
+  ngOnInit(): void { }
 
   private _filterResults(value: string): Result[] {
     const filterValue = value.toLowerCase();
@@ -57,5 +58,7 @@ export class NavbarComponent implements OnInit {
       this.trackResults = res.response.hits;
     })
   }
+
+
 
 }
