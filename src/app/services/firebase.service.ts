@@ -10,8 +10,12 @@ import { Observable } from 'rxjs';
 export class FirebaseService {
 
   private artistsPath = '/artists/';
+  private albumsPath = '/albums/';
+  private tracksPath = '/tracks/';
 
   artistRef: AngularFireObject<any>;
+  albumsRef: AngularFireObject<any>;
+  tracksRef: AngularFireObject<any>;
 
   constructor(private db: AngularFireDatabase) {
   }
@@ -23,5 +27,23 @@ export class FirebaseService {
   saveArtistData(id, artist): any {
     this.artistRef = this.db.object(`${this.artistsPath}${id}`);
     this.artistRef.set(artist);
+  }
+
+  getAlbum(id: string): Observable<any>{
+    return this.db.object(`${this.albumsPath}${id}`).valueChanges();
+  }
+
+  saveAlbumData(id, album): any {
+    this.albumsRef = this.db.object(`${this.albumsPath}${id}`);
+    this.albumsRef.set(album);
+  }
+
+  getTrack(id: string): Observable<any>{
+    return this.db.object(`${this.tracksPath}${id}`).valueChanges();
+  }
+
+  saveTrackData(id, track): any {
+    this.albumsRef = this.db.object(`${this.tracksPath}${id}`);
+    this.albumsRef.set(track);
   }
 }

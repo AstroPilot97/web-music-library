@@ -171,6 +171,7 @@
         }
         .track-artist{
           padding-top: 1vh;
+          padding-bottom: 1vh;
           background: rgba($spotifyBlack, 0.9);
           border-radius: 25px;
           .artist-image {
@@ -186,7 +187,9 @@
           }
         }
         .track-producers{
+          margin-top: 1vh;
           padding-top: 1vh;
+          padding-bottom: 1vh;
           background: rgba($spotifyBlack, 0.9);
           border-radius: 25px;
           .producer-image {

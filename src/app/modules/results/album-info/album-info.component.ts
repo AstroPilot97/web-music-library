@@ -6,6 +6,7 @@ import { Album } from 'src/app/models/album';
 import { map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { SpotifyArtist } from '../../../models/artist';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'app-album-info',
@@ -19,7 +20,7 @@ export class AlbumInfoComponent implements OnInit {
   artistInfo: SpotifyArtist;
   tableHeaders = ["number", "name", "length"];
 
-  constructor(private albumService: AlbumService, private route: ActivatedRoute, public loading: LoadingService, private webTitle: Title ) {}
+  constructor(private albumService: AlbumService,private firebaseService: FirebaseService, private route: ActivatedRoute, public loading: LoadingService, private webTitle: Title ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -30,22 +31,39 @@ export class AlbumInfoComponent implements OnInit {
 
   getAlbumInfo(): void {
     this.loading.startLoading();
-    setTimeout(() => this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
-      this.albumService.getAlbum(id).subscribe(album => {
-        this.albumInfo = album;
+    this.firebaseService.getAlbum(this.albumId).subscribe(album => {
+      if(album !==  null){
         console.log(album);
-        this.loading.finishLoading();
-        this.getAlbumArtist();
+        this.albumInfo = album.albumInfo;
+        this.artistInfo = album.artistInfo;
         this.getTrackTimes();
-        this.webTitle.setTitle(`${this.albumInfo.name} page`);
-      });
-     }), 2500)
+        this.webTitle.setTitle(`${this.albumInfo.name}'s page`);
+        this.loading.finishLoading();
+        return;
+      } else {
+        this.loading.startLoading();
+        setTimeout(() => this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
+          this.albumService.getAlbum(id).subscribe(album => {
+            this.albumInfo = album;
+            this.albumService.getArtist(this.albumInfo.artists[0].id).subscribe(res => {
+              this.artistInfo = res;
+              this.saveAlbumInfo();
+            })
+            this.loading.finishLoading();
+            this.getTrackTimes();
+            this.webTitle.setTitle(`${this.albumInfo.name} page`);
+          });
+         }), 2500);
+      }
+    });
   }
 
-  getAlbumArtist(){
-    this.albumService.getArtist(this.albumInfo.artists[0].id).subscribe(res => {
-      this.artistInfo = res;
-    })
+  saveAlbumInfo(){
+    const albumInfo = {
+      albumInfo: this.albumInfo,
+      artistInfo: this.artistInfo,
+    };
+    this.firebaseService.saveAlbumData(this.albumId, albumInfo);
   }
 
   getTrackTimes(){
@@ -55,7 +73,12 @@ export class AlbumInfoComponent implements OnInit {
 
       seconds = Math.floor(seconds) % 60;
       minutes = Math.floor(minutes) % 60;
-      track.trackTime =`${minutes}:${seconds}`;
+      let stringMinutes = minutes.toLocaleString();
+      let stringSeconds = seconds.toLocaleString();
+      if(seconds.toString().length < 2){
+        stringSeconds = '0' + stringSeconds;
+      }
+      track.trackTime =`${stringMinutes}:${stringSeconds}`;
     });
   }
 }

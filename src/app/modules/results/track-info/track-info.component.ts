@@ -5,6 +5,7 @@ import { TrackService } from '../../../services/track.service';
 import { Track } from 'src/app/models/track';
 import { LoadingService } from '../../../services/loading.service';
 import { TrackLyrics, SpotifyTrack, TrackFeatures } from '../../../models/track';
+import { FirebaseService } from '../../../services/firebase.service';
 
 @Component({
   selector: 'app-track-info',
@@ -22,7 +23,7 @@ export class TrackInfoComponent implements OnInit {
   videoId: string;
   trackTime: string;
 
-  constructor(private route: ActivatedRoute, private webTitle: Title, private trackService: TrackService, public loading: LoadingService) {
+  constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private webTitle: Title, private trackService: TrackService, public loading: LoadingService) {
   }
 
   ngOnInit(): void {
@@ -32,45 +33,51 @@ export class TrackInfoComponent implements OnInit {
     });
   }
 
-  getInfo(){
-    this.loading.startLoading();
-    this.trackInfo = null;
-    this.lyricsInfo = null;
-    this.spotifyResults = null;
-    this.spotifyTrack = null;
-    setTimeout(() => {
-      this.trackService.getTrackInfo(this.trackId).subscribe(res => {
-        this.trackInfo = res.response.song;
-        this.getSongLyrics();
-        this.pullIdFromVideoUrl();
-        this.trackService.getSpotifyTrackInfo(`${this.trackInfo.title} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
-          this.spotifyResults = res.tracks.items;
-          this.spotifyTrack = this.spotifyResults[0];
-          this.getAudioFeatures();
+  getInfo(): void{
+    this.loading.isLoading = true;
+    this.firebaseService.getTrack(this.trackId).subscribe(track => {
+      if(track !==  null){
+        this.trackInfo = track.trackInfo;
+        this.spotifyTrack = track.spotifyTrack;
+        this.trackFeatures = track.trackFeatures;
+        this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
+          this.lyricsInfo = res.result;
         });
+        this.pullIdFromVideoUrl();
+        this.formatTrackTime();
+        this.webTitle.setTitle(`${this.trackInfo.title}'s page`);
         this.loading.finishLoading();
-        this.webTitle.setTitle(`${this.trackInfo.title} page`);
-      })
-    }, 2500)
+        return;
+      } else {
+        setTimeout(() => {
+          this.loading.startLoading();
+          this.trackService.getTrackInfo(this.trackId).subscribe(res => {
+            this.trackInfo = res.response.song;
+            this.pullIdFromVideoUrl();
+            this.trackService.getSpotifyTrackInfo(`${this.trackInfo.title} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
+              this.spotifyResults = res.tracks.items;
+              this.spotifyTrack = this.spotifyResults[0];
+              this.trackService.getSpotifyTrackFeatures(`${this.spotifyTrack.id}`).subscribe(res => {
+                this.trackFeatures = res;
+                this.formatTrackTime();
+                this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
+                  this.lyricsInfo = res.result;
+                  this.saveTrackInfo();
+                });
+              });
+            });
+            this.loading.finishLoading();
+            this.webTitle.setTitle(`${this.trackInfo.title} page`);
+          })
+        }, 2500);
+      }
+    });
   }
 
   pullIdFromVideoUrl(){
    const media = this.trackInfo.media.find(media => media.type === 'video');
    const lastEqualSignIndex = media.url.lastIndexOf('=');
    this.videoId = media.url.substr(lastEqualSignIndex + 1);
-  }
-
-  getSongLyrics() {
-    this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
-      this.lyricsInfo = res.result;
-    })
-  }
-
-  getAudioFeatures(){
-    this.trackService.getSpotifyTrackFeatures(`${this.spotifyTrack.id}`).subscribe(res => {
-      this.trackFeatures = res;
-      this.formatTrackTime();
-    });
   }
 
   formatTrackTime(){
@@ -81,6 +88,15 @@ export class TrackInfoComponent implements OnInit {
     minutes = Math.floor(minutes) % 60;
 
     this.trackTime = `${minutes}:${seconds}`;
+  }
+
+  saveTrackInfo(){
+    const trackInfo = {
+      trackInfo: this.trackInfo,
+      spotifyTrack: this.spotifyTrack,
+      trackFeatures: this.trackFeatures
+    };
+    this.firebaseService.saveTrackData(this.trackId, trackInfo);
   }
 
 }

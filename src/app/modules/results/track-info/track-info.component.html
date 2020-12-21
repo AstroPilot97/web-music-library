@@ -79,7 +79,7 @@
             <h1>Track artist</h1>
             <div class="artist">
               <img class="artist-image" *ngIf="trackInfo.primary_artist.image_url" [src]="trackInfo.primary_artist.image_url"
-              height="200" width="200" (click)="loading.startLoading()" routerLink="/results/artist/{{spotifyTrack.artists[0].id}}">
+              height="200" width="200" (click)="loading.isloading = true" routerLink="/results/artist/{{spotifyTrack.artists[0].id}}">
               <h3>{{trackInfo.primary_artist.name}}</h3>
             </div>
           </div>
