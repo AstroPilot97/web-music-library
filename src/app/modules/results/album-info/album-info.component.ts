@@ -33,7 +33,6 @@ export class AlbumInfoComponent implements OnInit {
     this.loading.startLoading();
     this.firebaseService.getAlbum(this.albumId).subscribe(album => {
       if(album !==  null){
-        console.log(album);
         this.albumInfo = album.albumInfo;
         this.artistInfo = album.artistInfo;
         this.getTrackTimes();

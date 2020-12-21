@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="column right">
-          <div class="track-media">
+          <div class="track-media" *ngIf="trackInfo.media && trackInfo.media.length !== 0">
             <h1>Track preview</h1>
             <div class="music-preview" *ngIf="spotifyTrack.preview_url">
               <img class="album-cover" [src]="spotifyTrack.album.images[1].url">
@@ -83,7 +83,7 @@
               <h3>{{trackInfo.primary_artist.name}}</h3>
             </div>
           </div>
-          <div class="track-producers">
+          <div class="track-producers" *ngIf="trackInfo.producer_artists && trackInfo.producer_artists.length !== 0">
             <h1>Track producers</h1>
             <div class="producer" *ngFor="let producer of trackInfo.producer_artists">
               <img class="producer-image" *ngIf="producer.image_url" [src]="producer.image_url" height="200" width="200">

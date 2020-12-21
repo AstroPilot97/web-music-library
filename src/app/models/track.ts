@@ -19,6 +19,7 @@ export interface Track {
   producer_artists: {
     name: string;
     image_url: string;
+    length: number;
   }
   writer_artists: {
     name: string;

@@ -43,7 +43,13 @@ export class TrackInfoComponent implements OnInit {
         this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
           this.lyricsInfo = res.result;
         });
-        this.pullIdFromVideoUrl();
+        try{
+          this.pullIdFromVideoUrl();
+        }
+        catch(error)
+        {
+          console.error(error);
+        }
         this.formatTrackTime();
         this.webTitle.setTitle(`${this.trackInfo.title}'s page`);
         this.loading.finishLoading();
@@ -53,17 +59,23 @@ export class TrackInfoComponent implements OnInit {
           this.loading.startLoading();
           this.trackService.getTrackInfo(this.trackId).subscribe(res => {
             this.trackInfo = res.response.song;
-            this.pullIdFromVideoUrl();
             this.trackService.getSpotifyTrackInfo(`${this.trackInfo.title} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
               this.spotifyResults = res.tracks.items;
               this.spotifyTrack = this.spotifyResults[0];
               this.trackService.getSpotifyTrackFeatures(`${this.spotifyTrack.id}`).subscribe(res => {
                 this.trackFeatures = res;
-                this.formatTrackTime();
                 this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
                   this.lyricsInfo = res.result;
-                  this.saveTrackInfo();
                 });
+                this.saveTrackInfo();
+                try{
+                  this.pullIdFromVideoUrl();
+                }
+                catch(error)
+                {
+                  console.error(error);
+                }
+                this.formatTrackTime();
               });
             });
             this.loading.finishLoading();
