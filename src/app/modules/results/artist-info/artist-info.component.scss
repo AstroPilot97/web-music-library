@@ -1,35 +1,5 @@
 @import '../../../../variables';
 
-
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: $spotifyBlack;
-    .artist-banner{
-      padding: 3%;
-      img {
-        width: 100%;
-      }
-    }
-  }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .wrapper{
     display: flex;
@@ -52,7 +22,7 @@
     }
     .artist-container{
       margin: 0 auto;
-      width: 65%;
+      width: 55%;
       position: absolute;
       margin-top: 1vh;
       padding-left: 5vw;
@@ -63,19 +33,52 @@
         background: rgba($spotifyBlack, 0.9);
         padding-bottom: 1vh;
         margin-bottom: 2vh;
-        .artist-name{
-          padding-top: 1vh;
-          h1{
-            font-size: 3rem;
+        .row {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .column{
+            border-radius: 25px;
+            margin: 0 10px;
+            flex-wrap: wrap;
           }
-        }
-        .artist-banner{
-          img {
-            max-width: 800px;
+          .column.left{
+            width: 50%;
+            .artist-banner{
+              img {
+                max-width: 450px;
+              }
+            }
+          }
+          .column.right{
+            width: 50%;
+            .artist-name{
+              padding-top: 1vh;
+              h1{
+                font-size: 3rem;
+              }
+            }
+            .artist-miscalleanous {
+              text-align: left;
+              border-radius: 25px;
+              padding: 3%;
+              margin-bottom: 10px;
+              .artist-genres{
+                padding-bottom: 1vh;
+              }
+              .artist-followers{
+                font-size: 1.2rem;
+                padding-bottom: 1vh;
+              }
+              .artist-popularity{
+                font-size: 1.2rem;
+                padding-bottom: 1vh;
+              }
+            }
           }
         }
       }
-      .bottom-subcontainer{
+      .bottom-subcontainer {
         .row {
           display: flex;
           flex-direction: row;
@@ -92,24 +95,6 @@
             width: 25%;
           }
         }
-        .artist-miscalleanous{
-          text-align: left;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          padding: 3%;
-          margin-bottom: 10px;
-          .artist-genres{
-            padding-bottom: 1vh;
-          }
-          .artist-followers{
-            font-size: 1.2rem;
-            padding-bottom: 1vh;
-          }
-          .artist-popularity{
-            font-size: 1.2rem;
-            padding-bottom: 1vh;
-          }
-        }
         .artist-bio{
           text-align: justify;
           background: rgba($spotifyBlack, 0.9);
@@ -120,7 +105,7 @@
             font-size: 0.8rem;
             cursor: pointer;
           }
-          span:hover{
+          span:hover {
             filter: brightness(120%);
           }
         }
@@ -144,12 +129,13 @@
         }
         .similar-artists{
           padding-top: 1vh;
+          padding-bottom: 1vh;
           background: rgba($spotifyBlack, 0.9);
           border-radius: 25px;
           .similar-artist-image {
             border-radius: 50%;
           }
-          .artist-box{
+          .artist-box {
             transition: transform .2s;
             margin-top: 2vh;
           }

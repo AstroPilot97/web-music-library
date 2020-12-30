@@ -98,8 +98,12 @@ export class TrackInfoComponent implements OnInit {
 
     seconds = Math.floor(seconds) % 60;
     minutes = Math.floor(minutes) % 60;
-
-    this.trackTime = `${minutes}:${seconds}`;
+    let stringMinutes = minutes.toLocaleString();
+    let stringSeconds = seconds.toLocaleString();
+    if(seconds.toString().length < 2){
+      stringSeconds = '0' + stringSeconds;
+    }
+    this.trackTime =`${stringMinutes}:${stringSeconds}`;
   }
 
   saveTrackInfo(){

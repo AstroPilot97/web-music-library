@@ -1,30 +1,38 @@
 <div class="wrapper">
-  <div class="bg-image" *ngIf="spotifyArtistInfo.images.length !== 0" style="background-image: url({{spotifyArtistInfo.images[0].url}});"></div>
+  <div class="bg-image" *ngIf="spotifyArtistInfo" style="background-image: url({{spotifyArtistInfo.images[0].url}});"></div>
   <div class="bg-image" *ngIf="!spotifyArtistInfo" style="background-color: #2b2b2b;"></div>
   <div class="artist-container">
     <div class="top-subcontainer">
-      <div class="artist-banner">
-        <img *ngIf="spotifyArtistInfo.images.length !== 0" [src]="spotifyArtistInfo.images[0].url">
-      </div>
-      <div class="artist-name">
-        <h1>{{spotifyArtistInfo.name}}</h1>
-      </div>
-    </div>
-    <div class="bottom-subcontainer">
       <div class="row">
         <div class="column left">
+          <div class="artist-banner">
+            <img *ngIf="spotifyArtistInfo" [src]="spotifyArtistInfo.images[0].url">
+          </div>
+        </div>
+        <div class="column right">
+          <div class="artist-name">
+            <h1 *ngIf="spotifyArtistInfo">{{spotifyArtistInfo.name}}</h1>
+          </div>
           <div class="artist-miscalleanous">
-            <div class="artist-genres">
+            <hr *ngIf="spotifyArtistInfo">
+            <div class="artist-genres" *ngIf="spotifyArtistInfo">
               <h2>Genres</h2>
               <mat-chip-list aria-label="Genres">
                 <mat-chip *ngFor="let genre of spotifyArtistInfo.genres">{{genre}}</mat-chip>
               </mat-chip-list>
             </div>
-            <div class="artist-followers">
+            <hr *ngIf="spotifyArtistInfo">
+            <div class="artist-followers" *ngIf="spotifyArtistInfo">
               <p>Followers on Spotify: {{spotifyArtistInfo.followers.total}}</p>
             </div>
           </div>
-          <div class="artist-bio">
+        </div>
+      </div>
+    </div>
+    <div class="bottom-subcontainer">
+      <div class="row">
+        <div class="column left">
+          <div class="artist-bio" *ngIf="lastfmArtistInfo">
             <h1>{{spotifyArtistInfo.name}}'s bio
               <span *ngIf="!isExpanded" (click)="showFullInfo()">(Show full bio)</span>
               <span *ngIf="isExpanded" (click)="showFullInfo()">(Show shorter bio)</span>
@@ -39,7 +47,7 @@
             </div>
           </div>
         </div>
-        <div class="column right">
+        <div class="column right" *ngIf="similarArtists">
           <div class="similar-artists">
             <h1>Similar artists</h1>
             <div class="artist-box" *ngFor="let artist of similarArtists.artists | slice: 0:5">

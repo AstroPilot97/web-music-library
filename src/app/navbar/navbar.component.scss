@@ -1,170 +1,8 @@
 @import '../../variables';
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  mat-toolbar{
-    background-color: $darkPurple;
-    .header{
-      display: none;
-    }
-    [dir='rtl'] .example-option-img {
-      margin-right: 0;
-      margin-left: 8px;
-    }
-    .example-spacer {
-      flex: 1 1 auto;
-    }
-    #searchBar {
-      width: 90vw;
-      margin-top: 5%;
-      font-size: 1.2rem;
-      .example-form {
-        min-width: 150px;
-        max-width: 600px;
-        width: 100%;
-      }
-      .example-full-width {
-        width: 100%;
-      }
-    }
-  }
-  ::ng-deep {
-    input.mat-input-element {
-      color: $lightGray;
-    }
-    .mat-option {
-      font-size: 1.1rem;
-      line-height: 0 !important;
-      height: auto !important;
-      margin-top: 0.8rem;
-      margin-bottom: 0.8rem;
-    }
-    .mat-option-text{
-      vertical-align: middle ;
-    }
-    .mat-autocomplete-panel {
-      background: $spotifyBlack;
-      max-height: 550px !important;
-    }
-  }
-  .example-option-img{
-    vertical-align: middle;
-    margin-right: 0.5rem;
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  mat-toolbar {
-    .example-spacer {
-      flex: 1 1 auto;
-    }
-    background-color: $darkPurple;
-    span{
-      margin: 1%;
-    }
-    .header{
-      font-size: 1.5rem;
-    }
-    #searchBar {
-      width: 60vw;
-      margin-top: 2.5%;
-      font-size: 1.2rem;
-      .example-form {
-        min-width: 150px;
-        max-width: 600px;
-        width: 100%;
-      }
-      .example-full-width {
-        width: 100%;
-      }
-    }
-  }
-  ::ng-deep {
-    input.mat-input-element {
-      color: $lightGray;
-    }
-    .mat-option {
-      font-size: 1.5rem;
-      line-height: 0 !important;
-      height: auto !important;
-      margin-top: 0.8rem;
-      margin-bottom: 0.8rem;
-    }
-    .mat-option-text{
-      vertical-align: middle ;
-    }
-    .mat-autocomplete-panel {
-      background: $spotifyBlack;
-      max-height: 550px !important;
-    }
-  }
-  .example-option-img{
-    vertical-align: middle;
-    margin-right: 0.5rem;
-    width: 50px;
-    height: 50px;
-  }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  mat-toolbar {
-    .example-spacer {
-      flex: 1 1 auto;
-    }
-    .header {
-      font-size: 2rem;
-    }
-    #searchBar {
-      width: 55vw;
-      margin-top: 4%;
-      font-size: 1.2rem;
-      .example-form {
-        min-width: 150px;
-        max-width: 600px;
-        width: 100%;
-      }
-      .example-full-width {
-        width: 100%;
-      }
-    }
-  }
-  ::ng-deep {
-    input.mat-input-element {
-      color: $lightGray;
-    }
-    .mat-option {
-      font-size: 1.5rem;
-      line-height: 0 !important;
-      height: auto !important;
-      margin-top: 0.8rem;
-      margin-bottom: 0.8rem;
-    }
-    .mat-option-text{
-      vertical-align: middle ;
-    }
-    .mat-autocomplete-panel {
-      background: $spotifyBlack;
-      max-height: 550px !important;
-    }
-  }
-  .example-option-img{
-    vertical-align: middle;
-    margin-right: 0.5rem;
-    width: 100px;
-    height: 100px;
-  }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   mat-toolbar {
-    .example-spacer {
-      flex: 1 1 auto;
-    }
+    background-color: $darkPurple;
     .header {
       font-size: 2rem;
       cursor: pointer;
@@ -174,11 +12,11 @@
     }
     #searchBar {
       width: 40vw;
-      margin-top: 3%;
+      margin-top: 2%;
+      margin-left: 3%;
       font-size: 1.2rem;
       .example-form {
         min-width: 150px;
-        max-width: 600px;
         width: 100%;
       }
       .example-full-width {

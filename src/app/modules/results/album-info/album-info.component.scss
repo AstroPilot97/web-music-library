@@ -1,35 +1,5 @@
 @import '../../../../variables';
 
-
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: $spotifyBlack;
-    .album-banner{
-      padding: 3%;
-      img {
-        width: 100%;
-      }
-    }
-  }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .wrapper{
     display: flex;
@@ -38,7 +8,7 @@
     align-items: center;
     height: 100%;
     top: 0;
-    .bg-image{
+    .bg-image {
       filter: blur(6px);
       background-attachment: fixed;
       background-size: cover;
@@ -52,26 +22,62 @@
     }
     .album-container{
       margin: 0 auto;
-      width: 60%;
+      width: 55%;
       position: absolute;
       margin-top: 1vh;
       padding-left: 5vw;
       padding-right: 5vw;
-      .top-subcontainer{
+      .top-subcontainer {
         padding-top: 2vh;
         border-radius: 25px;
         background: rgba($spotifyBlack, 0.9);
         padding-bottom: 1vh;
         margin-bottom: 2vh;
-        .album-name{
-          padding-top: 1vh;
-          h1{
-            font-size: 3rem;
+        .row {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .column{
+            border-radius: 25px;
+            margin: 0 10px;
+            flex-wrap: wrap;
           }
-        }
-        .album-banner{
-          img {
-            max-width: 800px;
+          .column.left{
+            width: 50%;
+            .album-banner{
+              img {
+                max-width: 450px;
+              }
+            }
+          }
+          .column.right{
+            width: 50%;
+            .album-name{
+              padding-top: 1vh;
+              h1{
+                font-size: 3rem;
+              }
+            }
+            .album-miscalleanous{
+              text-align: left;
+              border-radius: 25px;
+              padding: 3%;
+              margin-bottom: 10px;
+              .release-date{
+                font-size: 1.2rem;
+                padding-top: 1vh;
+                padding-bottom: 1vh;
+              }
+              .album-artist{
+                font-size: 1.2rem;
+                padding-top: 1vh;
+                padding-bottom: 1vh;
+              }
+              .album-label{
+                font-size: 1.2rem;
+                padding-bottom: 1vh;
+              }
+            }
           }
         }
       }
@@ -92,27 +98,6 @@
             width: 35%;
           }
         }
-        .album-miscalleanous{
-          text-align: left;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          padding: 3%;
-          margin-bottom: 10px;
-          .release-date{
-            font-size: 1.2rem;
-            padding-top: 1vh;
-            padding-bottom: 1vh;
-          }
-          .album-artist{
-            font-size: 1.2rem;
-            padding-top: 1vh;
-            padding-bottom: 1vh;
-          }
-          .album-label{
-            font-size: 1.2rem;
-            padding-bottom: 1vh;
-          }
-        }
         .album-tracklist{
           text-align: left;
           background: rgba($spotifyBlack, 0.9);
@@ -121,6 +106,14 @@
           margin-bottom: 10px;
           table {
             width: 100%;
+            ::ng-deep{
+              td.mat-cell.cdk-column-name{
+                cursor: pointer;
+              }
+              td.mat-cell.cdk-column-name:hover{
+                color: aqua;
+              }
+            }
           }
         }
         .album-artists{

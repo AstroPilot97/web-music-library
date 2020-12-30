@@ -15,7 +15,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SearchService } from './services/search.service';
 import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
-import { ApiRequestInterceptor } from './interceptor/api-request.interceptor';
 import { NgPipesModule } from 'ngx-pipes'
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
@@ -51,13 +50,7 @@ import { environment } from '../environments/environment';
     }),
     NgPipesModule
   ],
-  providers: [SearchService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ApiRequestInterceptor,
-      multi: true,
-    }
-  ],
+  providers: [SearchService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

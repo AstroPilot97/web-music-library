@@ -58,7 +58,4 @@ export class NavbarComponent implements OnInit {
       this.trackResults = res.response.hits;
     })
   }
-
-
-
 }

@@ -52,7 +52,7 @@
     }
     .track-container{
       margin: 0 auto;
-      width: 60%;
+      width: 55%;
       position: absolute;
       margin-top: 1vh;
       padding-left: 5vw;
@@ -63,15 +63,49 @@
         background: rgba($spotifyBlack, 0.9);
         padding-bottom: 1vh;
         margin-bottom: 2vh;
-        .track-name{
-          padding-top: 1vh;
-          h1{
-            font-size: 3rem;
+        .row {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          .column{
+            border-radius: 25px;
+            margin: 0 10px;
+            flex-wrap: wrap;
           }
-        }
-        .track-banner{
-          img {
-            max-width: 800px;
+          .column.left{
+            width: 50%;
+            .track-banner{
+              img {
+                max-width: 450px;
+              }
+            }
+          }
+          .column.right{
+            width: 50%;
+            .track-name{
+              padding-top: 1vh;
+              h1{
+                font-size: 2rem;
+              }
+            }
+            .track-miscalleanous{
+              text-align: left;
+              border-radius: 25px;
+              padding: 3%;
+              margin-bottom: 10px;
+              .track-writers{
+                font-size: 1.2rem;
+              }
+              .track-release-date{
+                font-size: 1.2rem;
+              }
+              .track-recording-location{
+                font-size: 1.2rem;
+              }
+              .track-analysis{
+                font-size: 1.2rem;
+              }
+            }
           }
         }
       }
@@ -90,22 +124,6 @@
           }
           .column.right{
             width: 45%;
-          }
-        }
-        .track-miscalleanous{
-          text-align: left;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          padding: 3%;
-          margin-bottom: 10px;
-          .track-writers{
-            font-size: 1.2rem;
-          }
-          .track-release-date{
-            font-size: 1.2rem;
-          }
-          .track-recording-location{
-            font-size: 1.2rem;
           }
         }
         .track-lyrics{
@@ -130,12 +148,6 @@
             cursor: pointer;
           }
         }
-        .track-analysis{
-          padding: 3%;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          margin-bottom: 10px;
-        }
         .track-media{
           padding: 3%;
           background: rgba($spotifyBlack, 0.9);
@@ -150,15 +162,26 @@
             color: #444;
             margin: 20px auto;
             overflow: hidden;
-            .album-cover{
-              width: 35%;
-              float: left;
+            .row {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              .left {
+                width: 50%;
+                .album-cover{
+                  max-width: 150px;
+                }
+              }
+              .right{
+                width: 50%;
+                .track-name{
+                  padding-top: 1vh;
+                  color: $spotifyBlack;
+                }
+              }
             }
             .player{
-              width: 60%;
-            }
-            .track-name{
-              color: $spotifyBlack;
+              width: 100%;
             }
           }
         }

@@ -1,19 +1,19 @@
 <div class="wrapper">
-  <div class="bg-image" *ngIf="trackInfo.song_art_image_url" style="background-image: url({{trackInfo.song_art_image_url}});"></div>
+  <div class="bg-image" *ngIf="trackInfo" style="background-image: url({{trackInfo.song_art_image_url}});"></div>
+  <div class="bg-image" *ngIf="!trackInfo" style="background-color: #2b2b2b;"></div>
   <div class="track-container">
     <div class="top-subcontainer">
-      <div class="track-banner">
-        <img *ngIf="trackInfo.song_art_image_url" [src]="trackInfo.song_art_image_url">
-      </div>
-      <div class="track-name">
-        <h1>{{trackInfo.full_title}}</h1>
-      </div>
-    </div>
-    <div class="bottom-subcontainer">
       <div class="row">
         <div class="column left">
-          <div class="track-miscalleanous">
-            <h1>{{trackInfo.title}} info</h1>
+          <div class="track-banner">
+            <img *ngIf="trackInfo" [src]="trackInfo.song_art_image_url">
+          </div>
+        </div>
+        <div class="column right">
+          <div class="track-name" *ngIf="trackInfo">
+            <h1>{{trackInfo.full_title}}</h1>
+          </div>
+          <div class="track-miscalleanous" *ngIf="trackInfo">
             <hr>
             <div class="track-writers">
               <span>Written by:
@@ -35,32 +35,46 @@
                 <p>No info about recording location</p>
               </ng-template>
             </div>
+            <div class="track-analysis" *ngIf="trackFeatures">
+              <hr>
+              <p>Track length: {{trackTime}}</p>
+              <hr>
+              <p>Track tempo: {{trackFeatures.tempo | number: '1.0-0'}} BPM (Beats per minute)</p>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-subcontainer">
+      <div class="row">
+        <div class="column left">
           <div class="track-lyrics">
             <h2>Track lyrics</h2>
             <p *ngIf="lyricsInfo">{{lyricsInfo.track.text}}</p>
             <small *ngIf="lyricsInfo">{{lyricsInfo.copyright.notice}}</small>
             <p *ngIf="!lyricsInfo">Sorry, lyrics haven't been provided for this track.</p>
           </div>
-          <div class="track-album">
+          <div class="track-album" *ngIf="spotifyTrack">
             <h2>Check out the album</h2>
             <div class="album">
               <img [src]="spotifyTrack.album.images[1].url" (click)="loading.startLoading()" routerLink="/results/album/{{spotifyTrack.album.id}}">
               <h3>{{spotifyTrack.album.name}}</h3>
             </div>
           </div>
-          <div class="track-analysis">
-            <h2>Track features</h2>
-            <p>Track length: {{trackTime}}</p>
-            <p>Track tempo: {{trackFeatures.tempo | number: '1.0-0'}} BPM (Beats per minute)</p>
-          </div>
         </div>
         <div class="column right">
-          <div class="track-media" *ngIf="trackInfo.media && trackInfo.media.length !== 0">
+          <div class="track-media" *ngIf="trackInfo && spotifyTrack && trackInfo.media && trackInfo.media.length !== 0">
             <h1>Track preview</h1>
             <div class="music-preview" *ngIf="spotifyTrack.preview_url">
-              <img class="album-cover" [src]="spotifyTrack.album.images[1].url">
-              <h2 class="track-name">{{trackInfo.primary_artist.name}} - {{trackInfo.title}}</h2>
+              <div class="row">
+                <div class="left">
+                  <img class="album-cover" [src]="spotifyTrack.album.images[1].url">
+                </div>
+                <div class="right">
+                  <h1 class="track-name">{{trackInfo.primary_artist.name}}</h1>
+                  <h2 class="track-name">{{trackInfo.title}}</h2>
+                </div>
+              </div>
               <audio class="player" controls loop preload="auto" [src]="spotifyTrack.preview_url | safe" type="audio/mp3">
               </audio>
             </div>
@@ -70,12 +84,12 @@
               </ng-container>
             </div>
           </div>
-          <div class="track-description">
+          <div class="track-description" *ngIf="trackInfo">
             <h1>Track description</h1>
             <p *ngIf="trackInfo.description.plain !== '?'">{{trackInfo.description.plain}}</p>
             <p *ngIf="trackInfo.description.plain === '?'">No track description has been provided yet.</p>
           </div>
-          <div class="track-artist">
+          <div class="track-artist" *ngIf="trackInfo && spotifyTrack">
             <h1>Track artist</h1>
             <div class="artist">
               <img class="artist-image" *ngIf="trackInfo.primary_artist.image_url" [src]="trackInfo.primary_artist.image_url"
@@ -83,7 +97,7 @@
               <h3>{{trackInfo.primary_artist.name}}</h3>
             </div>
           </div>
-          <div class="track-producers" *ngIf="trackInfo.producer_artists && trackInfo.producer_artists.length !== 0">
+          <div class="track-producers" *ngIf="trackInfo && trackInfo.producer_artists && trackInfo.producer_artists.length !== 0">
             <h1>Track producers</h1>
             <div class="producer" *ngFor="let producer of trackInfo.producer_artists">
               <img class="producer-image" *ngIf="producer.image_url" [src]="producer.image_url" height="200" width="200">

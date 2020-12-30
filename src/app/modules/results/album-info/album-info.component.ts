@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumService } from '../../../services/album.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LoadingService } from '../../../services/loading.service';
 import { Album } from 'src/app/models/album';
 import { map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { SpotifyArtist } from '../../../models/artist';
 import { FirebaseService } from '../../../services/firebase.service';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-album-info',
@@ -20,7 +21,7 @@ export class AlbumInfoComponent implements OnInit {
   artistInfo: SpotifyArtist;
   tableHeaders = ["number", "name", "length"];
 
-  constructor(private albumService: AlbumService,private firebaseService: FirebaseService, private route: ActivatedRoute, public loading: LoadingService, private webTitle: Title ) {}
+  constructor(private albumService: AlbumService, private searchService: SearchService ,private firebaseService: FirebaseService, private route: ActivatedRoute, private router: Router, public loading: LoadingService, private webTitle: Title ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -79,5 +80,14 @@ export class AlbumInfoComponent implements OnInit {
       }
       track.trackTime =`${stringMinutes}:${stringSeconds}`;
     });
+  }
+
+  getTrack(trackName: string, trackArtist: string){
+    const query = `${trackName} ${trackArtist}`;
+    let trackId = null;
+    this.searchService.geniusSearch(query).subscribe(results => {
+      trackId = results.response.hits[0].result.id;
+      this.router.navigateByUrl(`/results/track/${trackId}`);
+    })
   }
 }
