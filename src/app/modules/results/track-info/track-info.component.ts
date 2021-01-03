@@ -15,6 +15,7 @@ import { FirebaseService } from '../../../services/firebase.service';
 export class TrackInfoComponent implements OnInit {
 
   trackId: string;
+  trackName: string;
   trackInfo: Track;
   spotifyResults: SpotifyTrack[];
   spotifyTrack: SpotifyTrack;
@@ -34,7 +35,7 @@ export class TrackInfoComponent implements OnInit {
   }
 
   getInfo(): void{
-    this.loading.isLoading = true;
+    this.loading.startLoading();
     this.firebaseService.getTrack(this.trackId).subscribe(track => {
       if(track !==  null){
         this.trackInfo = track.trackInfo;
@@ -50,7 +51,9 @@ export class TrackInfoComponent implements OnInit {
         {
           console.error(error);
         }
-        this.formatTrackTime();
+        if(this.trackFeatures !== undefined){
+          this.formatTrackTime();
+        }
         this.webTitle.setTitle(`${this.trackInfo.title}'s page`);
         this.loading.finishLoading();
         return;
@@ -62,8 +65,7 @@ export class TrackInfoComponent implements OnInit {
             this.trackService.getSpotifyTrackInfo(`${this.trackInfo.title} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
               this.spotifyResults = res.tracks.items;
               this.spotifyTrack = this.spotifyResults[0];
-              this.trackService.getSpotifyTrackFeatures(`${this.spotifyTrack.id}`).subscribe(res => {
-                this.trackFeatures = res;
+              if(this.spotifyTrack === undefined){
                 this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
                   this.lyricsInfo = res.result;
                 });
@@ -75,8 +77,23 @@ export class TrackInfoComponent implements OnInit {
                 {
                   console.error(error);
                 }
-                this.formatTrackTime();
-              });
+              } else {
+                this.trackService.getSpotifyTrackFeatures(`${this.spotifyTrack.id}`).subscribe(res => {
+                  this.trackFeatures = res;
+                  this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
+                    this.lyricsInfo = res.result;
+                  });
+                  this.saveTrackInfo();
+                  try{
+                    this.pullIdFromVideoUrl();
+                  }
+                  catch(error)
+                  {
+                    console.error(error);
+                  }
+                  this.formatTrackTime();
+                });
+              }
             });
             this.loading.finishLoading();
             this.webTitle.setTitle(`${this.trackInfo.title} page`);
@@ -107,11 +124,18 @@ export class TrackInfoComponent implements OnInit {
   }
 
   saveTrackInfo(){
-    const trackInfo = {
-      trackInfo: this.trackInfo,
-      spotifyTrack: this.spotifyTrack,
-      trackFeatures: this.trackFeatures
-    };
+    let trackInfo = {};
+    if(this.spotifyTrack === undefined){
+      trackInfo = {
+        trackInfo: this.trackInfo
+      };
+    } else {
+      trackInfo = {
+        trackInfo: this.trackInfo,
+        spotifyTrack: this.spotifyTrack,
+        trackFeatures: this.trackFeatures
+      };
+    }
     this.firebaseService.saveTrackData(this.trackId, trackInfo);
   }
 

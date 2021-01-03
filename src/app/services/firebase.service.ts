@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/database';
-import { LastFMArtist, SimilarArtist, ArtistAlbums, SpotifyArtist } from '../models/artist';
-import { Result } from '../models/result';
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -45,5 +43,23 @@ export class FirebaseService {
   saveTrackData(id, track): any {
     this.albumsRef = this.db.object(`${this.tracksPath}${id}`);
     this.albumsRef.set(track);
+  }
+
+  firebaseArtistSearch(query: string): Observable<any> {
+    let results = this.db.list(this.artistsPath, ref => ref.orderByChild('spotifyArtistInfo/name').startAt(query).endAt(query+"\uf8ff")
+    ).valueChanges();
+    return results;
+  }
+
+  firebaseAlbumSearch(query: string): Observable<any> {
+    let results = this.db.list(this.albumsPath, ref => ref.orderByChild('albumInfo/name').startAt(query).endAt(query+"\uf8ff")
+    ).valueChanges();
+    return results;
+  }
+
+  firebaseTrackSearch(query: string): Observable<any> {
+    let results = this.db.list(this.tracksPath, ref => ref.orderByChild('trackInfo/full_title').startAt(query).endAt(query+"\uf8ff")
+    ).valueChanges();
+    return results;
   }
 }

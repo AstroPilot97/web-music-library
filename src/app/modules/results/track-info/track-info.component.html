@@ -48,11 +48,14 @@
     <div class="bottom-subcontainer">
       <div class="row">
         <div class="column left">
-          <div class="track-lyrics">
+          <div class="track-lyrics" *ngIf="trackInfo">
             <h2>Track lyrics</h2>
-            <p *ngIf="lyricsInfo">{{lyricsInfo.track.text}}</p>
-            <small *ngIf="lyricsInfo">{{lyricsInfo.copyright.notice}}</small>
-            <p *ngIf="!lyricsInfo">Sorry, lyrics haven't been provided for this track.</p>
+            <ng-container *ngIf="lyricsInfo; else elseTemplate">
+              <p>{{lyricsInfo.track.text}}</p>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <p>Sorry, lyrics haven't been provided for this track.</p>
+            </ng-template>
           </div>
           <div class="track-album" *ngIf="spotifyTrack">
             <h2>Check out the album</h2>
@@ -63,9 +66,9 @@
           </div>
         </div>
         <div class="column right">
-          <div class="track-media" *ngIf="trackInfo && spotifyTrack && trackInfo.media && trackInfo.media.length !== 0">
+          <div class="track-media" *ngIf="trackInfo || spotifyTrack && trackInfo.media && trackInfo.media.length !== 0">
             <h1>Track preview</h1>
-            <div class="music-preview" *ngIf="spotifyTrack.preview_url">
+            <div class="music-preview" *ngIf="spotifyTrack && spotifyTrack.preview_url">
               <div class="row">
                 <div class="left">
                   <img class="album-cover" [src]="spotifyTrack.album.images[1].url">

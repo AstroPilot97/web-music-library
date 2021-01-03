@@ -17,6 +17,7 @@ import { SearchService } from '../../../services/search.service';
 export class AlbumInfoComponent implements OnInit {
 
   albumId: string;
+  albumName: string;
   albumInfo: Album;
   artistInfo: SpotifyArtist;
   tableHeaders = ["number", "name", "length"];
@@ -49,9 +50,9 @@ export class AlbumInfoComponent implements OnInit {
               this.artistInfo = res;
               this.saveAlbumInfo();
             })
-            this.loading.finishLoading();
             this.getTrackTimes();
             this.webTitle.setTitle(`${this.albumInfo.name} page`);
+            this.loading.finishLoading();
           });
          }), 2500);
       }

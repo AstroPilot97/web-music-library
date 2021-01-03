@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map, isEmpty } from 'rxjs/operators';
 import { SearchService } from '../services/search.service';
-import { Result, TrackResult } from '../models/result';
+import { Result, TrackResult, FirebaseAlbumResult, FirebaseArtistResult, FirebaseTrackResult } from '../models/result';
 import { LoadingService } from '../services/loading.service';
 import { FirebaseService } from '../services/firebase.service';
 
@@ -16,6 +16,9 @@ export class NavbarComponent implements OnInit {
   queryCtrl = new FormControl();
   filteredResults: Observable<Result[]>;
   filteredTracks: Observable<TrackResult[]>;
+  firebaseArtistResults: FirebaseArtistResult[] = [];
+  firebaseAlbumResults: FirebaseAlbumResult[] = [];
+  firebaseTrackResults: FirebaseTrackResult[] = [];
 
   results: Result[] = [];
   trackResults: TrackResult[] = [];
@@ -48,6 +51,17 @@ export class NavbarComponent implements OnInit {
   }
 
   searchQuery(){
+    this.firebaseQuery();
+    if(this.firebaseQuery() === false) {
+      this.spotifyQuery();
+      this.geniusSearchQuery();
+    } else {
+      this.results = [];
+      this.trackResults = [];
+    }
+  }
+
+  spotifyQuery(){
     this.searchService.searchQuery(this.queryCtrl.value).subscribe(res => {
       res.artists.items = [...res.artists.items, ...res.albums.items];
       this.results = res.artists.items;
@@ -57,5 +71,20 @@ export class NavbarComponent implements OnInit {
     this.searchService.geniusSearch(this.queryCtrl.value).subscribe(res => {
       this.trackResults = res.response.hits;
     })
+  }
+
+  firebaseQuery(){
+    let dataFetched: boolean = false;
+    this.firebaseSearch.firebaseArtistSearch(this.queryCtrl.value).subscribe(res => {
+      this.firebaseArtistResults = res;
+    });
+    this.firebaseSearch.firebaseAlbumSearch(this.queryCtrl.value).subscribe(res => {
+      this.firebaseAlbumResults = res;
+    });
+    this.firebaseSearch.firebaseTrackSearch(this.queryCtrl.value).subscribe(res => {
+      this.firebaseTrackResults = res;
+    });
+    (this.firebaseArtistResults.length === 0 && this.firebaseAlbumResults.length === 0 && this.firebaseTrackResults.length === 0) ? dataFetched = false : dataFetched = true;
+    return dataFetched;
   }
 }

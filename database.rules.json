@@ -1,6 +1,15 @@
 {
   "rules": {
     ".read": true,
-    ".write": true
+    ".write": true,
+    "artists": {
+      ".indexOn": "spotifyArtistInfo/name"
+    },
+    "albums": {
+      ".indexOn": "albumInfo/name"
+    },
+    "tracks": {
+      ".indexOn": "trackInfo/full_title"
+    }
   }
 }

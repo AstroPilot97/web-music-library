@@ -9,7 +9,7 @@
                 aria-label="searchBar"
                 [matAutocomplete]="auto"
                 [formControl]="queryCtrl"
-                (keydown)="searchQuery(); geniusSearchQuery()">
+                (keydown)="searchQuery();">
           <mat-autocomplete #auto="matAutocomplete">
             <mat-option (click)="loading.startLoading()" routerLink="results/{{result.type}}/{{result.id}}" *ngFor="let result of filteredResults | async" [value]="result.name">
               <img *ngIf="result.images.length !== 0" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.images[0].url"/>
@@ -21,6 +21,24 @@
               <img *ngIf="track.result.header_image_thumbnail_url" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="track.result.header_image_thumbnail_url"/>
               <img *ngIf="!track.result.header_image_thumbnail_url" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
               <span>{{track.result.full_title}}</span>
+              <small> | track</small>
+            </mat-option>
+            <mat-option (click)="loading.startLoading()" routerLink="results/artist/{{result.spotifyArtistInfo.id}}" *ngFor="let result of firebaseArtistResults" [value]="result.spotifyArtistInfo.name">
+              <img *ngIf="result.spotifyArtistInfo.images.length !== 0" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.spotifyArtistInfo.images[0].url"/>
+              <img *ngIf="result.spotifyArtistInfo.images.length === 0" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
+              <span>{{result.spotifyArtistInfo.name}}</span>
+              <small> | artist</small>
+            </mat-option>
+            <mat-option (click)="loading.startLoading()" routerLink="results/album/{{result.albumInfo.id}}" *ngFor="let result of firebaseAlbumResults" [value]="result.albumInfo.name">
+              <img *ngIf="result.albumInfo.images.length !== 0" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.albumInfo.images[0].url"/>
+              <img *ngIf="result.albumInfo.images.length === 0" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
+              <span>{{result.albumInfo.name}}</span>
+              <small> | album</small>
+            </mat-option>
+            <mat-option (click)="loading.startLoading()" routerLink="results/track/{{result.trackInfo.id}}" *ngFor="let result of firebaseTrackResults" [value]="result.trackInfo.full_title">
+              <img *ngIf="result.trackInfo.header_image_thumbnail_url" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.trackInfo.header_image_thumbnail_url"/>
+              <img *ngIf="!result.trackInfo.header_image_thumbnail_url" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
+              <span>{{result.trackInfo.full_title}}</span>
               <small> | track</small>
             </mat-option>
           </mat-autocomplete>
