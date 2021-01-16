@@ -1,0 +1,26 @@
+<div class="wrapper">
+  <div class="bg-image"></div>
+  <h1>Search results for {{query}}:</h1>
+  <div class="results-container">
+    <mat-card class="example-card" *ngFor="let card of results">
+      <mat-card-header>
+        <mat-card-title>{{card.name}}</mat-card-title>
+        <mat-card-subtitle>{{card.type}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image class="card-image" *ngIf="card.images.length !== 0" [src]="card.images[0].url" alt="Entry photo">
+      <mat-card-actions>
+        <button mat-raised-button routerLink="../../results/{{card.type}}/{{card.id}}">Check out</button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card class="example-card" *ngFor="let card of trackResults">
+      <mat-card-header>
+        <mat-card-title>{{card.result.title}}</mat-card-title>
+        <mat-card-subtitle>track</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image class="card-image" *ngIf="card.result.header_image_thumbnail_url" [src]="card.result.header_image_thumbnail_url" alt="Entry photo">
+      <mat-card-actions>
+        <button mat-raised-button routerLink="../../results/track/{{card.result.id}}">Check out</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

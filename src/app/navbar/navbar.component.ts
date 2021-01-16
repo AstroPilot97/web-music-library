@@ -1,29 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { startWith, map, isEmpty } from 'rxjs/operators';
+import { startWith, map } from 'rxjs/operators';
 import { SearchService } from '../services/search.service';
 import { Result, TrackResult, FirebaseAlbumResult, FirebaseArtistResult, FirebaseTrackResult } from '../models/result';
+import { HostListener } from "@angular/core"
+import { ngxLoadingAnimationTypes } from 'ngx-loading';
 import { LoadingService } from '../services/loading.service';
 import { FirebaseService } from '../services/firebase.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
+
 export class NavbarComponent implements OnInit {
-  queryCtrl = new FormControl();
+  screenWidth: number;
+  public queryCtrl = new FormControl();
+  searching: boolean = false;
+  animation = ngxLoadingAnimationTypes;
   filteredResults: Observable<Result[]>;
   filteredTracks: Observable<TrackResult[]>;
   firebaseArtistResults: FirebaseArtistResult[] = [];
   firebaseAlbumResults: FirebaseAlbumResult[] = [];
   firebaseTrackResults: FirebaseTrackResult[] = [];
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event?) {
+    this.screenWidth = window.innerWidth;
+  }
+
   results: Result[] = [];
   trackResults: TrackResult[] = [];
 
-  constructor(private searchService: SearchService, private firebaseSearch: FirebaseService, public loading: LoadingService) {
+  constructor(private searchService: SearchService, private firebaseSearch: FirebaseService, private router: Router, public loading: LoadingService) {
+    this.onResize();
     this.filteredResults = this.queryCtrl.valueChanges
       .pipe(
         startWith(''),
@@ -51,13 +64,29 @@ export class NavbarComponent implements OnInit {
   }
 
   searchQuery(){
-    this.firebaseQuery();
-    if(this.firebaseQuery() === false) {
-      this.spotifyQuery();
-      this.geniusSearchQuery();
+    this.searching = true;
+    if(this.screenWidth >= 1200){
+      this.firebaseQuery();
+      if(this.firebaseQuery() === false) {
+        this.spotifyQuery();
+        this.geniusSearchQuery();
+      } else {
+        this.results = [];
+        this.trackResults = [];
+      }
+      this.searching = false;
     } else {
-      this.results = [];
-      this.trackResults = [];
+      setTimeout(() => {
+        this.firebaseQuery();
+        if(this.firebaseQuery() === false) {
+          this.spotifyQuery();
+          this.geniusSearchQuery();
+        } else {
+          this.results = [];
+          this.trackResults = [];
+        }
+        this.searching = false;
+      }, 2000);
     }
   }
 
@@ -85,6 +114,11 @@ export class NavbarComponent implements OnInit {
       this.firebaseTrackResults = res;
     });
     (this.firebaseArtistResults.length === 0 && this.firebaseAlbumResults.length === 0 && this.firebaseTrackResults.length === 0) ? dataFetched = false : dataFetched = true;
+
     return dataFetched;
+  }
+
+  navigateToSearch(){
+    this.searchService.passQueryString(this.queryCtrl.value);
   }
 }

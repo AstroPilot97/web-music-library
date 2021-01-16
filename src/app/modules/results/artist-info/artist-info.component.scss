@@ -1,148 +1,147 @@
 @import '../../../../variables';
 
-@media only screen and (min-width: 1200px) {
-  .wrapper{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    height: 100%;
+.wrapper{
+  display: flex;
+  color: $lightGray;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  height: 100%;
+  top: 0;
+  .bg-image{
+    filter: blur(6px);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 110%;
+    width: 110%;
+    left: 0;
     top: 0;
-    .bg-image{
-      filter: blur(6px);
-      background-attachment: fixed;
-      background-size: cover;
-      background-repeat: no-repeat;
-      height: 110%;
-      width: 110%;
-      left: 0;
-      top: 0;
-      z-index: -1000;
-      position: fixed;
-    }
-    .artist-container{
-      margin: 0 auto;
-      width: 55%;
-      position: absolute;
-      margin-top: 1vh;
-      padding-left: 5vw;
-      padding-right: 5vw;
-      .top-subcontainer{
-        padding-top: 2vh;
-        border-radius: 25px;
-        background: rgba($spotifyBlack, 0.9);
-        padding-bottom: 1vh;
-        margin-bottom: 2vh;
-        .row {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          .column{
+    z-index: -1000;
+    position: fixed;
+  }
+  .artist-container{
+    margin: 0 auto;
+    width: 55%;
+    position: absolute;
+    margin-top: 1vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    .top-subcontainer{
+      padding-top: 2vh;
+      border-radius: 25px;
+      background: rgba($spotifyBlack, 0.9);
+      padding-bottom: 1vh;
+      margin-bottom: 2vh;
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .column{
+          border-radius: 25px;
+          margin: 0 10px;
+          flex-wrap: wrap;
+        }
+        .column.left{
+          width: 50%;
+          .artist-banner{
+            img {
+              max-width: 450px;
+            }
+          }
+        }
+        .column.right{
+          width: 50%;
+          .artist-name{
+            padding-top: 1vh;
+            h1{
+              font-size: 3rem;
+            }
+          }
+          .artist-miscalleanous {
+            text-align: left;
             border-radius: 25px;
-            margin: 0 10px;
-            flex-wrap: wrap;
-          }
-          .column.left{
-            width: 50%;
-            .artist-banner{
-              img {
-                max-width: 450px;
-              }
+            padding: 3%;
+            margin-bottom: 10px;
+            .artist-genres{
+              padding-bottom: 1vh;
             }
-          }
-          .column.right{
-            width: 50%;
-            .artist-name{
-              padding-top: 1vh;
-              h1{
-                font-size: 3rem;
-              }
+            .artist-followers{
+              font-size: 1.2rem;
+              padding-bottom: 1vh;
             }
-            .artist-miscalleanous {
-              text-align: left;
-              border-radius: 25px;
-              padding: 3%;
-              margin-bottom: 10px;
-              .artist-genres{
-                padding-bottom: 1vh;
-              }
-              .artist-followers{
-                font-size: 1.2rem;
-                padding-bottom: 1vh;
-              }
-              .artist-popularity{
-                font-size: 1.2rem;
-                padding-bottom: 1vh;
-              }
+            .artist-popularity{
+              font-size: 1.2rem;
+              padding-bottom: 1vh;
             }
           }
         }
       }
-      .bottom-subcontainer {
-        .row {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          .column{
-            border-radius: 25px;
-            margin: 0 10px;
-            flex-wrap: wrap;
-          }
-          .column.left{
-            width: 75%;
-          }
-          .column.right{
-            width: 25%;
-          }
-        }
-        .artist-bio{
-          text-align: justify;
-          background: rgba($spotifyBlack, 0.9);
+    }
+    .bottom-subcontainer {
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .column{
           border-radius: 25px;
-          padding: 3%;
-          margin-bottom: 10px;
-          span{
-            font-size: 0.8rem;
-            cursor: pointer;
-          }
-          span:hover {
-            filter: brightness(120%);
-          }
-        }
-        .artist-albums{
-          display: flex;
-          flex-direction: row;
+          margin: 0 10px;
           flex-wrap: wrap;
-          justify-content: space-evenly;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          padding: 3%;
-          .album{
-            width: 50%;
-            padding-bottom: 1vh;
-            transition: transform .2s;
-          }
-          .album:hover{
-            transform: scale(1.05);
-            cursor: pointer;
-          }
         }
-        .similar-artists{
-          padding-top: 1vh;
+        .column.left{
+          width: 75%;
+        }
+        .column.right{
+          width: 25%;
+        }
+      }
+      .artist-bio{
+        text-align: justify;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        padding: 3%;
+        margin-bottom: 10px;
+        span{
+          font-size: 0.8rem;
+          cursor: pointer;
+        }
+        span:hover {
+          filter: brightness(120%);
+        }
+      }
+      .artist-albums{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        padding: 3%;
+        .album{
+          width: 50%;
           padding-bottom: 1vh;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          .similar-artist-image {
-            border-radius: 50%;
-          }
-          .artist-box {
-            transition: transform .2s;
-            margin-top: 2vh;
-          }
-          .artist-box:hover {
-            transform: scale(1.15);
-            cursor: pointer;
-          }
+          transition: transform .2s;
+        }
+        .album:hover{
+          transform: scale(1.05);
+          cursor: pointer;
+        }
+      }
+      .similar-artists{
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        .similar-artist-image {
+          border-radius: 50%;
+        }
+        .artist-box {
+          transition: transform .2s;
+          margin-top: 2vh;
+        }
+        .artist-box:hover {
+          transform: scale(1.15);
+          cursor: pointer;
         }
       }
     }

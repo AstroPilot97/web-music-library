@@ -8,6 +8,7 @@ import { ArtistService } from '../../services/artist.service';
 import { NgxLoadingModule } from 'ngx-loading';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { AlbumService } from 'src/app/services/album.service';
@@ -16,19 +17,25 @@ import { TrackService } from '../../services/track.service';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { SafePipe } from './safe.pipe';
 import { NgPipesModule } from 'ngx-pipes';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 @NgModule({
-  declarations: [ArtistInfoComponent, AlbumInfoComponent, TrackInfoComponent, SafePipe],
+  declarations: [ArtistInfoComponent, AlbumInfoComponent, TrackInfoComponent, SafePipe, SearchResultsComponent],
   imports: [
     CommonModule,
     ResultsRoutingModule,
     NgxLoadingModule,
     MatChipsModule,
+    MatButtonModule,
     MatProgressBarModule,
     MatTooltipModule,
     NgxYoutubePlayerModule,
     NgPipesModule,
-    MatTableModule
+    MatTableModule,
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [ArtistService, AlbumService, TrackService]
 })
