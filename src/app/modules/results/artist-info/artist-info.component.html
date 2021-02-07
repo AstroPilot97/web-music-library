@@ -40,7 +40,7 @@
             <p *ngIf="!isExpanded">{{lastfmArtistInfo.artist.bio.summary | stripTags | trim: 'Read more on Last.fm'}}...</p>
             <p *ngIf="isExpanded">{{lastfmArtistInfo.artist.bio.content | stripTags | trim: 'Read more on Last.fm'}}</p>
           </div>
-          <div class="albums-container">
+          <div class="albums-container" *ngIf="artistAlbums">
             <h1 class="album-header">Albums</h1>
             <hr>
             <div class="artist-albums">
