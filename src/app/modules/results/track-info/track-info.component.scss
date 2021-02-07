@@ -17,41 +17,6 @@
     width: 110%;
     left: 0;
     top: 0;
-<<<<<<< HEAD
-    .bg-image{
-      filter: blur(6px);
-      background-attachment: fixed;
-      background-size: cover;
-      background-repeat: no-repeat;
-      height: 110%;
-      width: 110%;
-      left: 0;
-      top: 0;
-      z-index: -1000;
-      position: fixed;
-    }
-    .track-container{
-      margin: 0 auto;
-      width: 62%;
-      position: absolute;
-      margin-top: 1vh;
-      padding-left: 5vw;
-      padding-right: 5vw;
-      .top-subcontainer{
-        padding-top: 2vh;
-        border-radius: 25px;
-        background: rgba($spotifyBlack, 0.9);
-        padding-bottom: 1vh;
-        margin-bottom: 2vh;
-        .row {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          .column{
-            border-radius: 25px;
-            margin: 0 10px;
-            flex-wrap: wrap;
-=======
     z-index: -1000;
     position: fixed;
   }
@@ -83,7 +48,6 @@
             img {
               max-width: 450px;
             }
->>>>>>> 9a53b32fcf4a05a70e54a7b4e7d9b894437743b1
           }
         }
         .column.right{
