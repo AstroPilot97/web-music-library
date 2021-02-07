@@ -20,9 +20,10 @@ import { NgPipesModule } from 'ngx-pipes';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { SearchResultsComponent } from './search-results/search-results.component';
+import { AlbumsFilterPipe } from './albumsFilter.pipe';
 
 @NgModule({
-  declarations: [ArtistInfoComponent, AlbumInfoComponent, TrackInfoComponent, SafePipe, SearchResultsComponent],
+  declarations: [ArtistInfoComponent, AlbumInfoComponent, TrackInfoComponent, SafePipe, AlbumsFilterPipe, SearchResultsComponent],
   imports: [
     CommonModule,
     ResultsRoutingModule,

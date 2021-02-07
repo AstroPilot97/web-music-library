@@ -6,6 +6,7 @@ import { LoadingService } from '../../../services/loading.service';
 import { Title } from '@angular/platform-browser';
 import { forkJoin } from 'rxjs';
 import { FirebaseService } from '../../../services/firebase.service';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-artist-info',
@@ -19,6 +20,8 @@ export class ArtistInfoComponent implements OnInit {
   similarArtists: SimilarArtist;
   lastfmArtistInfo: LastFMArtist;
   artistAlbums: ArtistAlbums;
+  albumsFilter = {album_group: 'album'};
+  singlesFilter = {album_group: 'single'};
   isExpanded: boolean = false;
   constructor(private artistService: ArtistService, private route: ActivatedRoute, private firebaseService: FirebaseService, public loading: LoadingService, private webTitle: Title) {}
 

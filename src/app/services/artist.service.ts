@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { SpotifyAuthService } from './spotify-auth.service';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

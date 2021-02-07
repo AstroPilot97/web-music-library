@@ -40,10 +40,28 @@
             <p *ngIf="!isExpanded">{{lastfmArtistInfo.artist.bio.summary | stripTags | trim: 'Read more on Last.fm'}}...</p>
             <p *ngIf="isExpanded">{{lastfmArtistInfo.artist.bio.content | stripTags | trim: 'Read more on Last.fm'}}</p>
           </div>
-          <div class="artist-albums">
-            <div class="album" *ngFor="let album of artistAlbums">
-              <img *ngIf="album.images.length !== 0" [src]="album.images[1].url" (click)="ngOnInit()" routerLink="/results/album/{{album.id}}">
-              <h3>{{album.name}}</h3>
+          <div class="albums-container">
+            <h1 class="album-header">Albums</h1>
+            <hr>
+            <div class="artist-albums">
+              <div class="album" *ngFor="let album of artistAlbums | albumsFilter: albumsFilter">
+                <div class="albums" *ngIf="album.album_group === 'album'">
+                  <img *ngIf="album.images" [src]="album.images[1].url" (click)="ngOnInit()" routerLink="/results/album/{{album.id}}">
+                  <img *ngIf="!album.images" src="../../assets/thumbnails/no_image.jpg" routerLink="/results/album/{{album.id}}">
+                  <h3>{{album.name}}</h3>
+                </div>
+              </div>
+            </div>
+            <h1 class="album-header">Singles</h1>
+            <hr>
+            <div class="artist-albums">
+              <div class="album" *ngFor="let album of artistAlbums | albumsFilter: singlesFilter">
+                <div class="singles" *ngIf="album.album_group === 'single'">
+                  <img *ngIf="album.images" [src]="album.images[1].url" (click)="ngOnInit()" routerLink="/results/album/{{album.id}}">
+                  <img *ngIf="!album.images" src="../../assets/thumbnails/no_image.jpg" routerLink="/results/album/{{album.id}}">
+                  <h3>{{album.name}}</h3>
+                </div>
+              </div>
             </div>
           </div>
         </div>

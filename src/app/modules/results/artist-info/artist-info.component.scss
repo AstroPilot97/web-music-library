@@ -22,7 +22,7 @@
   }
   .artist-container{
     margin: 0 auto;
-    width: 55%;
+    width: 65%;
     position: absolute;
     margin-top: 1vh;
     padding-left: 5vw;
@@ -109,22 +109,27 @@
           filter: brightness(120%);
         }
       }
-      .artist-albums{
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
+      .albums-container{
         background: rgba($spotifyBlack, 0.9);
         border-radius: 25px;
         padding: 3%;
-        .album{
-          width: 50%;
-          padding-bottom: 1vh;
-          transition: transform .2s;
-        }
-        .album:hover{
-          transform: scale(1.05);
-          cursor: pointer;
+        .artist-albums{
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+          .album-header{
+            display: block;
+          }
+          .album{
+            width: 50%;
+            padding-bottom: 1vh;
+            transition: transform .2s;
+          }
+          .album:hover{
+            transform: scale(1.05);
+            cursor: pointer;
+          }
         }
       }
       .similar-artists{
@@ -140,7 +145,7 @@
           margin-top: 2vh;
         }
         .artist-box:hover {
-          transform: scale(1.15);
+          transform: scale(1.05);
           cursor: pointer;
         }
       }
