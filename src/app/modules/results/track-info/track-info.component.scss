@@ -1,43 +1,23 @@
 @import '../../../../variables';
 
-
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: $spotifyBlack;
-    .artist-banner{
-      padding: 3%;
-      img {
-        width: 100%;
-      }
-    }
-  }
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  .wrapper{
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-    height: 100%;
+.wrapper{
+  color: $lightGray;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  height: 100%;
+  top: 0;
+  .bg-image{
+    filter: blur(6px);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 110%;
+    width: 110%;
+    left: 0;
     top: 0;
+<<<<<<< HEAD
     .bg-image{
       filter: blur(6px);
       background-attachment: fixed;
@@ -71,161 +51,186 @@
             border-radius: 25px;
             margin: 0 10px;
             flex-wrap: wrap;
+=======
+    z-index: -1000;
+    position: fixed;
+  }
+  .track-container{
+    margin: 0 auto;
+    width: 55%;
+    position: absolute;
+    margin-top: 1vh;
+    padding-left: 5vw;
+    padding-right: 5vw;
+    .top-subcontainer{
+      padding-top: 2vh;
+      border-radius: 25px;
+      background: rgba($spotifyBlack, 0.9);
+      padding-bottom: 1vh;
+      margin-bottom: 2vh;
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .column{
+          border-radius: 25px;
+          margin: 0 10px;
+          flex-wrap: wrap;
+        }
+        .column.left{
+          width: 50%;
+          .track-banner{
+            img {
+              max-width: 450px;
+            }
+>>>>>>> 9a53b32fcf4a05a70e54a7b4e7d9b894437743b1
           }
-          .column.left{
-            width: 50%;
-            .track-banner{
-              img {
-                max-width: 450px;
-              }
+        }
+        .column.right{
+          width: 50%;
+          .track-name{
+            padding-top: 1vh;
+            h1{
+              font-size: 2rem;
             }
           }
-          .column.right{
-            width: 50%;
-            .track-name{
-              padding-top: 1vh;
-              h1{
-                font-size: 2rem;
-              }
+          .track-miscalleanous{
+            text-align: left;
+            border-radius: 25px;
+            padding: 3%;
+            margin-bottom: 10px;
+            .track-writers{
+              font-size: 1.2rem;
             }
-            .track-miscalleanous{
-              text-align: left;
-              border-radius: 25px;
-              padding: 3%;
-              margin-bottom: 10px;
-              .track-writers{
-                font-size: 1.2rem;
-              }
-              .track-release-date{
-                font-size: 1.2rem;
-              }
-              .track-recording-location{
-                font-size: 1.2rem;
-              }
-              .track-analysis{
-                font-size: 1.2rem;
-              }
+            .track-release-date{
+              font-size: 1.2rem;
+            }
+            .track-recording-location{
+              font-size: 1.2rem;
+            }
+            .track-analysis{
+              font-size: 1.2rem;
             }
           }
         }
       }
-      .bottom-subcontainer{
-        .row {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          .column{
-            border-radius: 25px;
-            margin: 0 10px;
-            flex-wrap: wrap;
-          }
-          .column.left{
-            width: 55%;
-          }
-          .column.right{
-            width: 45%;
-          }
-        }
-        .track-lyrics{
-          text-align: left;
-          background: rgba($spotifyBlack, 0.9);
+    }
+    .bottom-subcontainer{
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        .column{
           border-radius: 25px;
-          padding: 3%;
-          margin-bottom: 10px;
-          white-space: pre-wrap;
+          margin: 0 10px;
+          flex-wrap: wrap;
         }
-        .track-album{
-          padding: 3%;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          margin-bottom: 10px;
-          .album{
-            transition: transform .2s;
-            margin-top: 2vh;
-          }
-          .album:hover{
-            transform: scale(1.10);
-            cursor: pointer;
-          }
+        .column.left{
+          width: 55%;
         }
-        .track-media{
-          padding: 3%;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          margin-bottom: 10px;
-          .music-preview{
-            width: 80%;
-            height: auto;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: #eee;
-            color: #444;
-            margin: 20px auto;
-            overflow: hidden;
-            .row {
-              display: flex;
-              flex-direction: row;
-              justify-content: space-between;
-              .left {
-                width: 50%;
-                .album-cover{
-                  max-width: 150px;
-                }
-              }
-              .right{
-                width: 50%;
-                .track-name{
-                  padding-top: 1vh;
-                  color: $spotifyBlack;
-                }
+        .column.right{
+          width: 45%;
+        }
+      }
+      .track-lyrics{
+        text-align: left;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        padding: 3%;
+        margin-bottom: 10px;
+        white-space: pre-wrap;
+      }
+      .track-album{
+        padding: 3%;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        margin-bottom: 10px;
+        .album{
+          transition: transform .2s;
+          margin-top: 2vh;
+        }
+        .album:hover{
+          transform: scale(1.10);
+          cursor: pointer;
+        }
+      }
+      .track-media{
+        padding: 3%;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        margin-bottom: 10px;
+        .music-preview{
+          width: 80%;
+          height: auto;
+          padding: 10px;
+          border-radius: 5px;
+          background-color: #eee;
+          color: #444;
+          margin: 20px auto;
+          overflow: hidden;
+          .row {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            .left {
+              width: 50%;
+              .album-cover{
+                max-width: 150px;
               }
             }
-            .player{
-              width: 100%;
+            .right{
+              width: 50%;
+              .track-name{
+                padding-top: 1vh;
+                color: $spotifyBlack;
+              }
             }
           }
-        }
-        .track-description{
-          text-align: left;
-          padding: 3%;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          margin-bottom: 10px;
-        }
-        .track-artist{
-          padding-top: 1vh;
-          padding-bottom: 1vh;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          .artist-image {
-            border-radius: 50%;
-          }
-          .artist{
-            transition: transform .2s;
-            margin-top: 2vh;
-          }
-          .artist:hover {
-            transform: scale(1.15);
-            cursor: pointer;
+          .player{
+            width: 100%;
           }
         }
-        .track-producers{
-          margin-top: 1vh;
-          padding-top: 1vh;
-          padding-bottom: 1vh;
-          background: rgba($spotifyBlack, 0.9);
-          border-radius: 25px;
-          .producer-image {
-            border-radius: 50%;
-          }
-          .producer{
-            transition: transform .2s;
-            margin-top: 2vh;
-          }
-          .producer:hover {
-            transform: scale(1.15);
-            cursor: pointer;
-          }
+      }
+      .track-description{
+        text-align: left;
+        padding: 3%;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        margin-bottom: 10px;
+      }
+      .track-artist{
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        .artist-image {
+          border-radius: 50%;
+        }
+        .artist{
+          transition: transform .2s;
+          margin-top: 2vh;
+        }
+        .artist:hover {
+          transform: scale(1.15);
+          cursor: pointer;
+        }
+      }
+      .track-producers{
+        margin-top: 1vh;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        .producer-image {
+          border-radius: 50%;
+        }
+        .producer{
+          transition: transform .2s;
+          margin-top: 2vh;
+        }
+        .producer:hover {
+          transform: scale(1.15);
+          cursor: pointer;
         }
       }
     }

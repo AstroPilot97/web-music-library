@@ -52,7 +52,7 @@
             <h1>Similar artists</h1>
             <div class="artist-box" *ngFor="let artist of similarArtists.artists | slice: 0:5">
               <img class="similar-artist-image" (click)="ngOnInit()" routerLink="/results/artist/{{artist.id}}"
-              *ngIf="artist.images.length !== 0" [src]="artist.images[0].url" height="200" width="200">
+              *ngIf="artist.images" [src]="artist.images[0].url" height="200" width="200">
               <h3>{{artist.name}}</h3>
             </div>
           </div>

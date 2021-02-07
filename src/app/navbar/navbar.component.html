@@ -42,7 +42,12 @@
               <small> | track</small>
             </mat-option>
           </mat-autocomplete>
+          <div class="loading-area">
+            <ngx-loading class="loading" [show]="searching" [config]="{animationType: animation.circle,
+              fullScreenBackdrop: false, primaryColour: '#ffffff', secondaryColour: '#55133b'}"></ngx-loading>
+          </div>
         </mat-form-field>
+        <button class="search-button" [disabled]="!this.queryCtrl.value" (click)="loading.startLoading(); navigateToSearch();" routerLink="results/search-results" mat-raised-button><mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon><span>Search</span></button>
       </form>
     </div>
   </span>
