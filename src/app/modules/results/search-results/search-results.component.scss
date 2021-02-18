@@ -8,8 +8,12 @@
   align-items: center;
   height: 100%;
   top: 0;
+  padding-top: 2vw;
+  .results-header{
+    font-size: 2rem;
+  }
   .bg-image {
-    background-color: $spotifyBlack;
+    background-image: url("../../../../assets/backgrounds/mobile-home-bg.jpg");
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
@@ -22,6 +26,7 @@
   }
   .results-container {
     display: flex;
+    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
     .example-card {
@@ -30,6 +35,32 @@
       margin: 1vw;
       .card-image {
         width: 200px;
+      }
+    }
+  }
+}
+
+@media (max-width: 766px) {
+  .wrapper {
+    .results-container {
+      .example-card {
+        width: 150px;
+        .card-image {
+          width: 150px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 424px) {
+  .wrapper {
+    .results-container {
+      .example-card {
+        width: 250px;
+        .card-image {
+          width: 250px;
+        }
       }
     }
   }
