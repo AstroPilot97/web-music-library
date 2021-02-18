@@ -66,6 +66,87 @@ mat-toolbar {
   height: 60px;
 }
 
+@media (max-width: 1200px) {
+  mat-toolbar {
+    #searchBar {
+      width: 65vw;
+      margin-top: 3%;
+      .example-form {
+        .search-button{
+          margin-left: 3vw;
+        }
+      }
+    }
+  }
+}
 
+@media (max-width: 992px) {
+  mat-toolbar {
+    .header {
+      display: none;
+    }
+    #searchBar {
+      width: 78vw;
+      margin-left: 1%;
+      margin-top: 3%;
+      .example-form {
+        .search-button{
+          margin-left: 3vw;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 766px) {
+  mat-toolbar {
+    #searchBar {
+      width: 78vw;
+      margin-top: 3%;
+      margin-left: 1%;
+      font-size: 1rem;
+      .example-form {
+        .search-button{
+          min-width: 40px;
+          margin-left: 2vw;
+          .button-text {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  ::ng-deep {
+    .mat-option {
+      font-size: 1rem;
+    }
+  }
+  .example-option-img{
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 425px) {
+  mat-toolbar {
+    padding: 0;
+    #searchBar {
+      width: 76vw;
+      margin-top: 3%;
+      margin-left: 4%;
+      font-size: 0.8rem;
+      .example-full-width {
+        .loading-area {
+          ::ng-deep {
+            .spinner-circle{
+              font-size: 2px;
+              margin-bottom: 0.05vh;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 
