@@ -1,84 +1,67 @@
 @import '../../../../variables';
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
-  .wrapper{
-    height:100%;
-    background-color: $spotifyBlack;
-    display: flex;
-    .banner-area{
-      height: 60%;
+.wrapper{
+  height:100%;
+  background-image: url("../../../../assets/backgrounds/home-bg.png");
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  .banner-area{
+    color: $lightGray;
+    h1{
+      font-size: 3rem;
     }
-    .card-row{
-      height: 40%;
-    }
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 20vw;
+    margin-left: 15vw;
   }
 }
 
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
+@media (max-width: 1200px) {
   .wrapper{
-    height:100%;
-    background-color: $spotifyBlack;
-    display: flex;
+    background-image: url("../../../../assets/backgrounds/mobile-home-bg.jpg");
     .banner-area{
-      height: 60%;
-    }
-    .card-row{
-      height: 40%;
-    }
-  }
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  .wrapper{
-    height:100%;
-    background-color: $spotifyBlack;
-    display: flex;
-    .banner-area{
-      height: 60%;
-    }
-    .card-row{
-      height: 40%;
-    }
-  }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  .wrapper{
-    height:100%;
-    background-color: $spotifyBlack;
-    display: flex;
-    .banner-area{
-      height: 60%;
-    }
-    .card-row{
-      height: 40%;
-    }
-  }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  .wrapper{
-    height:100%;
-    background-image: url("../../../../assets/backgrounds/home-bg.png");
-    background-size: cover;
-    background-attachment: fixed;
-    display: flex;
-    .banner-area{
-      color: $lightGray;
       h1{
-        font-size: 3rem;
+        font-size: 3.5rem;
       }
-      font-size: 2rem;
-      text-align: center;
-      margin-top: 20vw;
+      margin-top: 10vw;
+      margin-left: 22vw;
+    }
+  }
+}
+
+@media (max-width: 922px) {
+  .wrapper{
+    .banner-area{
       margin-left: 15vw;
     }
   }
 }
 
+@media (max-width: 766px) {
+  .wrapper{
+    .banner-area{
+      h1{
+        font-size: 2.5rem;
+      }
+      font-size: 1.5rem;
+      margin-left: 1.5vw;
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .wrapper{
+    justify-content: center;
+    align-items: center;
+    .banner-area{
+      h1{
+        font-size: 2rem;
+      }
+      margin-top: 0;
+      margin-bottom: 170vw;
+    }
+  }
+}
 
