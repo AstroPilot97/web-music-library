@@ -13,8 +13,8 @@
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
-    height: 110%;
-    width: 110%;
+    height: 100%;
+    width: 100%;
     left: 0;
     top: 0;
     z-index: -1000;
@@ -25,8 +25,6 @@
     width: 65%;
     position: absolute;
     margin-top: 1vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
     .top-subcontainer{
       padding-top: 2vh;
       border-radius: 25px;
@@ -39,7 +37,6 @@
         justify-content: space-between;
         .column{
           border-radius: 25px;
-          margin: 0 10px;
           flex-wrap: wrap;
         }
         .column.left{
@@ -85,7 +82,6 @@
         justify-content: space-between;
         .column{
           border-radius: 25px;
-          margin: 0 10px;
           flex-wrap: wrap;
         }
         .column.left{
@@ -93,6 +89,7 @@
         }
         .column.right{
           width: 25%;
+          margin-left: 10px;
         }
       }
       .artist-bio{
@@ -132,21 +129,250 @@
           }
         }
       }
-      .similar-artists{
+      .similars-container {
         padding-top: 1vh;
-        padding-bottom: 1vh;
         background: rgba($spotifyBlack, 0.9);
         border-radius: 25px;
-        .similar-artist-image {
-          border-radius: 50%;
+        .artist-header{
+          display: block;
         }
-        .artist-box {
-          transition: transform .2s;
-          margin-top: 2vh;
+        .similar-artists{
+          padding-bottom: 1vh;
+          .similar-artist-image {
+            border-radius: 50%;
+          }
+          .artist-box {
+            transition: transform .2s;
+            margin-top: 2vh;
+          }
+          .artist-box:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+          }
         }
-        .artist-box:hover {
-          transform: scale(1.05);
-          cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .wrapper{
+    .artist-container{
+      width: 75%;
+      .top-subcontainer{
+        .row {
+          .column.left{
+            .artist-banner{
+              img {
+                max-width: 360px;
+              }
+            }
+          }
+        }
+      }
+      .bottom-subcontainer {
+        .albums-container{
+          .artist-albums{
+            .album{
+              .album-image{
+                width: 95%;
+              }
+            }
+          }
+        }
+        .similar-artists{
+          .artist-box {
+            .similar-artist-image {
+              width: 150px;
+              height: 150px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .wrapper{
+    .artist-container{
+      width: 85%;
+      .top-subcontainer{
+        .row {
+          .column.left{
+            .artist-banner{
+              img {
+                max-width: 300px;
+              }
+            }
+          }
+          .column.right{
+            .artist-name{
+              h1{
+                font-size: 2.5rem;
+              }
+            }
+          }
+        }
+      }
+      .bottom-subcontainer {
+        .albums-container{
+          .artist-albums{
+            .album{
+              .album-image{
+                width: 95%;
+              }
+            }
+          }
+        }
+        .similar-artists{
+          .artist-box {
+            .similar-artist-image {
+              width: 130px;
+              height: 130px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 766px) {
+  .wrapper{
+    .artist-container{
+      width: 95%;
+      .top-subcontainer{
+        .row {
+          margin: 0;
+          display: block;
+          .column.left{
+            width: 100%;
+            .artist-banner{
+              img {
+                max-width: 350px;
+              }
+            }
+          }
+          .column.right{
+            width: 100%;
+            .artist-name{
+              h1{
+                font-size: 2.5rem;
+              }
+            }
+            .artist-miscalleanous {
+              margin-left: 1vw;
+            }
+          }
+        }
+      }
+      .bottom-subcontainer {
+        .row{
+          display: block;
+          .column.left{
+            width: 100%;
+            .albums-container{
+              .artist-albums{
+                .album{
+                  .album-image{
+                    width: 95%;
+                  }
+                }
+              }
+            }
+          }
+          .column.right{
+            width: 100%;
+            margin-top: 15px;
+            margin-left: 0px;
+            .similar-artists{
+              .artist-header{
+                display: block;
+              }
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: space-evenly;
+              .artist-box {
+                .similar-artist-image {
+                  width: 180px;
+                  height: 180px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 424px) {
+  .wrapper{
+    .artist-container{
+      .top-subcontainer{
+        .row {
+          .column.left{
+            width: 100%;
+            .artist-banner{
+              img {
+                max-width: 290px;
+              }
+            }
+          }
+          .column.right{
+            width: 100%;
+            .artist-name{
+              h1{
+                font-size: 2.5rem;
+              }
+            }
+            .artist-miscalleanous {
+              margin-left: 1vw;
+            }
+          }
+        }
+      }
+      .bottom-subcontainer {
+        .row{
+          display: block;
+          .column.left{
+            width: 100%;
+            .artist-bio{
+              h1{
+                font-size: 1.3rem;
+              }
+            }
+            .albums-container{
+              .artist-albums{
+                display: block;
+                .album{
+                  width: 100%;
+                  .album-image{
+                    width: 95%;
+                  }
+                }
+              }
+            }
+          }
+          .column.right{
+            width: 100%;
+            margin-top: 15px;
+            margin-left: 0px;
+            .similar-artists{
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: space-evenly;
+              .artist-box {
+                .similar-artist-image {
+                  width: 140px;
+                  height: 140px;
+                }
+              }
+            }
+          }
         }
       }
     }

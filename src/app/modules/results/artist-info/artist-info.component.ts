@@ -6,7 +6,6 @@ import { LoadingService } from '../../../services/loading.service';
 import { Title } from '@angular/platform-browser';
 import { forkJoin } from 'rxjs';
 import { FirebaseService } from '../../../services/firebase.service';
-import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-artist-info',

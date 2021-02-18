@@ -16,7 +16,7 @@
           <div class="artist-miscalleanous">
             <hr *ngIf="spotifyArtistInfo">
             <div class="artist-genres" *ngIf="spotifyArtistInfo">
-              <h2>Genres</h2>
+              <h2>Genres:</h2>
               <mat-chip-list aria-label="Genres">
                 <mat-chip *ngFor="let genre of spotifyArtistInfo.genres">{{genre}}</mat-chip>
               </mat-chip-list>
@@ -46,8 +46,8 @@
             <div class="artist-albums">
               <div class="album" *ngFor="let album of artistAlbums | albumsFilter: albumsFilter">
                 <div class="albums" *ngIf="album.album_group === 'album'">
-                  <img *ngIf="album.images" [src]="album.images[1].url" (click)="ngOnInit()" routerLink="/results/album/{{album.id}}">
-                  <img *ngIf="!album.images" src="../../assets/thumbnails/no_image.jpg" routerLink="/results/album/{{album.id}}">
+                  <img class="album-image" *ngIf="album.images" [src]="album.images[1].url" (click)="ngOnInit()" routerLink="/results/album/{{album.id}}">
+                  <img class="album-image" *ngIf="!album.images" src="../../assets/thumbnails/no_image.jpg" routerLink="/results/album/{{album.id}}">
                   <h3>{{album.name}}</h3>
                 </div>
               </div>
@@ -66,12 +66,14 @@
           </div>
         </div>
         <div class="column right" *ngIf="similarArtists">
-          <div class="similar-artists">
-            <h1>Similar artists</h1>
-            <div class="artist-box" *ngFor="let artist of similarArtists.artists | slice: 0:5">
-              <img class="similar-artist-image" (click)="ngOnInit()" routerLink="/results/artist/{{artist.id}}"
-              *ngIf="artist.images" [src]="artist.images[0].url" height="200" width="200">
-              <h3>{{artist.name}}</h3>
+          <div class="similars-container">
+            <h1 class="artist-header">Similar artists</h1>
+            <div class="similar-artists">
+              <div class="artist-box" *ngFor="let artist of similarArtists.artists | slice: 0:5">
+                <img class="similar-artist-image" (click)="ngOnInit()" routerLink="/results/artist/{{artist.id}}"
+                *ngIf="artist.images" [src]="artist.images[0].url" height="200" width="200">
+                <h3>{{artist.name}}</h3>
+              </div>
             </div>
           </div>
         </div>
