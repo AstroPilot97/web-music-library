@@ -22,11 +22,9 @@
   }
   .album-container{
     margin: 0 auto;
-    width: 65%;
+    width: 5%;
     position: absolute;
     margin-top: 1vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
     .top-subcontainer {
       padding-top: 2vh;
       border-radius: 25px;
@@ -39,7 +37,6 @@
         justify-content: space-between;
         .column{
           border-radius: 25px;
-          margin: 0 10px;
           flex-wrap: wrap;
         }
         .column.left{
@@ -88,7 +85,6 @@
         justify-content: space-between;
         .column{
           border-radius: 25px;
-          margin: 0 10px;
           flex-wrap: wrap;
         }
         .column.left{
@@ -96,6 +92,7 @@
         }
         .column.right{
           width: 35%;
+          margin-left: 15px;
         }
       }
       .album-tracklist{
@@ -131,6 +128,118 @@
         .artist-box:hover {
           transform: scale(1.15);
           cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .wrapper{
+    .album-container{
+      width: 75%;
+      .top-subcontainer {
+        .row {
+          .column.left{
+            .album-banner{
+              img {
+                max-width: 360px;
+              }
+            }
+          }
+          .column.right{
+            .album-name{
+              h1{
+                font-size: 2.3rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .wrapper{
+    .album-container{
+      width: 85%;
+      .top-subcontainer {
+        .row {
+          .column.left{
+            .album-banner{
+              img {
+                max-width: 300px;
+              }
+            }
+          }
+          .column.right{
+            .album-name{
+              h1{
+                font-size: 2.3rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 766px) {
+  .wrapper{
+    .album-container{
+      width: 95%;
+      .top-subcontainer {
+        .row {
+          margin: 0 auto;
+          display: block;
+          .column.left{
+            width: 100%;
+            .album-banner{
+              img {
+                max-width: 350px;
+              }
+            }
+          }
+          .column.right{
+            width: 100%;
+            .album-name{
+              h1{
+                font-size: 2.3rem;
+              }
+            }
+          }
+        }
+      }
+      .bottom-subcontainer {
+        .row {
+          display: block;
+          .column.left{
+            width: 100%;
+          }
+          .column.right{
+            width: 100%;
+            margin-left: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 424px) {
+  .wrapper{
+    .album-container{
+      .top-subcontainer {
+        .row {
+          .column.left{
+            .album-banner{
+              img {
+                max-width: 290px;
+              }
+            }
+          }
         }
       }
     }
