@@ -25,8 +25,6 @@
     width: 65%;
     position: absolute;
     margin-top: 1vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
     .top-subcontainer{
       padding-top: 2vh;
       border-radius: 25px;
@@ -39,7 +37,6 @@
         justify-content: space-between;
         .column{
           border-radius: 25px;
-          margin: 0 10px;
           flex-wrap: wrap;
         }
         .column.left{
@@ -86,115 +83,341 @@
         justify-content: space-between;
         .column{
           border-radius: 25px;
-          margin: 0 10px;
           flex-wrap: wrap;
         }
         .column.left{
           width: 55%;
+          .track-lyrics{
+            text-align: left;
+            background: rgba($spotifyBlack, 0.9);
+            border-radius: 25px;
+            padding: 3%;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+          }
+          .track-album{
+            padding: 3%;
+            background: rgba($spotifyBlack, 0.9);
+            border-radius: 25px;
+            margin-bottom: 10px;
+            .album{
+              transition: transform .2s;
+              margin-top: 2vh;
+            }
+            .album:hover{
+              transform: scale(1.10);
+              cursor: pointer;
+            }
+          }
         }
         .column.right{
           width: 45%;
-        }
-      }
-      .track-lyrics{
-        text-align: left;
-        background: rgba($spotifyBlack, 0.9);
-        border-radius: 25px;
-        padding: 3%;
-        margin-bottom: 10px;
-        white-space: pre-wrap;
-      }
-      .track-album{
-        padding: 3%;
-        background: rgba($spotifyBlack, 0.9);
-        border-radius: 25px;
-        margin-bottom: 10px;
-        .album{
-          transition: transform .2s;
-          margin-top: 2vh;
-        }
-        .album:hover{
-          transform: scale(1.10);
-          cursor: pointer;
-        }
-      }
-      .track-media{
-        padding: 3%;
-        background: rgba($spotifyBlack, 0.9);
-        border-radius: 25px;
-        margin-bottom: 10px;
-        .music-preview{
-          width: 80%;
-          height: auto;
-          padding: 10px;
-          border-radius: 5px;
-          background-color: #eee;
-          color: #444;
-          margin: 20px auto;
-          overflow: hidden;
-          .row {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            .left {
-              width: 50%;
-              .album-cover{
-                max-width: 150px;
+          margin-left: 15px;
+          .track-media{
+            padding: 3%;
+            background: rgba($spotifyBlack, 0.9);
+            border-radius: 25px;
+            margin-bottom: 10px;
+            .music-preview{
+              width: 80%;
+              height: auto;
+              padding: 10px;
+              border-radius: 5px;
+              background-color: #eee;
+              color: #444;
+              margin: 20px auto;
+              overflow: hidden;
+              .row {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .left {
+                  width: 50%;
+                  .album-cover{
+                    max-width: 150px;
+                  }
+                }
+                .right{
+                  width: 50%;
+                  .track-name{
+                    padding-top: 1vh;
+                    color: $spotifyBlack;
+                  }
+                }
+              }
+              .player{
+                width: 100%;
               }
             }
-            .right{
-              width: 50%;
-              .track-name{
-                padding-top: 1vh;
-                color: $spotifyBlack;
+            .music-video {
+              position: relative;
+              overflow: hidden;
+              .resp-video{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: 0;
               }
             }
           }
-          .player{
+          .track-description{
+            text-align: left;
+            padding: 3%;
+            background: rgba($spotifyBlack, 0.9);
+            border-radius: 25px;
+            margin-bottom: 10px;
+          }
+          .track-artist{
+            padding-top: 1vh;
+            padding-bottom: 1vh;
+            background: rgba($spotifyBlack, 0.9);
+            border-radius: 25px;
+            .artist-image {
+              border-radius: 50%;
+            }
+            .artist{
+              transition: transform .2s;
+              margin-top: 2vh;
+            }
+            .artist:hover {
+              transform: scale(1.15);
+              cursor: pointer;
+            }
+          }
+          .producer-container{
+            background: rgba($spotifyBlack, 0.9);
+            border-radius: 25px;
+            margin-top: 1vh;
+            padding-top: 1vh;
+            .track-producers{
+              padding-bottom: 1vh;
+              .producer-image {
+                border-radius: 50%;
+              }
+              .producer{
+                transition: transform .2s;
+                margin-top: 2vh;
+              }
+              .producer:hover {
+                transform: scale(1.15);
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .wrapper{
+    .track-container{
+      width: 75%;
+      .top-subcontainer{
+        .row {
+          .column.left{
+            .track-banner{
+              img {
+                max-width: 360px;
+              }
+            }
+          }
+        }
+      }
+      .bottom-subcontainer{
+        .row {
+          .column.right{
+            .track-media{
+              .music-preview{
+                .row {
+                  .left {
+                    .album-cover{
+                      max-width: 130px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .wrapper{
+    .track-container{
+      width: 85%;
+      .top-subcontainer{
+        .row {
+          .column.left{
+            .track-banner{
+              img {
+                max-width: 300px;
+              }
+            }
+          }
+        }
+      }
+      .bottom-subcontainer{
+        .row {
+          .column.right{
+            .track-media{
+              .music-preview{
+                .row {
+                  display: block;
+                  .left {
+                    width: 100%;
+                    .album-cover{
+                      max-width: 150px;
+                    }
+                  }
+                  .right{
+                    width: 100%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 766px) {
+  .wrapper{
+    .track-container{
+      width: 95%;
+      .top-subcontainer{
+        .row {
+          margin: 0 auto;
+          display: block;
+          .column.left{
+            width: 100%;
+            .track-banner{
+              img {
+                max-width: 350px;
+              }
+            }
+          }
+          .column.right{
             width: 100%;
           }
         }
       }
-      .track-description{
-        text-align: left;
-        padding: 3%;
-        background: rgba($spotifyBlack, 0.9);
-        border-radius: 25px;
-        margin-bottom: 10px;
+      .bottom-subcontainer{
+        .row {
+          display: block;
+          .column.left{
+            width: 100%;
+          }
+          .column.right{
+            width: 100%;
+            margin-left: 0px;
+            .track-media{
+              .music-preview{
+                .row {
+                  display: block;
+                  .left {
+                    width: 100%;
+                    .album-cover{
+                      max-width: 200px;
+                    }
+                  }
+                  .right{
+                    width: 100%;
+                  }
+                }
+              }
+            }
+            .track-producers{
+              .producer-header{
+                display: block;
+              }
+              display: flex;
+              flex-direction: row;
+              flex-wrap: wrap;
+              justify-content: space-evenly;
+              .producer {
+                .producer-image {
+                  width: 200px;
+                  height: 200px;
+                }
+              }
+            }
+          }
+        }
       }
-      .track-artist{
-        padding-top: 1vh;
-        padding-bottom: 1vh;
-        background: rgba($spotifyBlack, 0.9);
-        border-radius: 25px;
-        .artist-image {
-          border-radius: 50%;
-        }
-        .artist{
-          transition: transform .2s;
-          margin-top: 2vh;
-        }
-        .artist:hover {
-          transform: scale(1.15);
-          cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 424px) {
+  .wrapper{
+    .track-container{
+      .top-subcontainer{
+        .row {
+          .column.left{
+            .track-banner{
+              img {
+                max-width: 290px;
+              }
+            }
+          }
         }
       }
-      .track-producers{
-        margin-top: 1vh;
-        padding-top: 1vh;
-        padding-bottom: 1vh;
-        background: rgba($spotifyBlack, 0.9);
-        border-radius: 25px;
-        .producer-image {
-          border-radius: 50%;
-        }
-        .producer{
-          transition: transform .2s;
-          margin-top: 2vh;
-        }
-        .producer:hover {
-          transform: scale(1.15);
-          cursor: pointer;
+      .bottom-subcontainer{
+        .row {
+          .column.left{
+            .track-album{
+              .album{
+                .album-image {
+                  max-width: 290px;
+                }
+              }
+            }
+          }
+          .column.right{
+            .track-media{
+              .music-preview{
+                width: 90%;
+                .row {
+                  display: block;
+                  .left {
+                    width: 100%;
+                    .album-cover{
+                      max-width: 250px;
+                    }
+                  }
+                  .right{
+                    width: 100%;
+                  }
+                }
+              }
+            }
+            .producer-container {
+              .track-producers{
+                .producer-header{
+                  display: block;
+                }
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                .producer {
+                  .producer-image {
+                    width: 140px;
+                    height: 140px;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

@@ -60,7 +60,7 @@
           <div class="track-album" *ngIf="spotifyTrack">
             <h2>Check out the album</h2>
             <div class="album">
-              <img [src]="spotifyTrack.album.images[1].url" (click)="loading.startLoading()" routerLink="/results/album/{{spotifyTrack.album.id}}">
+              <img class="album-image" [src]="spotifyTrack.album.images[1].url" (click)="loading.startLoading()" routerLink="/results/album/{{spotifyTrack.album.id}}">
               <h3>{{spotifyTrack.album.name}}</h3>
             </div>
           </div>
@@ -82,7 +82,7 @@
               </audio>
             </div>
             <div class="music-video" *ngFor="let media of trackInfo.media">
-              <ng-container *ngIf="media.type === 'video'">
+              <ng-container class="resp-video" *ngIf="media.type === 'video'">
                 <youtube-player [videoId]="videoId"></youtube-player>
               </ng-container>
             </div>
@@ -100,11 +100,13 @@
               <h3>{{trackInfo.primary_artist.name}}</h3>
             </div>
           </div>
-          <div class="track-producers" *ngIf="trackInfo && trackInfo.producer_artists && trackInfo.producer_artists.length !== 0">
-            <h1>Track producers</h1>
-            <div class="producer" *ngFor="let producer of trackInfo.producer_artists">
-              <img class="producer-image" *ngIf="producer.image_url" [src]="producer.image_url" height="200" width="200">
-              <h3>{{producer.name}}</h3>
+          <div class="producer-container">
+            <h1 class="producer-header">Track producers</h1>
+            <div class="track-producers" *ngIf="trackInfo && trackInfo.producer_artists && trackInfo.producer_artists.length !== 0">
+              <div class="producer" *ngFor="let producer of trackInfo.producer_artists">
+                <img class="producer-image" *ngIf="producer.image_url" [src]="producer.image_url" height="200" width="200">
+                <h3>{{producer.name}}</h3>
+              </div>
             </div>
           </div>
         </div>
