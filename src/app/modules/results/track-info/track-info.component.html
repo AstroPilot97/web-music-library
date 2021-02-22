@@ -48,7 +48,7 @@
     <div class="bottom-subcontainer">
       <div class="row">
         <div class="column left">
-          <div class="track-lyrics" *ngIf="trackInfo">
+          <div class="track-lyrics" *ngIf="lyricsInfo">
             <h2>Track lyrics</h2>
             <ng-container *ngIf="lyricsInfo; else elseTemplate">
               <p>{{lyricsInfo.track.text}}</p>
@@ -100,7 +100,7 @@
               <h3>{{trackInfo.primary_artist.name}}</h3>
             </div>
           </div>
-          <div class="producer-container">
+          <div class="producer-container"  *ngIf="trackInfo && trackInfo.producer_artists">
             <h1 class="producer-header">Track producers</h1>
             <div class="track-producers" *ngIf="trackInfo && trackInfo.producer_artists && trackInfo.producer_artists.length !== 0">
               <div class="producer" *ngFor="let producer of trackInfo.producer_artists">

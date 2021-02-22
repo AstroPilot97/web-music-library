@@ -3,11 +3,18 @@
 .wrapper{
   height:100%;
   background-image: url("../../../../assets/backgrounds/home-bg.png");
-  background-size: cover;
   background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: -1000;
+  position: fixed;
   display: flex;
   .banner-area{
     color: $lightGray;
+    position: absolute;
     h1{
       font-size: 3rem;
     }
@@ -59,8 +66,7 @@
       h1{
         font-size: 2rem;
       }
-      margin-top: 0;
-      margin-bottom: 170vw;
+      margin-bottom: 50vw;
     }
   }
 }
