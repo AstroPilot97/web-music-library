@@ -52,7 +52,7 @@
           .track-name{
             padding-top: 1vh;
             h1{
-              font-size: 3rem;
+              font-size: 2rem;
             }
           }
           .track-miscalleanous{
@@ -201,6 +201,8 @@
               padding-bottom: 1vh;
               .producer-image {
                 border-radius: 50%;
+                width: 200px;
+                height: 200px;
               }
               .producer{
                 transition: transform .2s;
@@ -208,7 +210,6 @@
               }
               .producer:hover {
                 transform: scale(1.15);
-                cursor: pointer;
               }
             }
           }
