@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { ResultsRoutingModule } from './results-routing.module';
 import { ArtistInfoComponent } from './artist-info/artist-info.component';
@@ -38,6 +38,6 @@ import { AlbumsFilterPipe } from './albumsFilter.pipe';
     MatCardModule,
     MatGridListModule
   ],
-  providers: [ArtistService, AlbumService, TrackService]
+  providers: [ArtistService, AlbumService, TrackService, DatePipe]
 })
 export class ResultsModule { }

@@ -52,7 +52,7 @@
           .track-name{
             padding-top: 1vh;
             h1{
-              font-size: 2rem;
+              font-size: 3rem;
             }
           }
           .track-miscalleanous{
@@ -103,6 +103,10 @@
             .album{
               transition: transform .2s;
               margin-top: 2vh;
+              .album-image{
+                width: 400px;
+                height: 400px;
+              }
             }
             .album:hover{
               transform: scale(1.10);
@@ -176,6 +180,8 @@
             border-radius: 25px;
             .artist-image {
               border-radius: 50%;
+              height: 300px;
+              width: 300px;
             }
             .artist{
               transition: transform .2s;
@@ -229,6 +235,14 @@
       }
       .bottom-subcontainer{
         .row {
+          .column.left{
+            .album{
+              .album-image{
+                max-width: 300px;
+                max-height: 300px;
+              }
+            }
+          }
           .column.right{
             .track-media{
               .music-preview{
@@ -280,6 +294,12 @@
                     width: 100%;
                   }
                 }
+              }
+            }
+            .track-artist{
+              .artist-image{
+                height: 250px;
+                width: 250px;
               }
             }
           }
@@ -366,6 +386,13 @@
             .track-banner{
               img {
                 max-width: 290px;
+              }
+            }
+          }
+          .column.right{
+            .track-name{
+              h1{
+                font-size: 2.5rem;
               }
             }
           }

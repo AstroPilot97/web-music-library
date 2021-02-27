@@ -16,15 +16,25 @@
           <div class="track-miscalleanous" *ngIf="trackInfo">
             <hr>
             <div class="track-writers">
-              <span>Written by:
-                <ul *ngFor="let writer of trackInfo.writer_artists">
-                  <li>{{writer.name}}</li>
-                </ul>
-              </span>
+              <ng-container *ngIf="trackInfo.writer_artists; else noWriters">
+                <span>Written by:
+                  <ul *ngFor="let writer of trackInfo.writer_artists">
+                    <li>{{writer.name}}</li>
+                  </ul>
+                </span>
+              </ng-container>
+              <ng-template #noWriters>
+                <span>No info about track writers</span>
+              </ng-template>
               <hr>
             </div>
             <div class="track-release-date">
-              <p>Release date: {{trackInfo.release_date_for_display}}</p>
+              <ng-container *ngIf="trackInfo.release_date_for_display; else noDate">
+                <p>Release date: {{trackInfo.release_date_for_display}}</p>
+              </ng-container>
+              <ng-template #noDate>
+                <p>No info about release date</p>
+              </ng-template>
               <hr>
             </div>
             <div class="track-recording-location">
@@ -60,7 +70,7 @@
           <div class="track-album" *ngIf="spotifyTrack">
             <h2>Check out the album</h2>
             <div class="album">
-              <img class="album-image" [src]="spotifyTrack.album.images[1].url" (click)="loading.startLoading()" routerLink="/results/album/{{spotifyTrack.album.id}}">
+              <img class="album-image" [src]="spotifyTrack.album.images[1].url" routerLink="/results/album/{{spotifyTrack.album.id}}">
               <h3>{{spotifyTrack.album.name}}</h3>
             </div>
           </div>
@@ -96,7 +106,7 @@
             <h1>Track artist</h1>
             <div class="artist">
               <img class="artist-image" *ngIf="trackInfo.primary_artist.image_url" [src]="trackInfo.primary_artist.image_url"
-              height="200" width="200" (click)="loading.isloading = true" routerLink="/results/artist/{{spotifyTrack.artists[0].id}}">
+              height="200" width="200" routerLink="/results/artist/{{spotifyTrack.artists[0].id}}">
               <h3>{{trackInfo.primary_artist.name}}</h3>
             </div>
           </div>
@@ -104,7 +114,7 @@
             <h1 class="producer-header">Track producers</h1>
             <div class="track-producers" *ngIf="trackInfo && trackInfo.producer_artists && trackInfo.producer_artists.length !== 0">
               <div class="producer" *ngFor="let producer of trackInfo.producer_artists">
-                <img class="producer-image" *ngIf="producer.image_url" [src]="producer.image_url" height="200" width="200">
+                <img class="producer-image" *ngIf="producer.image_url" [src]="producer.image_url">
                 <h3>{{producer.name}}</h3>
               </div>
             </div>

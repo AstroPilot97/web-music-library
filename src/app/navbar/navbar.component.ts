@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
   results: Result[] = [];
   trackResults: TrackResult[] = [];
 
-  constructor(private searchService: SearchService, private firebaseSearch: FirebaseService, private router: Router, public loading: LoadingService) {
+  constructor(private searchService: SearchService, private firebaseSearch: FirebaseService) {
     this.onResize();
     this.filteredResults = this.queryCtrl.valueChanges
       .pipe(
@@ -86,7 +86,7 @@ export class NavbarComponent implements OnInit {
           this.trackResults = [];
         }
         this.searching = false;
-      }, 2000);
+      }, 1000);
     }
   }
 

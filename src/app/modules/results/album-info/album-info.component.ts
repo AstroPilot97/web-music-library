@@ -8,6 +8,7 @@ import { Title } from '@angular/platform-browser';
 import { SpotifyArtist } from '../../../models/artist';
 import { FirebaseService } from '../../../services/firebase.service';
 import { SearchService } from '../../../services/search.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-album-info',
@@ -21,8 +22,13 @@ export class AlbumInfoComponent implements OnInit {
   albumInfo: Album;
   artistInfo: SpotifyArtist;
   tableHeaders = ["number", "name", "length"];
+  currentDate = new Date().toDateString();
+  dateFlag: boolean;
 
-  constructor(private albumService: AlbumService, private searchService: SearchService ,private firebaseService: FirebaseService, private route: ActivatedRoute, private router: Router, public loading: LoadingService, private webTitle: Title ) {}
+  constructor(private albumService: AlbumService, private searchService: SearchService, private firebaseService: FirebaseService, private route: ActivatedRoute,
+    private router: Router, public loading: LoadingService, private webTitle: Title, private datePipe: DatePipe) {
+    this.currentDate = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -34,27 +40,18 @@ export class AlbumInfoComponent implements OnInit {
   getAlbumInfo(): void {
     this.loading.startLoading();
     this.firebaseService.getAlbum(this.albumId).subscribe(album => {
-      if(album !==  null){
-        this.albumInfo = album.albumInfo;
-        this.artistInfo = album.artistInfo;
-        this.getTrackTimes();
-        this.webTitle.setTitle(`${this.albumInfo.name}'s page`);
-        this.loading.finishLoading();
-        return;
+      if(album){
+        this.timestampCheck(this.currentDate, album.dateSaved);
+        if(this.dateFlag === false){
+          this.albumInfo = album.albumInfo;
+          this.artistInfo = album.artistInfo;
+          this.getTrackTimes();
+          this.loading.finishLoading();
+        } else {
+          this.getApiInfo();
+        }
       } else {
-        this.loading.startLoading();
-        setTimeout(() => this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
-          this.albumService.getAlbum(id).subscribe(album => {
-            this.albumInfo = album;
-            this.albumService.getArtist(this.albumInfo.artists[0].id).subscribe(res => {
-              this.artistInfo = res;
-              this.saveAlbumInfo();
-            })
-            this.getTrackTimes();
-            this.webTitle.setTitle(`${this.albumInfo.name} page`);
-            this.loading.finishLoading();
-          });
-         }), 2500);
+        this.getApiInfo();
       }
     });
   }
@@ -63,6 +60,7 @@ export class AlbumInfoComponent implements OnInit {
     const albumInfo = {
       albumInfo: this.albumInfo,
       artistInfo: this.artistInfo,
+      dateSaved: this.currentDate
     };
     this.firebaseService.saveAlbumData(this.albumId, albumInfo);
   }
@@ -71,7 +69,6 @@ export class AlbumInfoComponent implements OnInit {
     this.albumInfo.tracks.items.forEach(track => {
       let seconds = track.duration_ms / 1000;
       let minutes = seconds / 60;
-
       seconds = Math.floor(seconds) % 60;
       minutes = Math.floor(minutes) % 60;
       let stringMinutes = minutes.toLocaleString();
@@ -90,5 +87,30 @@ export class AlbumInfoComponent implements OnInit {
       trackId = results.response.hits[0].result.id;
       this.router.navigateByUrl(`/results/track/${trackId}`);
     })
+  }
+
+  timestampCheck(currentDate, olderDate){
+    this.dateFlag = false;
+    var d1 = Date.parse(currentDate);
+    var d2 = Date.parse(olderDate);
+    if(d1 - d2 >= 7){
+      this.dateFlag = true;
+    }
+    return this.dateFlag;
+  }
+
+  getApiInfo(){
+    setTimeout(() => this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
+      this.albumService.getAlbum(id).subscribe(album => {
+        this.albumInfo = album;
+        this.albumService.getArtist(this.albumInfo.artists[0].id).subscribe(res => {
+          this.artistInfo = res;
+          this.saveAlbumInfo();
+        })
+        this.getTrackTimes();
+        this.webTitle.setTitle(`${this.albumInfo.name} page`);
+        this.loading.finishLoading();
+      });
+     }), 2000);
   }
 }

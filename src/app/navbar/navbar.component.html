@@ -11,31 +11,31 @@
                 [formControl]="queryCtrl"
                 (keydown)="searchQuery();">
           <mat-autocomplete #auto="matAutocomplete">
-            <mat-option (click)="loading.startLoading()" routerLink="results/{{result.type}}/{{result.id}}" *ngFor="let result of filteredResults | async" [value]="result.name">
+            <mat-option routerLink="results/{{result.type}}/{{result.id}}" *ngFor="let result of filteredResults | async" [value]="result.name">
               <img *ngIf="result.images.length !== 0" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.images[0].url"/>
               <img *ngIf="result.images.length === 0" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
               <span>{{result.name}}</span>
               <small> | {{result.type}}</small>
             </mat-option>
-            <mat-option (click)="loading.startLoading()" routerLink="results/track/{{track.result.id}}" *ngFor="let track of filteredTracks | async" [value]="track.result.full_title">
+            <mat-option routerLink="results/track/{{track.result.id}}" *ngFor="let track of filteredTracks | async" [value]="track.result.full_title">
               <img *ngIf="track.result.header_image_thumbnail_url" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="track.result.header_image_thumbnail_url"/>
               <img *ngIf="!track.result.header_image_thumbnail_url" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
               <span>{{track.result.full_title}}</span>
               <small> | track</small>
             </mat-option>
-            <mat-option (click)="loading.startLoading()" routerLink="results/artist/{{result.spotifyArtistInfo.id}}" *ngFor="let result of firebaseArtistResults" [value]="result.spotifyArtistInfo.name">
+            <mat-option routerLink="results/artist/{{result.spotifyArtistInfo.id}}" *ngFor="let result of firebaseArtistResults" [value]="result.spotifyArtistInfo.name">
               <img *ngIf="result.spotifyArtistInfo.images.length !== 0" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.spotifyArtistInfo.images[0].url"/>
               <img *ngIf="result.spotifyArtistInfo.images.length === 0" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
               <span>{{result.spotifyArtistInfo.name}}</span>
               <small> | artist</small>
             </mat-option>
-            <mat-option (click)="loading.startLoading()" routerLink="results/album/{{result.albumInfo.id}}" *ngFor="let result of firebaseAlbumResults" [value]="result.albumInfo.name">
+            <mat-option routerLink="results/album/{{result.albumInfo.id}}" *ngFor="let result of firebaseAlbumResults" [value]="result.albumInfo.name">
               <img *ngIf="result.albumInfo.images.length !== 0" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.albumInfo.images[0].url"/>
               <img *ngIf="result.albumInfo.images.length === 0" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
               <span>{{result.albumInfo.name}}</span>
               <small> | album</small>
             </mat-option>
-            <mat-option (click)="loading.startLoading()" routerLink="results/track/{{result.trackInfo.id}}" *ngFor="let result of firebaseTrackResults" [value]="result.trackInfo.full_title">
+            <mat-option routerLink="results/track/{{result.trackInfo.id}}" *ngFor="let result of firebaseTrackResults" [value]="result.trackInfo.full_title">
               <img *ngIf="result.trackInfo.header_image_thumbnail_url" class="example-option-img" aria-hidden alt="Entry thumbnail" [src]="result.trackInfo.header_image_thumbnail_url"/>
               <img *ngIf="!result.trackInfo.header_image_thumbnail_url" class="example-option-img" src="../../assets/thumbnails/no_image.jpg" alt="No image" />
               <span>{{result.trackInfo.full_title}}</span>
@@ -47,9 +47,8 @@
               fullScreenBackdrop: false, primaryColour: '#ffffff', secondaryColour: '#55133b'}"></ngx-loading>
           </div>
         </mat-form-field>
-        <button class="search-button" [disabled]="!this.queryCtrl.value" (click)="loading.startLoading(); navigateToSearch();" routerLink="results/search-results" mat-raised-button><mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon><span class="button-text">Search</span></button>
+        <button class="search-button" [disabled]="!this.queryCtrl.value" (click)="navigateToSearch();" routerLink="results/search-results" mat-raised-button><mat-icon aria-hidden="false" aria-label="Example home icon">search</mat-icon><span class="button-text">Search</span></button>
       </form>
     </div>
   </span>
 </mat-toolbar>
-<ngx-loading [show]="loading.isLoading"></ngx-loading>

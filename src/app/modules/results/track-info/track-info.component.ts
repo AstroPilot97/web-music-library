@@ -6,6 +6,7 @@ import { Track } from 'src/app/models/track';
 import { LoadingService } from '../../../services/loading.service';
 import { TrackLyrics, SpotifyTrack, TrackFeatures } from '../../../models/track';
 import { FirebaseService } from '../../../services/firebase.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-track-info',
@@ -23,8 +24,11 @@ export class TrackInfoComponent implements OnInit {
   lyricsInfo: TrackLyrics;
   videoId: string;
   trackTime: string;
+  currentDate = new Date().toDateString();
+  dateFlag: boolean;
 
-  constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private webTitle: Title, private trackService: TrackService, public loading: LoadingService) {
+  constructor(private route: ActivatedRoute, private firebaseService: FirebaseService, private webTitle: Title, private trackService: TrackService, public loading: LoadingService, private datePipe: DatePipe) {
+    this.currentDate = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
   }
 
   ngOnInit(): void {
@@ -34,85 +38,50 @@ export class TrackInfoComponent implements OnInit {
     });
   }
 
-  getInfo(): void{
+  getInfo(): void {
     this.loading.startLoading();
     this.firebaseService.getTrack(this.trackId).subscribe(track => {
-      if(track !==  null){
-        this.trackInfo = track.trackInfo;
-        this.spotifyTrack = track.spotifyTrack;
-        this.trackFeatures = track.trackFeatures;
-        this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
-          this.lyricsInfo = res.result;
-        });
-        try{
-          this.pullIdFromVideoUrl();
+      if(track){
+        this.timestampCheck(this.currentDate, track.dateSaved);
+        if(this.dateFlag === false){
+          this.trackInfo = track.trackInfo;
+          this.spotifyTrack = track.spotifyTrack;
+          this.trackFeatures = track.trackFeatures;
+          this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
+            this.lyricsInfo = res.result;
+          });
+          try{
+            this.pullIdFromVideoUrl();
+          }
+          catch(error)
+          {
+            console.error(error);
+          }
+          if(this.trackFeatures !== undefined){
+            this.formatTrackTime();
+          }
+          this.webTitle.setTitle(`${this.trackInfo.title}'s page`);
+          this.loading.finishLoading();
+        } else {
+          this.getApiInfo();
         }
-        catch(error)
-        {
-          console.error(error);
-        }
-        if(this.trackFeatures !== undefined){
-          this.formatTrackTime();
-        }
-        this.webTitle.setTitle(`${this.trackInfo.title}'s page`);
-        this.loading.finishLoading();
-        return;
       } else {
-        setTimeout(() => {
-          this.loading.startLoading();
-          this.trackService.getTrackInfo(this.trackId).subscribe(res => {
-            this.trackInfo = res.response.song;
-            this.trackService.getSpotifyTrackInfo(`${this.trackInfo.title} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
-              this.spotifyResults = res.tracks.items;
-              this.spotifyTrack = this.spotifyResults[0];
-              if(this.spotifyTrack === undefined){
-                this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
-                  this.lyricsInfo = res.result;
-                });
-                this.saveTrackInfo();
-                try{
-                  this.pullIdFromVideoUrl();
-                }
-                catch(error)
-                {
-                  console.error(error);
-                }
-              } else {
-                this.trackService.getSpotifyTrackFeatures(`${this.spotifyTrack.id}`).subscribe(res => {
-                  this.trackFeatures = res;
-                  this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
-                    this.lyricsInfo = res.result;
-                  });
-                  this.saveTrackInfo();
-                  try{
-                    this.pullIdFromVideoUrl();
-                  }
-                  catch(error)
-                  {
-                    console.error(error);
-                  }
-                  this.formatTrackTime();
-                });
-              }
-            });
-            this.loading.finishLoading();
-            this.webTitle.setTitle(`${this.trackInfo.title} page`);
-          })
-        }, 2500);
+        this.getApiInfo();
       }
     });
   }
 
   pullIdFromVideoUrl(){
-   const media = this.trackInfo.media.find(media => media.type === 'video');
-   const lastEqualSignIndex = media.url.lastIndexOf('=');
-   this.videoId = media.url.substr(lastEqualSignIndex + 1);
+    if(this.trackInfo.media){
+      const media = this.trackInfo.media.find(media => media.type === 'video');
+      const lastEqualSignIndex = media.url.lastIndexOf('=');
+      this.videoId = media.url.substr(lastEqualSignIndex + 1);
+    }
   }
 
   formatTrackTime(){
     let seconds = this.trackFeatures.duration_ms / 1000;
     let minutes = seconds / 60;
-
     seconds = Math.floor(seconds) % 60;
     minutes = Math.floor(minutes) % 60;
     let stringMinutes = minutes.toLocaleString();
@@ -127,16 +96,72 @@ export class TrackInfoComponent implements OnInit {
     let trackInfo = {};
     if(this.spotifyTrack === undefined){
       trackInfo = {
-        trackInfo: this.trackInfo
+        trackInfo: this.trackInfo,
+        dateSaved: this.currentDate
       };
     } else {
       trackInfo = {
         trackInfo: this.trackInfo,
         spotifyTrack: this.spotifyTrack,
-        trackFeatures: this.trackFeatures
+        trackFeatures: this.trackFeatures,
+        dateSaved: this.currentDate
       };
     }
     this.firebaseService.saveTrackData(this.trackId, trackInfo);
   }
 
+  timestampCheck(currentDate, olderDate){
+    this.dateFlag = false;
+    var d1 = Date.parse(currentDate);
+    var d2 = Date.parse(olderDate);
+    d1 = (d1 / (60*60*24*1000));
+    d2 = (d2 / (60*60*24*1000));
+    if(d1 - d2 >= 7){
+      this.dateFlag = true;
+    }
+    return this.dateFlag;
+  }
+
+  getApiInfo(){
+    setTimeout(() => {
+      this.trackService.getTrackInfo(this.trackId).subscribe(res => {
+        this.trackInfo = res.response.song;
+        this.trackService.getSpotifyTrackInfo(`${this.trackInfo.title} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
+          this.spotifyResults = res.tracks.items;
+          this.spotifyTrack = this.spotifyResults[0];
+          if(this.spotifyTrack === undefined){
+            this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
+              this.lyricsInfo = res.result;
+            });
+            this.saveTrackInfo();
+            try{
+              this.pullIdFromVideoUrl();
+            }
+            catch(error)
+            {
+              console.error(error);
+            }
+          } else {
+            this.trackService.getSpotifyTrackFeatures(`${this.spotifyTrack.id}`).subscribe(res => {
+              this.trackFeatures = res;
+              this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
+                this.lyricsInfo = res.result;
+              });
+              this.saveTrackInfo();
+              try{
+                this.pullIdFromVideoUrl();
+              }
+              catch(error)
+              {
+                console.error(error);
+              }
+              this.formatTrackTime();
+            });
+          }
+        });
+        this.loading.finishLoading();
+        this.webTitle.setTitle(`${this.trackInfo.title} page`);
+      })
+    }, 2000);
+  }
 }
