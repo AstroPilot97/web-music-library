@@ -62,6 +62,8 @@
             <h2>Track lyrics</h2>
             <ng-container *ngIf="lyricsInfo; else elseTemplate">
               <p>{{lyricsInfo.track.text}}</p>
+              <small>{{lyricsInfo.copyright.artist}}</small><br>
+              <small>{{lyricsInfo.copyright.notice}}</small>
             </ng-container>
             <ng-template #elseTemplate>
               <p>Sorry, lyrics haven't been provided for this track.</p>
