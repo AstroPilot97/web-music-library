@@ -52,7 +52,7 @@
           .album-name{
             padding-top: 1vh;
             h1{
-              font-size: 2.7rem;
+              font-size: 2.5rem;
             }
           }
           .album-miscalleanous{
@@ -88,10 +88,10 @@
           flex-wrap: wrap;
         }
         .column.left{
-          width: 65%;
+          width: 55%;
         }
         .column.right{
-          width: 35%;
+          width: 45%;
           margin-left: 15px;
         }
       }
@@ -116,6 +116,7 @@
       .album-artists{
         padding-top: 1vh;
         padding-bottom: 1vh;
+        margin-bottom: 1vh;
         background: rgba($spotifyBlack, 0.9);
         border-radius: 25px;
         .album-artist-image {
@@ -128,6 +129,20 @@
         .artist-box:hover {
           transform: scale(1.15);
           cursor: pointer;
+        }
+      }
+      .album-description{
+        text-align: justify;
+        background: rgba($spotifyBlack, 0.9);
+        border-radius: 25px;
+        padding: 3%;
+        margin-bottom: 10px;
+        span{
+          font-size: 0.8rem;
+          cursor: pointer;
+        }
+        span:hover {
+          filter: brightness(120%);
         }
       }
     }
@@ -177,6 +192,18 @@
             .album-name{
               h1{
                 font-size: 2.3rem;
+              }
+            }
+          }
+        }
+      }
+      .bottom-subcontainer{
+        .row{
+          .column.right{
+            .album-description{
+              span{
+                font-size: 0.7rem;
+                cursor: pointer;
               }
             }
           }

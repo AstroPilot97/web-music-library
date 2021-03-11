@@ -122,40 +122,43 @@ export class TrackInfoComponent implements OnInit {
     return this.dateFlag;
   }
 
-  getApiInfo(){
+  getApiInfo(){ //pobieranie danych o utworze z API
     setTimeout(() => {
+      //pobieranie informacji o utworze z Genius
       this.trackService.getTrackInfo(this.trackId).subscribe(res => {
         this.trackInfo = res.response.song;
+        //pobieranie informacji o utworze ze Spotify poprzez przekazanie nazwy utworu i artysty z Genius
         this.trackService.getSpotifyTrackInfo(`${this.trackInfo.title} ${this.trackInfo.primary_artist.name}`).subscribe(res => {
           this.spotifyResults = res.tracks.items;
           this.spotifyTrack = this.spotifyResults[0];
-          if(this.spotifyTrack === undefined){
+          if(this.spotifyTrack === undefined){ //jeśli nie ma utworu w Spotify, przejdź od razu do pobrania tekstu z Lyrics API
             this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
               this.lyricsInfo = res.result;
             });
-            this.saveTrackInfo();
+            this.saveTrackInfo(); //zapisanie obiektu danych do bazy
             try{
-              this.pullIdFromVideoUrl();
+              this.pullIdFromVideoUrl(); //wyciąganie ID z adresu URL wideo w YouTube
             }
             catch(error)
             {
-              console.error(error);
+              console.error(error); //jeśli nie ma wideo w YouTube, wyświetl błąd w konsoli
             }
-          } else {
+          } else { //jeśli utwór jest w Spotify, pobierz dane z analizy audio
             this.trackService.getSpotifyTrackFeatures(`${this.spotifyTrack.id}`).subscribe(res => {
               this.trackFeatures = res;
+              //pobieranie tekstu utworu z Lyrics API
               this.trackService.getTrackLyrics(this.trackInfo.primary_artist.name, this.trackInfo.title).subscribe(res => {
                 this.lyricsInfo = res.result;
               });
-              this.saveTrackInfo();
+              this.saveTrackInfo(); //zapisanie obiektu danych do bazy
               try{
                 this.pullIdFromVideoUrl();
               }
               catch(error)
               {
-                console.error(error);
+                console.error(error); //jeśli nie ma wideo w YouTube, wyświetl błąd w konsoli
               }
-              this.formatTrackTime();
+              this.formatTrackTime(); //przetworzenie długości utworu na format 'mm:ss'
             });
           }
         });

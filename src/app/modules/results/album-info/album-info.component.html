@@ -1,33 +1,33 @@
 <div class="wrapper">
-  <div class="bg-image" *ngIf="albumInfo" style="background-image: url({{albumInfo.images[0].url}});"></div>
+  <div class="bg-image" *ngIf="albumInfo" style="background-image: url({{albumInfo.images[0].url}});"></div> <!--tło-->
   <div class="bg-image" *ngIf="!albumInfo" style="background-color: #2b2b2b;"></div>
   <div class="album-container">
     <div class="top-subcontainer" *ngIf="albumInfo">
       <div class="row">
         <div class="column left">
           <div class="album-banner">
-            <img *ngIf="albumInfo" [src]="albumInfo.images[0].url">
+            <img *ngIf="albumInfo" [src]="albumInfo.images[0].url"> <!--grafika albumu-->
           </div>
         </div>
         <div class="column right">
           <div class="album-name">
-            <h1 *ngIf="albumInfo">{{albumInfo.name}}</h1>
+            <h1 *ngIf="albumInfo">{{albumInfo.name}}</h1> <!--tytuł albumu-->
           </div>
           <div class="album-miscalleanous" *ngIf="albumInfo">
             <hr>
             <div class="release-date">
-              <p>Release date: {{albumInfo.release_date}}</p>
+              <p>Release date: {{albumInfo.release_date}}</p> <!--data wydania albumu-->
               <hr>
             </div>
             <div class="album-artist">
-              <p *ngFor="let artist of albumInfo.artists">Artist(s): {{artist.name}}</p>
+              <p *ngFor="let artist of albumInfo.artists">Artist(s): {{artist.name}}</p> <!--wykonawcy albumu-->
               <hr>
             </div>
             <div class="album-label">
-              <p>Label: {{albumInfo.label}}</p>
+              <p>Label: {{albumInfo.label}}</p> <!--wytwórnia płytowa-->
             </div>
             <div class="album-copyrights" *ngFor="let copyright of albumInfo.copyrights">
-              <p><small *ngIf="copyright.type">({{copyright.type}})</small> {{copyright.text}}</p>
+              <p><small *ngIf="copyright.type">({{copyright.type}})</small> {{copyright.text}}</p> <!--prawa autorskie-->
             </div>
           </div>
         </div>
@@ -64,6 +64,14 @@
               *ngIf="artistInfo.images.length !== 0" [src]="artistInfo.images[0].url" height="200" width="200">
               <h3>{{artistInfo.name}}</h3>
             </div>
+          </div>
+          <div class="album-description" *ngIf="albumDesc && albumDesc.album.wiki">
+            <h1>Album description
+              <span *ngIf="!isExpanded" (click)="showFullInfo()">(Show full)</span>
+              <span *ngIf="isExpanded" (click)="showFullInfo()">(Show short)</span>
+            </h1>
+            <p *ngIf="!isExpanded">{{albumDesc.album.wiki.summary | stripTags | trim: 'Read more on Last.fm'}}...</p>
+            <p *ngIf="isExpanded">{{albumDesc.album.wiki.content | stripTags | trim: 'Read more on Last.fm'}}</p>
           </div>
         </div>
       </div>

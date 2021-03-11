@@ -25,3 +25,12 @@ export interface Album {
     text: string;
   }
 }
+
+export interface LastFMAlbum {
+  album: {
+    wiki: {
+      content: string;
+      summary: string;
+    }
+  }
+}

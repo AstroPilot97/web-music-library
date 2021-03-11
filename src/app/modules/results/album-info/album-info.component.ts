@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AlbumService } from '../../../services/album.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { LoadingService } from '../../../services/loading.service';
-import { Album } from 'src/app/models/album';
+import { Album, LastFMAlbum } from 'src/app/models/album';
 import { map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
-import { SpotifyArtist } from '../../../models/artist';
+import { SpotifyArtist, LastFMArtist } from '../../../models/artist';
 import { FirebaseService } from '../../../services/firebase.service';
 import { SearchService } from '../../../services/search.service';
 import { DatePipe } from '@angular/common';
@@ -21,6 +21,8 @@ export class AlbumInfoComponent implements OnInit {
   albumName: string;
   albumInfo: Album;
   artistInfo: SpotifyArtist;
+  albumDesc: LastFMAlbum;
+  isExpanded: boolean;
   tableHeaders = ["number", "name", "length"];
   currentDate = new Date().toDateString();
   dateFlag: boolean;
@@ -45,6 +47,7 @@ export class AlbumInfoComponent implements OnInit {
         if(this.dateFlag === false){
           this.albumInfo = album.albumInfo;
           this.artistInfo = album.artistInfo;
+          this.albumDesc = album.albumDesc;
           this.getTrackTimes();
           this.loading.finishLoading();
         } else {
@@ -60,6 +63,7 @@ export class AlbumInfoComponent implements OnInit {
     const albumInfo = {
       albumInfo: this.albumInfo,
       artistInfo: this.artistInfo,
+      albumDesc: this.albumDesc,
       dateSaved: this.currentDate
     };
     this.firebaseService.saveAlbumData(this.albumId, albumInfo);
@@ -99,13 +103,30 @@ export class AlbumInfoComponent implements OnInit {
     return this.dateFlag;
   }
 
+  showFullInfo(){
+    if(this.isExpanded === false){
+      this.isExpanded = true;
+    }
+    else {
+      this.isExpanded = false;
+    }
+  }
+
+  //metoda na wyciąganie danych o albumach z serwisu albumService
   getApiInfo(){
     setTimeout(() => this.route.params.pipe(map(params => params['id'])).subscribe((id: string) => {
+      //subskrypcja metody
       this.albumService.getAlbum(id).subscribe(album => {
-        this.albumInfo = album;
+        this.albumInfo = album; //interfejs Album
+        //przekazanie ID artysty z danych albumu i pobieranie informacji o nim
         this.albumService.getArtist(this.albumInfo.artists[0].id).subscribe(res => {
-          this.artistInfo = res;
-          this.saveAlbumInfo();
+          this.artistInfo = res; // interfejs SpotifyArtist
+          this.albumService.getLastFMAlbum(this.albumInfo.name, this.artistInfo.name).subscribe(lastFMInfo => {
+            delete lastFMInfo.album.image;
+            delete lastFMInfo.album.tracks;
+            this.albumDesc = lastFMInfo;
+            this.saveAlbumInfo(); //zapis danych do bazy Firebase
+          });
         })
         this.getTrackTimes();
         this.webTitle.setTitle(`${this.albumInfo.name} page`);

@@ -37,11 +37,13 @@ export class NavbarComponent implements OnInit {
 
   constructor(private searchService: SearchService, private firebaseSearch: FirebaseService) {
     this.onResize();
+    //wywołanie metody _filterResults i dynamiczne przycinanie wyników, przypisanie do nowej tablicy
     this.filteredResults = this.queryCtrl.valueChanges
       .pipe(
         startWith(''),
         map(result => result ? this._filterResults(result) : this.results.slice())
       );
+    //wywołanie metody _filterTracks i dynamiczne przycinanie wyników, przypisanie do nowej tablicy
     this.filteredTracks =  this.queryCtrl.valueChanges
     .pipe(
       startWith(''),
@@ -51,12 +53,14 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void { }
 
+  //metoda na filtrowanie wyników zwróconych ze Spotify API
   private _filterResults(value: string): Result[] {
     const filterValue = value.toLowerCase();
 
     return this.results.filter(result => result.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  //metoda na filtrowanie utworów zwróconych z Genius API
   private _filterTracks(value: string): TrackResult[] {
     const filterValue = value.toLowerCase();
 
