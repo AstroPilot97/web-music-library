@@ -20,17 +20,17 @@
     z-index: -1000;
     position: fixed;
   }
-  .artist-container{
-    margin: 0 auto;
-    width: 65%;
-    position: absolute;
-    margin-top: 1vh;
-    .top-subcontainer{
-      padding-top: 2vh;
-      border-radius: 25px;
-      background: rgba($spotifyBlack, 0.9);
-      padding-bottom: 1vh;
-      margin-bottom: 2vh;
+  .artist-container{ //klasa kontenera informacji o artyście
+    margin: 0 auto; //rozkład automatyczny marginesów
+    width: 65%; //szerokość kontenera
+    position: absolute; //pozycjonowanie kontenera
+    margin-top: 1vh; //długość zewnętrznego marginesu górnego
+    .top-subcontainer{ //klasa górnej część kontenera informacji
+      padding-top: 2vh; //długość wewnętrznego marginesu górnego
+      border-radius: 25px; //promień krawędzi kontenera
+      background: rgba($spotifyBlack, 0.9); //kolor i przeźroczystość tła
+      padding-bottom: 1vh; //długość wewnętrznego marginesu dolnego
+      margin-bottom: 2vh; //długość zewnętrznego marginesu dolnego
       .row {
         display: flex;
         flex-direction: row;
@@ -308,24 +308,24 @@
   }
 }
 
-@media (max-width: 424px) {
+@media (max-width: 424px) { //style dla urządzeń o szerokości do 424 pikseli
   .wrapper{
     .artist-container{
       .top-subcontainer{
         .row {
           .column.left{
-            width: 100%;
+            width: 100%; //zmieniona szerokość kolumny, obejmująca szerokość całego ekranu
             .artist-banner{
               img {
-                max-width: 290px;
+                max-width: 290px; //zmniejszona wielkość grafiki artysty
               }
             }
           }
           .column.right{
-            width: 100%;
+            width: 100%; //zmieniona szerokość kolumny, obejmująca szerokość całego ekranu
             .artist-name{
               h1{
-                font-size: 2.5rem;
+                font-size: 2.5rem; //zmniejszony nagłówek z nazwą artysty
               }
             }
             .artist-miscalleanous {
